@@ -1,0 +1,950 @@
+openapi: 3.1.0
+info:
+  title: Mosey Accounts API
+  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
+  version: 1.0.0
+  x-logo:
+    url: null
+tags:
+- name: Accounts
+paths:
+  /accounts/signup:
+    post:
+      summary: Embedded Signup
+      operationId: embedded_signup_handler_accounts_signup_post
+      parameters:
+      - name: verbose
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Verbose
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmbeddedSignupRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddedSignupResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Accounts
+  /accounts/signup/sessions:
+    post:
+      summary: Create Hosted Signup Session
+      description: Provides a URL for directing a user through the hosted signup experience. Upon successful completion the user will be redirected to the callback_url. The returned legal entity id will not be active until the user has completed their signup. If a subsequent signup needs to be generated for a user the returned legal_entity_id from the first should be included in the request.
+      operationId: Create_Hosted_Signup_Session_accounts_signup_sessions_post
+      parameters:
+      - name: verbose
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Verbose
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/app__api__platform__auth__HostedSignupRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/app__api__platform__auth__HostedSignupResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Accounts
+  /accounts/auth:
+    post:
+      summary: Authenticate Legal Entity
+      description: Provides a short-lived authentication token scoped to the requested legal entity. Tokens must be included as an Authorization header for all API requests on behalf of the legal entity. They are valid for 10 minutes. Your API key will be provided to you by Mosey.
+      operationId: account_authenticate_accounts_auth_post
+      parameters:
+      - name: verbose
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Verbose
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformAuthenticateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSessionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Accounts
+  /accounts/connect:
+    post:
+      summary: Connect Account
+      description: Returns a hosted connection URL, which allows the user to connect to a specific account in the state agency such as accessing Employer Services Online Account in California Employment Development Department. This endpoint returns the connection_id which can be used to query the current status of the connection.
+      operationId: create_connection_handler_accounts_connect_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformConnectRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformConnectSession'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      tags:
+      - Accounts
+  /accounts/connections/{connection_id}:
+    get:
+      summary: Get Account Connection
+      description: Returns the current status of connection. The statuses can be - Pending/Authenticating/Registering/Connected/Disconnected/Canceled.
+      operationId: get_connection_handler_accounts_connections__connection_id__get
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: connection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Connection Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformConnection'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Accounts
+  /accounts/connections/{connection_id}/cancel:
+    post:
+      summary: Cancel Account Connection
+      description: Cancels a pending, registering, or authenticating connection for the given connection_id.
+      operationId: cancel_connection_handler_accounts_connections__connection_id__cancel_post
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: connection_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Connection Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformConnection'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Accounts
+  /v2/accounts/manage/session:
+    post:
+      summary: Create Agency Accounts Management Session
+      description: 'Creates an authenticated session to enter the Mosey app, and returns
+
+        the url on which a user can view accounts registered with state agencies and login credentials if present with state agencies.
+
+
+        The list of agencies supported can be viewed at /v2/agency_accounts'
+      operationId: Create_Agency_Accounts_Management_Session_v2_accounts_manage_session_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScopedHostedSessionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedSessionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Accounts
+components:
+  schemas:
+    TaxClassEnum:
+      type: string
+      enum:
+      - unset
+      - corp
+      - s_corp
+      - partnership
+      - disregarded
+      - tax_exempt
+      title: TaxClassEnum
+      description: 'The IRS tax classification for an entity.
+
+
+        In some circumstances, a company can elect to be treated different
+
+        from the entity type for tax purposes. For example, an LLC can
+
+        elect to be taxed as a corporation.
+
+        - Corp: taxed as a corporation, the default for C Corps
+
+        - S Corp: election using IRS Form 2553
+
+        - Partnership: taxed as a partnership, the default for LPs
+
+        - Disregarded: taxes pass through to the members, default for LLCs
+
+        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
+    PlatformAccountHistoryItem:
+      properties:
+        period_start_date:
+          type: string
+          format: date
+          title: Period Start Date
+        period_end_date:
+          type: string
+          format: date
+          title: Period End Date
+        payment_date:
+          type: string
+          format: date
+          title: Payment Date
+        filing_date:
+          type: string
+          format: date
+          title: Filing Date
+        payment_amount:
+          type: integer
+          title: Payment Amount
+        amount_due:
+          type: integer
+          title: Amount Due
+        amount_applied:
+          type: integer
+          title: Amount Applied
+        raw_data:
+          type: object
+          title: Raw Data
+      type: object
+      required:
+      - period_start_date
+      - period_end_date
+      - payment_date
+      - filing_date
+      - payment_amount
+      - amount_due
+      - amount_applied
+      - raw_data
+      title: PlatformAccountHistoryItem
+    PlatformMailClassification:
+      type: string
+      enum:
+      - penalty
+      - underpayment
+      - tax_rate_change
+      - other
+      title: PlatformMailClassification
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HostedSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: HostedSessionResponse
+    PlatformConnection:
+      properties:
+        id:
+          type: string
+          title: Id
+        status:
+          $ref: '#/components/schemas/PlatformConnectionStatus'
+        account:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformAccount'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - status
+      - account
+      title: PlatformConnection
+    Address:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        country:
+          type: string
+          title: Country
+        postal_code:
+          type: string
+          title: Postal Code
+      type: object
+      required:
+      - address_line_1
+      - city
+      - state
+      - country
+      - postal_code
+      title: Address
+    AccountingYearEndMonthNumber:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      title: AccountingYearEndMonthNumber
+    app__api__platform__auth__HostedSignupRequest:
+      properties:
+        business_name:
+          type: string
+          title: Business Name
+        user_email:
+          type: string
+          title: User Email
+        callback_url:
+          type: string
+          title: Callback Url
+        legal_entity_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Id
+        business_information:
+          anyOf:
+          - $ref: '#/components/schemas/app__api__platform__auth__HostedSignupRequestBusinessInformation'
+          - type: 'null'
+        external_company_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Company Id
+      type: object
+      required:
+      - business_name
+      - user_email
+      - callback_url
+      title: HostedSignupRequest
+    PlatformAuthenticateRequest:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+      type: object
+      required:
+      - legal_entity_id
+      title: PlatformAuthenticateRequest
+    app__api__platform__auth__HostedSignupRequestBusinessInformation:
+      properties:
+        incorporation_region:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Incorporation Region
+        entity_type:
+          anyOf:
+          - $ref: '#/components/schemas/EntityTypeEnum'
+          - type: 'null'
+        tax_classification:
+          anyOf:
+          - $ref: '#/components/schemas/TaxClassEnum'
+          - type: 'null'
+        llc_managed_type:
+          anyOf:
+          - $ref: '#/components/schemas/LLCManagedTypeEnum'
+          - type: 'null'
+        business_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Name
+        business_purpose:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Purpose
+        ein:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ein
+        incorporation_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Incorporation Date
+        naics_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Naics Code
+        accounting_method:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingMethod'
+          - type: 'null'
+        accounting_period:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingPeriod'
+          - type: 'null'
+        accounting_year_end:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingYearEndMonthNumber'
+          - type: 'null'
+        futa_liability_year:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Futa Liability Year
+      type: object
+      title: HostedSignupRequestBusinessInformation
+    LLCManagedTypeEnum:
+      type: string
+      enum:
+      - member_managed
+      - manager_managed
+      title: LLCManagedTypeEnum
+    PlatformAccountStatus:
+      type: string
+      enum:
+      - active
+      - exception
+      - closed
+      title: PlatformAccountStatus
+    AccountingMethod:
+      type: string
+      enum:
+      - accrual
+      - cash
+      title: AccountingMethod
+    EmbeddedSignupRequest:
+      properties:
+        user_email:
+          type: string
+          title: User Email
+        business_name:
+          type: string
+          title: Business Name
+        entity_type:
+          $ref: '#/components/schemas/EntityTypeEnum'
+        tax_classification:
+          $ref: '#/components/schemas/TaxClassEnum'
+        incorporation_location:
+          type: string
+          title: Incorporation Location
+        incorporation_date:
+          type: string
+          format: date
+          title: Incorporation Date
+        ein:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ein
+        llc_managed_type:
+          anyOf:
+          - $ref: '#/components/schemas/LLCManagedTypeEnum'
+          - type: 'null'
+        business_purpose:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Purpose
+        business_phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Phone
+        business_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Email
+        business_address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        mailing_address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        naics_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Naics Code
+        accounting_method:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingMethod'
+          - type: 'null'
+        accounting_period:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingPeriod'
+          - type: 'null'
+        accounting_year_end:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingYearEndMonthNumber'
+          - type: 'null'
+        futa_liability_year:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Futa Liability Year
+        external_company_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Company Id
+        authorization_callback_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization Callback Url
+      type: object
+      required:
+      - user_email
+      - business_name
+      - entity_type
+      - tax_classification
+      - incorporation_location
+      - incorporation_date
+      title: EmbeddedSignupRequest
+    PlatformAccountNotice:
+      properties:
+        mail_classification:
+          $ref: '#/components/schemas/PlatformMailClassification'
+        received_on:
+          type: string
+          format: date
+          title: Received On
+        description:
+          type: string
+          title: Description
+        summary:
+          type: string
+          title: Summary
+        signed_url:
+          type: string
+          title: Signed Url
+      type: object
+      required:
+      - mail_classification
+      - received_on
+      - description
+      - summary
+      - signed_url
+      title: PlatformAccountNotice
+    PlatformAccount:
+      properties:
+        id:
+          type: string
+          title: Id
+        agency_account:
+          $ref: '#/components/schemas/app__api__platform__accounts__models__PlatformAgencyAccount'
+        status:
+          $ref: '#/components/schemas/PlatformAccountStatus'
+        id_number:
+          type: string
+          title: Id Number
+        has_tpa:
+          type: boolean
+          title: Has Tpa
+        tax_rate_percent:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Tax Rate Percent
+        reporting_schedule:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Reporting Schedule
+        balance:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Balance
+        history:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/PlatformAccountHistoryItem'
+            type: array
+          - type: 'null'
+          title: History
+        notices:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/PlatformAccountNotice'
+            type: array
+          - type: 'null'
+          title: Notices
+        account_login:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformAccountLogin'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - agency_account
+      - status
+      - id_number
+      - has_tpa
+      title: PlatformAccount
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformConnectSession:
+      properties:
+        connect_url:
+          type: string
+          title: Connect Url
+        connection:
+          $ref: '#/components/schemas/PlatformConnection'
+      type: object
+      required:
+      - connect_url
+      - connection
+      title: PlatformConnectSession
+    PlatformConnectionStatus:
+      type: string
+      enum:
+      - pending
+      - authenticating
+      - registering
+      - connected
+      - disconnected
+      - canceled
+      title: PlatformConnectionStatus
+    EntityTypeEnum:
+      type: string
+      enum:
+      - unset
+      - c_corp
+      - p_corp
+      - llc
+      - llp
+      - lp
+      - gp
+      title: EntityTypeEnum
+    EmbeddedSignupResponse:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+        authorization_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization Url
+          description: This is deprecated. Please see url field
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: This is a session scoped URL that allows users to complete the signup process.
+      type: object
+      required:
+      - legal_entity_id
+      title: EmbeddedSignupResponse
+    AccountingPeriod:
+      type: string
+      enum:
+      - fiscal
+      - calendar
+      title: AccountingPeriod
+    app__api__platform__accounts__models__PlatformAgencyAccount:
+      properties:
+        id:
+          type: string
+          title: Id
+        agency_id:
+          type: string
+          title: Agency Id
+        region:
+          type: string
+          title: Region
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - id
+      - agency_id
+      - region
+      - name
+      title: PlatformAgencyAccount
+    PlatformConnectRequest:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+        agency_account_id:
+          type: string
+          title: Agency Account Id
+      type: object
+      required:
+      - legal_entity_id
+      - agency_account_id
+      title: PlatformConnectRequest
+    AuthSessionResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        token_type:
+          type: string
+          const: bearer
+          title: Token Type
+          default: bearer
+        state:
+          anyOf:
+          - type: object
+          - type: 'null'
+          title: State
+      type: object
+      required:
+      - access_token
+      title: AuthSessionResponse
+    PlatformAccountLogin:
+      properties:
+        login_url:
+          type: string
+          title: Login Url
+        user_name:
+          type: string
+          title: User Name
+        two_factor_enabled:
+          type: boolean
+          title: Two Factor Enabled
+      type: object
+      required:
+      - login_url
+      - user_name
+      - two_factor_enabled
+      title: PlatformAccountLogin
+    app__api__platform__auth__HostedSignupResponse:
+      properties:
+        signup_url:
+          type: string
+          title: Signup Url
+          description: This is a deprecated field, please use url
+        url:
+          type: string
+          title: Url
+          description: This is a session scoped URL which allows users to completed the signup process.
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+      type: object
+      required:
+      - signup_url
+      - url
+      - created_at
+      - expires_at
+      - legal_entity_id
+      title: HostedSignupResponse
+    ScopedHostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+        region_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Region Id
+      type: object
+      required:
+      - callback_url
+      title: ScopedHostedSessionRequest
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/token

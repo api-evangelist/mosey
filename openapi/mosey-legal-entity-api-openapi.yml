@@ -1,0 +1,529 @@
+openapi: 3.1.0
+info:
+  title: Mosey Accounts Legal Entity API
+  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
+  version: 1.0.0
+  x-logo:
+    url: null
+tags:
+- name: Legal Entity
+paths:
+  /legal_entity:
+    get:
+      summary: Get Legal Entity
+      description: Returns information for the authorized legal entity
+      operationId: get_legal_entity_handler_legal_entity_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountLegalEntity'
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      tags:
+      - Legal Entity
+  /v2/legal_entity:
+    get:
+      summary: Get Legal Entity Details
+      operationId: Get_Legal_Entity_details_v2_legal_entity_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformLegalEntity'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Legal Entity
+components:
+  schemas:
+    TaxClassEnum:
+      type: string
+      enum:
+      - unset
+      - corp
+      - s_corp
+      - partnership
+      - disregarded
+      - tax_exempt
+      title: TaxClassEnum
+      description: 'The IRS tax classification for an entity.
+
+
+        In some circumstances, a company can elect to be treated different
+
+        from the entity type for tax purposes. For example, an LLC can
+
+        elect to be taxed as a corporation.
+
+        - Corp: taxed as a corporation, the default for C Corps
+
+        - S Corp: election using IRS Form 2553
+
+        - Partnership: taxed as a partnership, the default for LPs
+
+        - Disregarded: taxes pass through to the members, default for LLCs
+
+        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LLCManagedTypeEnum:
+      type: string
+      enum:
+      - member_managed
+      - manager_managed
+      title: LLCManagedTypeEnum
+    PlatformLegalEntity:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        notices_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notices Url
+        user_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Email
+        business_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Name
+        entity_type:
+          anyOf:
+          - $ref: '#/components/schemas/EntityTypeEnum_2'
+          - type: 'null'
+        tax_classification:
+          anyOf:
+          - $ref: '#/components/schemas/TaxClassEnum'
+          - type: 'null'
+        incorporation_region:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+        incorporated_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Incorporated Date
+        ein:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ein
+        llc_managed_type:
+          anyOf:
+          - $ref: '#/components/schemas/LLCManagedTypeEnum'
+          - type: 'null'
+        business_purpose:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Purpose
+        business_phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Phone
+        business_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Email
+        business_address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        mailing_address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        naics_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Naics Code
+        accounting_method:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingMethod'
+          - type: 'null'
+        accounting_period:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingPeriod'
+          - type: 'null'
+        accounting_year_end:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingYearEndMonth'
+          - type: 'null'
+        futa_liability_year:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Futa Liability Year
+        last_payroll_update:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Payroll Update
+      type: object
+      required:
+      - id
+      - name
+      - notices_url
+      - user_email
+      - business_name
+      - entity_type
+      - tax_classification
+      - incorporation_region
+      - incorporated_date
+      title: PlatformLegalEntity
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AccountingYearEndMonth:
+      type: string
+      enum:
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+      title: AccountingYearEndMonth
+    AccountingMethod:
+      type: string
+      enum:
+      - accrual
+      - cash
+      title: AccountingMethod
+    EntityTypeEnum:
+      type: string
+      enum:
+      - unset
+      - c_corp
+      - p_corp
+      - llc
+      - llp
+      - lp
+      - gp
+      title: EntityTypeEnum
+    Address:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        country:
+          type: string
+          title: Country
+        postal_code:
+          type: string
+          title: Postal Code
+      type: object
+      required:
+      - address_line_1
+      - city
+      - state
+      - country
+      - postal_code
+      title: Address
+    EntityTypeEnum_2:
+      type: string
+      enum:
+      - unset
+      - c_corp
+      - p_corp
+      - pllc
+      - llc
+      - llp
+      - lp
+      - gp
+      title: EntityTypeEnum
+    AccountingYearEndMonthNumber:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      title: AccountingYearEndMonthNumber
+    AccountLegalEntity:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        notices_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Notices Url
+        user_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Email
+        business_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Name
+        entity_type:
+          anyOf:
+          - $ref: '#/components/schemas/EntityTypeEnum'
+          - type: 'null'
+        tax_classification:
+          anyOf:
+          - $ref: '#/components/schemas/TaxClassEnum'
+          - type: 'null'
+        incorporation_location:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Incorporation Location
+        incorporation_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Incorporation Date
+        ein:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ein
+        llc_managed_type:
+          anyOf:
+          - $ref: '#/components/schemas/LLCManagedTypeEnum'
+          - type: 'null'
+        business_purpose:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Purpose
+        business_phone:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Phone
+        business_email:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Email
+        business_address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        mailing_address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+        naics_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Naics Code
+        accounting_method:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingMethod'
+          - type: 'null'
+        accounting_period:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingPeriod'
+          - type: 'null'
+        accounting_year_end:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingYearEndMonthNumber'
+          - type: 'null'
+        futa_liability_year:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Futa Liability Year
+      type: object
+      required:
+      - id
+      - name
+      - notices_url
+      - user_email
+      - business_name
+      - entity_type
+      - tax_classification
+      - incorporation_location
+      - incorporation_date
+      title: AccountLegalEntity
+    StateCode:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: StateCode
+    AccountingPeriod:
+      type: string
+      enum:
+      - fiscal
+      - calendar
+      title: AccountingPeriod
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/token

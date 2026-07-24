@@ -1,0 +1,342 @@
+openapi: 3.1.0
+info:
+  title: Mosey Accounts Regions API
+  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
+  version: 1.0.0
+  x-logo:
+    url: null
+tags:
+- name: Regions
+paths:
+  /v2/regions:
+    get:
+      summary: List Regions
+      description: Returns the list of regions associated with the authenticated legal entity.
+      operationId: list_regions_handler_v2_regions_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlatformRegion'
+                title: Response List Regions Handler V2 Regions Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Regions
+    post:
+      summary: Add multiple regions
+      description: "Add multiple regions to the authenticated legal entity.\nProviding the employee count will configure the region and generate applicable tasks.\nThe employee count is expected to consist of all current full time employees.\n\n### Example\n\n    Request\n    ```\n        \"config\": {\n            \"AL\": {\"employee_count\": 1},\n            \"AK\": {\"employee_count\": 10},\n        }\n    }\n    ```"
+      operationId: add_multiple_regions_handler_v2_regions_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformBatchRegionConfig'
+      responses:
+        '200':
+          description: A successful response will contain the dictionary containing regions, with employee counts. For a successful response, this will match the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformBatchRegionConfig'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformHttpException'
+          description: Unprocessable Entity
+      tags:
+      - Regions
+  /v2/regions/{region}:
+    put:
+      summary: Add region
+      description: 'Add a region to the authenticated legal entity.
+
+        Providing the employee count will configure the region and generate applicable tasks.
+
+        The employee count is expected to consist of all current full time employees.'
+      operationId: add_region_handler_v2_regions__region__put
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: region
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/StateCode'
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformRegionConfig'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformRegionConfig'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformHttpException'
+          description: Unprocessable Entity
+      tags:
+      - Regions
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformHttpException:
+      properties:
+        message:
+          type: string
+          title: Message
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - message
+      - detail
+      title: PlatformHttpException
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PlatformRegionRef:
+      properties:
+        id:
+          type: string
+          title: Id
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - id
+      - code
+      - name
+      title: PlatformRegionRef
+    PlatformRegion:
+      properties:
+        region:
+          $ref: '#/components/schemas/PlatformRegionRef'
+        config:
+          $ref: '#/components/schemas/PlatformRegionConfig'
+      type: object
+      required:
+      - region
+      - config
+      title: PlatformRegion
+    PlatformRegionConfig:
+      properties:
+        employee_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Employee Count
+      type: object
+      required:
+      - employee_count
+      title: PlatformRegionConfig
+    StateCode:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: StateCode
+    PlatformBatchRegionConfig:
+      properties:
+        config:
+          additionalProperties:
+            $ref: '#/components/schemas/PlatformRegionConfig'
+          propertyNames:
+            $ref: '#/components/schemas/StateCode'
+          type: object
+          title: Config
+          description: A dictionary with two character state code as key and regional configuration as value.
+      type: object
+      required:
+      - config
+      title: PlatformBatchRegionConfig
+      description: 'A dictionary mapping state codes to their respective platform region configurations.
+
+        The key for the dictionary is the StateCode which is the 2 character state code. To view the entire list of supported state codes, see [StateCode enum](/api-reference/v2/add-region#parameter-region).'
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/token

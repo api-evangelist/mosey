@@ -1,0 +1,173 @@
+openapi: 3.1.0
+info:
+  title: Mosey Accounts Auth API
+  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
+  version: 1.0.0
+  x-logo:
+    url: null
+tags:
+- name: Auth
+paths:
+  /v2/auth/payroll:
+    post:
+      summary: Setup Payroll Connection for Legal Entity
+      operationId: setup_payroll_v2_auth_payroll_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformAuthenticationSessionPayrollSetupRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformAuthenticationSessionPayrollSetupResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Auth
+  /v2/auth:
+    post:
+      summary: Authenticate Legal Entity
+      operationId: authenticate_v2_auth_post
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Authorization
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformAuthenticationSessionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformAuthenticationSessionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Auth
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformAuthenticationSessionPayrollSetupRequest:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+        authorization_callback_url:
+          type: string
+          title: Authorization Callback Url
+      type: object
+      required:
+      - legal_entity_id
+      - authorization_callback_url
+      title: PlatformAuthenticationSessionPayrollSetupRequest
+    PlatformAuthenticationSessionPayrollSetupResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: PlatformAuthenticationSessionPayrollSetupResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PlatformAuthenticationSessionRequest:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+      type: object
+      required:
+      - legal_entity_id
+      title: PlatformAuthenticationSessionRequest
+    PlatformAuthenticationSessionResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        token_type:
+          type: string
+          const: bearer
+          title: Token Type
+          default: bearer
+        state:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: State
+      type: object
+      required:
+      - access_token
+      title: PlatformAuthenticationSessionResponse
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/token

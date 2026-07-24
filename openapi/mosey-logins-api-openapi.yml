@@ -1,0 +1,385 @@
+openapi: 3.1.0
+info:
+  title: Mosey Accounts Logins API
+  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
+  version: 1.0.0
+  x-logo:
+    url: null
+tags:
+- name: Logins
+paths:
+  /logins:
+    get:
+      summary: List Legal Entity's Account Logins
+      description: "Lists _Account Login_ for the current _Legal Entity_.\n\nRetrieving a login's information is a **three-step process**:\n1. the returned objects will contain, amongst other information, the `id` of the Account Login.\n1. the hosted url can be obtained by calling `/logins/<id>/sessions`\n1. the Account Login data will be available following the previous response's `url`\n\n### Example\n\n1. Request all logins for the current Legal Entity: `/logins`\n1. Response:\n   ```\n   [\n      {\n        \"id\": \"abc1234\",\n        \"name\": \"Account for Tax Office in Nevada\",\n        \"region_code\": \"NV\",\n        \"login_url\": \"https://tax.neveda.gov/login\",\n        \"url\": \"https://tax.neveda.gov/login\",\n        \"is_supported\": true,\n      },\n      ...\n  ]\n   ```"
+      operationId: list_account_logins_logins_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
+                type: array
+                title: Response List Account Logins Logins Get
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      tags:
+      - Logins
+  /logins/{legal_entity_account_login_public_id}/sessions:
+    post:
+      summary: Create Account Login Session
+      description: Returns the url the end-user should follow to retrieve the Account Login secrets and data
+      operationId: make_account_login_hosted_url_logins__legal_entity_account_login_public_id__sessions_post
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: legal_entity_account_login_public_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Legal Entity Account Login Public Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginsSessionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformLegalEntityAccountLoginSessionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Logins
+  /v2/logins:
+    get:
+      summary: List Legal Entity's Account Logins
+      description: "Lists _Account Login_ for the current _Legal Entity_.\n\nRetrieving a login's information is a **three-step process**:\n1. the returned objects will contain, amongst other information, the `id` of the Account Login.\n1. the hosted url can be obtained by calling `/logins/<id>/sessions`\n1. the Account Login data will be available following the previous response's `url`\n\n### Example\n\n1. Request all logins for the current Legal Entity: `/logins`\n1. Response:\n   ```\n   [\n      {\n        \"id\": \"abc1234\",\n        \"name\": \"Account for Tax Office in Nevada\",\n        \"region\": \"NV\",\n        \"url\": \"https://tax.neveda.gov/login\",\n        \"is_supported\": true,\n      },\n      ...\n  ]\n   ```"
+      operationId: list_account_logins_v2_logins_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: region
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+          title: Region
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlatformLegalEntityAccountLogin_2'
+                title: Response List Account Logins V2 Logins Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Logins
+  /v2/logins/{account_login_public_id}/session:
+    post:
+      summary: Create Account Login Session
+      operationId: Create_Account_Login_Session_v2_logins__account_login_public_id__session_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: account_login_public_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Login Public Id
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostedSessionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedSessionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Logins
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    StateCode:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: StateCode
+    PlatformLegalEntityAccountLoginSessionResponse:
+      properties:
+        created_at:
+          type: string
+          title: Created At
+          description: This is the time the `url` became accessible
+        expires_at:
+          type: string
+          title: Expires At
+          description: This is the time after which the `url` will no longer accessible
+        url:
+          type: string
+          title: Url
+          description: A temporary link the user must follow if they want to access the Login information (including passwords and user names)
+      type: object
+      required:
+      - created_at
+      - expires_at
+      - url
+      title: PlatformLegalEntityAccountLoginSessionResponse
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PlatformLegalEntityAccountLogin_2:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        region:
+          $ref: '#/components/schemas/StateCode'
+          description: The state which the login belongs to
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - region
+      - url
+      title: PlatformLegalEntityAccountLogin
+    HostedSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: HostedSessionResponse
+    LoginsSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: LoginsSessionRequest
+    PlatformLegalEntityAccountLogin:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        location_id:
+          type: string
+          title: Location Id
+          description: The location id the login belongs to
+        login_url:
+          type: string
+          title: Login Url
+          description: This field is deprecated, please use url.
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - location_id
+      - login_url
+      - url
+      title: PlatformLegalEntityAccountLogin
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/token

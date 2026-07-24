@@ -1,0 +1,371 @@
+openapi: 3.1.0
+info:
+  title: Mosey Accounts Agency Accounts API
+  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
+  version: 1.0.0
+  x-logo:
+    url: null
+tags:
+- name: Agency Accounts
+paths:
+  /agency_accounts:
+    get:
+      summary: List Agency Accounts
+      operationId: get_agency_accounts_for_legal_entity_agency_accounts_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/app__api__platform__models__PlatformAgencyAccount'
+                type: array
+                title: Response Get Agency Accounts For Legal Entity Agency Accounts Get
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      tags:
+      - Agency Accounts
+  /v2/agency_accounts:
+    get:
+      summary: List Agency Accounts
+      operationId: list_agency_accounts_handler_v2_agency_accounts_get
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: region
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+          title: Region
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlatformAgencyAccount'
+                title: Response List Agency Accounts Handler V2 Agency Accounts Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Agency Accounts
+components:
+  schemas:
+    PlatformAgency:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        website:
+          type: string
+          title: Website
+      type: object
+      required:
+      - id
+      - name
+      - website
+      title: PlatformAgency
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    StateCode:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: StateCode
+    PlatformAgencyAttributeStatus:
+      type: string
+      enum:
+      - todo
+      - in-progress
+      - done
+      title: PlatformAgencyAttributeStatus
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PlatformAgencyAttributeAndValue_2:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+        status:
+          $ref: '#/components/schemas/PlatformAgencyAttributeStatus'
+      type: object
+      required:
+      - name
+      - description
+      - value
+      - status
+      title: PlatformAgencyAttributeAndValue
+    PlatformLegalEntityAccountLogin_2:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        region:
+          $ref: '#/components/schemas/StateCode'
+          description: The state which the login belongs to
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - region
+      - url
+      title: PlatformLegalEntityAccountLogin
+    PlatformAgencyAttributeAndValue:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+      type: object
+      required:
+      - name
+      - description
+      - value
+      title: PlatformAgencyAttributeAndValue
+    PlatformAgencyAccount:
+      properties:
+        region:
+          $ref: '#/components/schemas/StateCode'
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        agency:
+          $ref: '#/components/schemas/PlatformAgency'
+        data:
+          items:
+            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue_2'
+          type: array
+          title: Data
+        logins:
+          items:
+            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin_2'
+          type: array
+          title: Logins
+      type: object
+      required:
+      - region
+      - id
+      - name
+      - agency
+      - data
+      - logins
+      title: PlatformAgencyAccount
+    app__api__platform__models__PlatformAgencyAccount:
+      properties:
+        location_id:
+          type: string
+          title: Location Id
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        agency:
+          $ref: '#/components/schemas/PlatformAgency'
+        data:
+          items:
+            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue'
+          type: array
+          title: Data
+        logins:
+          items:
+            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
+          type: array
+          title: Logins
+      type: object
+      required:
+      - location_id
+      - id
+      - name
+      - agency
+      - data
+      - logins
+      title: PlatformAgencyAccount
+    PlatformLegalEntityAccountLogin:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        location_id:
+          type: string
+          title: Location Id
+          description: The location id the login belongs to
+        login_url:
+          type: string
+          title: Login Url
+          description: This field is deprecated, please use url.
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - location_id
+      - login_url
+      - url
+      title: PlatformLegalEntityAccountLogin
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/token

@@ -1,0 +1,255 @@
+openapi: 3.1.0
+info:
+  title: Mosey Accounts Handbook API
+  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
+  version: 1.0.0
+  x-logo:
+    url: null
+tags:
+- name: Handbook
+paths:
+  /v2/handbook:
+    get:
+      summary: Display Handbook Summary
+      operationId: Display_Handbook_Summary_v2_handbook_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformHandbook'
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      tags:
+      - Handbook
+  /v2/handbook/automate/sessions:
+    post:
+      summary: Provide A Session Scoped Handbook Builder Page.
+      operationId: Provide_a_session_scoped_handbook_builder_page__v2_handbook_automate_sessions_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlatformAutomationSessionRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformHandbookAutomationSessionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - OAuth2PasswordBearer: []
+      - OAuth2PasswordBearer: []
+      tags:
+      - Handbook
+  /v2/handbook/session:
+    post:
+      summary: Create Handbook Session
+      operationId: Create_Handbook_Session_v2_handbook_session_post
+      security:
+      - OAuth2PasswordBearer: []
+      parameters:
+      - name: legal_entity_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Public Id
+      - name: user_or_platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Or Platform Public Id
+      - name: platform_public_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Platform Public Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HostedSessionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HostedSessionResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Handbook
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformHandbookAutomationSessionResponse:
+      properties:
+        automation_url:
+          type: string
+          title: Automation Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - automation_url
+      - created_at
+      - expires_at
+      title: PlatformHandbookAutomationSessionResponse
+    PlatformHandbook:
+      properties:
+        summary:
+          $ref: '#/components/schemas/PlatformHandbookSummary'
+        details:
+          $ref: '#/components/schemas/PlatformHandbookDetails'
+      type: object
+      required:
+      - summary
+      - details
+      title: PlatformHandbook
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
+    PlatformHandbookDetails:
+      properties:
+        handbook_automation_url:
+          type: string
+          title: Handbook Automation Url
+      type: object
+      required:
+      - handbook_automation_url
+      title: PlatformHandbookDetails
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HostedSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: HostedSessionResponse
+    PlatformHandbookSummary:
+      properties:
+        number_of_adopotable_policies:
+          type: integer
+          title: Number Of Adopotable Policies
+        publishable:
+          type: boolean
+          title: Publishable
+        has_published:
+          type: boolean
+          title: Has Published
+        acknowledgement_stats:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformHandbookAcknowledgementStats'
+          - type: 'null'
+      type: object
+      required:
+      - number_of_adopotable_policies
+      - publishable
+      - has_published
+      title: PlatformHandbookSummary
+    PlatformAutomationSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: PlatformAutomationSessionRequest
+    PlatformHandbookAcknowledgementStats:
+      properties:
+        signed:
+          type: integer
+          title: Signed
+        outdated:
+          type: integer
+          title: Outdated
+        pending:
+          type: integer
+          title: Pending
+      type: object
+      required:
+      - signed
+      - outdated
+      - pending
+      title: PlatformHandbookAcknowledgementStats
+  securitySchemes:
+    OAuth2PasswordBearer:
+      type: oauth2
+      flows:
+        password:
+          scopes: {}
+          tokenUrl: /api/token
