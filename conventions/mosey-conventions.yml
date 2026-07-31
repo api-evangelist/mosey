@@ -1,0 +1,43 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mosey-openapi.json
+docs: https://docs.mosey.com/api-reference/introduction
+authentication:
+  style: oauth2-password
+  token_endpoint: https://api.mosey.com/api/token
+  header: 'Authorization: Bearer <access_token>'
+  ref: authentication/mosey-authentication.yml
+idempotency:
+  supported: false
+  note: No Idempotency-Key header or parameter is documented; writes are not declared idempotent.
+pagination:
+  style: filter
+  note: >-
+    List endpoints (GET /tasks, GET /mail, and their per-location variants) are
+    filtered by query parameters rather than paged. Task filters include
+    definition_id, start_date, end_date, include_managed, status, tags; mail is
+    filtered by start_date/end_date. No cursor, offset, or page tokens are present.
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: null
+versioning:
+  style: uri-path
+  current: v2
+  ref: lifecycle/mosey-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  shape: '{ "detail": [ { "loc", "msg", "type" } ] }'
+  ref: errors/mosey-problem-types.yml
+rate_limit_signaling:
+  headers: null
+  note: No rate-limit headers or policy documented in the spec or docs.
+hosted_sessions:
+  note: >-
+    A distinctive Mosey convention: several POST operations mint short-lived,
+    authenticated hosted app URLs (signup, task resolution, agency accounts,
+    documents, handbook builder, tasks management) that a partner embeds/redirects
+    to, rather than returning raw resource data.
+  ref: components/mosey-components.yml

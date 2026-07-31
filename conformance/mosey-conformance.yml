@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mosey-openapi.json
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: components.securitySchemes declares OAuth2PasswordBearer (type oauth2, password flow, tokenUrl /api/token)
+  - id: oidc
+    conforms: false
+    evidence: no openIdConnect scheme and no /.well-known/openid-configuration (404)
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors returned as application/json FastAPI envelope {detail:[{loc,msg,type}]}, not application/problem+json
+  - id: openapi-3.1
+    conforms: true
+    evidence: openapi 3.1.0 documents published at docs.mosey.com/openapi.json (+ v1/v2)
+  - id: idempotency
+    conforms: false
+    evidence: no Idempotency-Key header/parameter documented in the spec
+  - id: cursor-pagination
+    conforms: false
+    evidence: list endpoints use date-range/filter query params (start_date/end_date/status/tags), no cursor or offset paging
+  - id: webhooks
+    conforms: false
+    evidence: no webhook/callback surface in the spec or docs

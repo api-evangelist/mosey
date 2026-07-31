@@ -1,0 +1,39 @@
+# Mosey
+
+## Docs
+
+- [Mosey API](https://docs.mosey.com/api-reference/introduction.md)
+- [Add multiple regions](https://docs.mosey.com/api-reference/v2/add-multiple-regions.md): Add multiple regions to the authenticated legal entity. Providing the employee count will configure the region and generate applicable tasks. The employee count is expected to consist of all current full time employees.
+- [Add region](https://docs.mosey.com/api-reference/v2/add-region.md): Add a region to the authenticated legal entity. Providing the employee count will configure the region and generate applicable tasks. The employee count is expected to consist of all current full time employees.
+- [Authenticate Legal Entity](https://docs.mosey.com/api-reference/v2/authenticate-legal-entity.md)
+- [Create A Hosted Signup Session](https://docs.mosey.com/api-reference/v2/create-a-hosted-signup-session.md)
+- [Create A Task Resolution Session](https://docs.mosey.com/api-reference/v2/create-a-task-resolution-session.md)
+- [Create Account Login Session](https://docs.mosey.com/api-reference/v2/create-account-login-session.md)
+- [Create Agency Accounts Management Session](https://docs.mosey.com/api-reference/v2/create-agency-accounts-management-session.md): Creates an authenticated session to enter the Mosey app, and returns the url on which a user can view accounts registered with state agencies and login credentials if present with state agencies.
+- [Create Documents Management Session](https://docs.mosey.com/api-reference/v2/create-documents-management-session.md): Creates an authenticated session to enter the Mosey app, and returns the url on which a user can view documents received from State agencies.
+- [Create Handbook Session](https://docs.mosey.com/api-reference/v2/create-handbook-session.md)
+- [Create Tasks Management Session](https://docs.mosey.com/api-reference/v2/create-tasks-management-session.md): Creates an authenticated session to enter the Mosey app, and returns the url on which a user can view and manage tasks.
+- [Display Handbook Summary](https://docs.mosey.com/api-reference/v2/display-handbook-summary.md)
+- [Get Legal Entity Details](https://docs.mosey.com/api-reference/v2/get-legal-entity-details.md)
+- [Get Task](https://docs.mosey.com/api-reference/v2/get-task.md)
+- [List Agency Accounts](https://docs.mosey.com/api-reference/v2/list-agency-accounts.md)
+- [List Legal Entity's Account Logins](https://docs.mosey.com/api-reference/v2/list-legal-entitys-account-logins.md): Lists _Account Login_ for the current _Legal Entity_.
+- [List Mail](https://docs.mosey.com/api-reference/v2/list-mail.md): Returns mail information received by the authorized legal entity
+- [List Regions](https://docs.mosey.com/api-reference/v2/list-regions.md): Returns the list of regions associated with the authenticated legal entity.
+- [List Tasks](https://docs.mosey.com/api-reference/v2/list-tasks.md): List of tasks based on the filters provided as query parameters.
+- [Setup Payroll Connection for Legal Entity](https://docs.mosey.com/api-reference/v2/setup-payroll-connection-for-legal-entity.md)
+- [Signup To Create A Legal Entity](https://docs.mosey.com/api-reference/v2/signup-to-create-a-legal-entity.md)
+- [Update Question Task Answer](https://docs.mosey.com/api-reference/v2/update-question-task-answer.md): Answer a question task. A question could accept a boolean (true/false) answer or numerical answer or a date After a successful update, the task's status is returned.
+- [Update Task Status](https://docs.mosey.com/api-reference/v2/update-task-status.md): Updates the status of the specified requirement task. Question task's status cannot be updated. Task status can be updated to todo or done only. After a successful update, the updated task is returned.
+
+## OpenAPI Specs
+
+- [openapi_v2](https://docs.mosey.com/openapi_v2.json)
+- [openapi_v1](https://docs.mosey.com/openapi_v1.json)
+- [openapi](https://docs.mosey.com/openapi.json)
+
+## Optional
+
+- [About Us](https://mosey.com/about/)
+- [Contact Us](mailto:info@mosey.com)
+- [Blog](https://mosey.com/blog/)

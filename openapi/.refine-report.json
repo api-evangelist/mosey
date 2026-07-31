@@ -1,0 +1,36 @@
+{
+  "provider": "mosey",
+  "sources": [
+    "mosey-accounts-api-openapi.yml",
+    "mosey-agency-accounts-api-openapi.yml",
+    "mosey-auth-api-openapi.yml",
+    "mosey-documents-api-openapi.yml",
+    "mosey-handbook-api-openapi.yml",
+    "mosey-legal-entity-api-openapi.yml",
+    "mosey-locations-api-openapi.yml",
+    "mosey-logins-api-openapi.yml",
+    "mosey-mail-api-openapi.yml",
+    "mosey-regions-api-openapi.yml",
+    "mosey-signup-api-openapi.yml",
+    "mosey-tasks-api-openapi.yml"
+  ],
+  "outputs": [
+    "mosey-accounts-api-openapi.yml",
+    "mosey-agency-accounts-api-openapi.yml",
+    "mosey-auth-api-openapi.yml",
+    "mosey-documents-api-openapi.yml",
+    "mosey-handbook-api-openapi.yml",
+    "mosey-legal-entity-api-openapi.yml",
+    "mosey-locations-api-openapi.yml",
+    "mosey-logins-api-openapi.yml",
+    "mosey-mail-api-openapi.yml",
+    "mosey-regions-api-openapi.yml",
+    "mosey-signup-api-openapi.yml",
+    "mosey-tasks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

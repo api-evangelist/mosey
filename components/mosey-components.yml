@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mosey.com/api-reference/introduction
+note: >-
+  Mosey does not ship a client-side web-component / element library. Its embeddable
+  surface is a set of server-minted HOSTED SESSIONS: API operations that return a
+  short-lived authenticated Mosey app URL a partner redirects to or iframes, so the
+  compliance UI runs inside the partner product. Grouped below by flow.
+families:
+  - name: Signup
+    kind: hosted-session
+    components:
+      - name: Hosted Signup Session
+        source_operation: openapi/mosey-openapi.json#Create_Hosted_Signup_Session_v2_signup_sessions_post
+        returns: hosted app URL
+  - name: Tasks
+    kind: hosted-session
+    components:
+      - name: Tasks Management Session
+        source_operation: openapi/mosey-openapi.json#hosted_task_tasks_sessions_post
+        returns: hosted app URL
+      - name: Task Resolution / Automation Session
+        source_operation: openapi/mosey-openapi.json#automate_task_handler_tasks__task_id__automate_sessions_post
+        returns: hosted app URL
+  - name: Handbook
+    kind: hosted-session
+    components:
+      - name: Handbook Builder Session
+        source_operation: openapi/mosey-openapi.json#Provide_a_session_scoped_handbook_builder_page__v2_handbook_automate_sessions_post
+        returns: hosted app URL
+  - name: Accounts
+    kind: hosted-session
+    components:
+      - name: Account Login Session
+        source_operation: openapi/mosey-openapi.json#make_account_login_hosted_url_logins__legal_entity_account_login_public_id__sessions_post
+        returns: hosted app URL

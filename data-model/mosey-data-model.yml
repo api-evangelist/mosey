@@ -1,0 +1,66 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mosey-openapi.json
+note: >-
+  Entity graph derived from OpenAPI component schemas and id-reference fields.
+  Mosey models a Legal Entity that operates in one or more Regions/Locations, each
+  generating compliance Tasks, and holding Agency Accounts, Account Logins, and Mail.
+entities:
+  - name: LegalEntity
+    schema: AccountLegalEntity
+    description: The business/company that Mosey tracks compliance for; root of the graph.
+  - name: Location
+    schema: AccountLegalEntityLocation
+    description: A state/region registration for a legal entity (a.k.a. region).
+    id_field: region_platform_public_id / location_public_id
+  - name: Task
+    schema: AccountTask
+    description: A compliance requirement or question task generated for a location.
+  - name: TaskDefinition
+    schema: AccountTaskDefinition
+    description: The template/definition a task instantiates.
+  - name: AgencyAccount
+    description: An account registered with a state/local agency.
+  - name: AccountLogin
+    description: Stored login credentials for a state/local agency portal.
+  - name: Mail
+    description: Physical mail received on behalf of the legal entity.
+  - name: Connection
+    description: A Tax Accounts API account connection (preview).
+relationships:
+  - from: Location
+    to: LegalEntity
+    type: belongs_to
+    via: legal entity context (authenticated)
+  - from: LegalEntity
+    to: Location
+    type: has_many
+    via: locations
+  - from: Task
+    to: Location
+    type: belongs_to
+    via: region_platform_public_id
+  - from: Location
+    to: Task
+    type: has_many
+    via: tasks
+  - from: Task
+    to: TaskDefinition
+    type: belongs_to
+    via: definition_id
+  - from: LegalEntity
+    to: AgencyAccount
+    type: has_many
+    via: agency_accounts
+  - from: LegalEntity
+    to: AccountLogin
+    type: has_many
+    via: logins
+  - from: Location
+    to: AccountLogin
+    type: has_many
+    via: locations/{location_public_id}/logins
+  - from: LegalEntity
+    to: Mail
+    type: has_many
+    via: mail

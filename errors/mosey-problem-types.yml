@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mosey-openapi.json
+format: json
+envelope:
+  media_type: application/json
+  shape: '{ "detail": [ { "loc": [string|int], "msg": string, "type": string } ] }'
+  note: >-
+    Mosey runs on a FastAPI-style stack. Request validation failures return the
+    standard HTTPValidationError envelope on HTTP 422. The harvested OpenAPI only
+    declares 200 and 422 responses; other status codes (401 unauthorized, 404 not
+    found) are enforced at runtime but not documented in the spec.
+problems:
+  - status: 422
+    title: Validation error
+    schema: HTTPValidationError
+    remediation: >-
+      Inspect detail[].loc to find the offending field and detail[].msg for the
+      reason; correct the request body/query parameters and retry.
+    applies_to: all operations (documented response)
+  - status: 401
+    title: Unauthorized
+    remediation: >-
+      Obtain a fresh access token via POST /api/token (OAuth2 password grant) and
+      send it as Authorization: Bearer <token>. Observed on protected endpoints
+      (e.g. GET https://api.mosey.com/openapi.json returns 401).
+    applies_to: all authenticated operations (runtime; not in spec)

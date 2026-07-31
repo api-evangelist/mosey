@@ -1,0 +1,4427 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Mosey API",
+    "description": "If you'd like to use the Mosey API, please contact sales@mosey.com.",
+    "version": "1.0.0",
+    "x-logo": {
+      "url": null
+    }
+  },
+  "paths": {
+    "/accounts/signup": {
+      "post": {
+        "summary": "Embedded Signup",
+        "operationId": "embedded_signup_handler_accounts_signup_post",
+        "parameters": [
+          {
+            "name": "verbose",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Verbose"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmbeddedSignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmbeddedSignupResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/signup/sessions": {
+      "post": {
+        "summary": "Create Hosted Signup Session",
+        "description": "Provides a URL for directing a user through the hosted signup experience. Upon successful completion the user will be redirected to the callback_url. The returned legal entity id will not be active until the user has completed their signup. If a subsequent signup needs to be generated for a user the returned legal_entity_id from the first should be included in the request.",
+        "operationId": "Create_Hosted_Signup_Session_accounts_signup_sessions_post",
+        "parameters": [
+          {
+            "name": "verbose",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Verbose"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app__api__platform__auth__HostedSignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__api__platform__auth__HostedSignupResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/auth": {
+      "post": {
+        "summary": "Authenticate Legal Entity",
+        "description": "Provides a short-lived authentication token scoped to the requested legal entity. Tokens must be included as an Authorization header for all API requests on behalf of the legal entity. They are valid for 10 minutes. Your API key will be provided to you by Mosey.",
+        "operationId": "account_authenticate_accounts_auth_post",
+        "parameters": [
+          {
+            "name": "verbose",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Verbose"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformAuthenticateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/signup/sessions": {
+      "post": {
+        "summary": "Create Hosted Signup Session",
+        "operationId": "Create_Hosted_Signup_Session_v2_signup_sessions_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/app__platform__public__HostedSignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/app__platform__public__HostedSignupResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/tasks": {
+      "get": {
+        "summary": "List Mosey Tasks",
+        "operationId": "List_Mosey_Tasks_v2_tasks_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformTask"
+                  },
+                  "type": "array",
+                  "title": "Response List Mosey Tasks V2 Tasks Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/v2/handbook": {
+      "get": {
+        "summary": "Display Handbook Summary",
+        "operationId": "Display_Handbook_Summary_v2_handbook_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHandbook"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/v2/handbook/automate/sessions": {
+      "post": {
+        "summary": "Provide A Session Scoped Handbook Builder Page.",
+        "operationId": "Provide_a_session_scoped_handbook_builder_page__v2_handbook_automate_sessions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformAutomationSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHandbookAutomationSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/locations": {
+      "get": {
+        "summary": "List Locations",
+        "description": "Returns the list of locations associated with the authenticated legal entity.",
+        "operationId": "list_locations_handler_locations_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AccountLegalEntityLocationRef"
+                  },
+                  "type": "array",
+                  "title": "Response List Locations Handler Locations Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/locations/{location_public_id}": {
+      "put": {
+        "summary": "Add Location",
+        "description": "Returns the specified location that is associated with the authenticated legal entity.\nAn optional configuration can be provided to help decide if some tasks should be included or not.\n\n<table>\n<tr><td>has_employees</td><td>Include or filter out tasks that are applicable when employees are living or working in the location. Once payroll is connected for the legal entity, this value will be kept in sync.</td></tr>\n<tr><td>has_physical_location</td><td>Include or filter out tasks that are applicable when the legal entity has a physical presence (such as an office) in the location.</td></tr>\n</table>\n\nThis table maps Location IDs to the state abbreviation code it represents. The IDs are globally unique and are used regardless of which legal entity is authenticated.\n\n<table>\n<tr><td>e5aa6d3222d22de2</td><td>AL</td></tr>\n<tr><td>86e384ec4456dd93</td><td>AK</td></tr>\n<tr><td>43c2b058fdc38bd0</td><td>AZ</td></tr>\n<tr><td>8a3248de4ff636d4</td><td>AR</td></tr>\n<tr><td>99be5e8f54c4680d</td><td>CA</td></tr>\n<tr><td>e8239e013ff4cde4</td><td>CO</td></tr>\n<tr><td>e69817cba25a7fa6</td><td>CT</td></tr>\n<tr><td>1f1cc147c009b409</td><td>DE</td></tr>\n<tr><td>afb903b3dcbe23fc</td><td>DC</td></tr>\n<tr><td>33cf440c464d38f5</td><td>FL</td></tr>\n<tr><td>5c392fde8d78eb3c</td><td>GA</td></tr>\n<tr><td>dcb44d856176eb43</td><td>HI</td></tr>\n<tr><td>a71f627b1843088a</td><td>ID</td></tr>\n<tr><td>30c18f24ba96c1e2</td><td>IL</td></tr>\n<tr><td>fbe3a2db6d46f2fe</td><td>IN</td></tr>\n<tr><td>81fb4925ba83f81b</td><td>IA</td></tr>\n<tr><td>f60f094906bf6e61</td><td>KS</td></tr>\n<tr><td>0fced19468cca680</td><td>KY</td></tr>\n<tr><td>b51b14eb685c802f</td><td>LA</td></tr>\n<tr><td>50b6e06268188bff</td><td>ME</td></tr>\n<tr><td>784c3796c1f6931f</td><td>MD</td></tr>\n<tr><td>d26e531db2dcbb50</td><td>MA</td></tr>\n<tr><td>b07e8933d62889e9</td><td>MI</td></tr>\n<tr><td>2577a77a916b01bd</td><td>MN</td></tr>\n<tr><td>4641d29a7416dae8</td><td>MS</td></tr>\n<tr><td>4eecb1031e0ecc97</td><td>MO</td></tr>\n<tr><td>3c6de0a85af1153b</td><td>MT</td></tr>\n<tr><td>47b790d36c9135fe</td><td>NE</td></tr>\n<tr><td>c2473d37f8547551</td><td>NV</td></tr>\n<tr><td>e4656a4c283b7c15</td><td>NH</td></tr>\n<tr><td>a3cc7e50a63fb347</td><td>NJ</td></tr>\n<tr><td>43ca15ae2aa526e9</td><td>NM</td></tr>\n<tr><td>5894aa7b4729ed13</td><td>NY</td></tr>\n<tr><td>aa79248e404b74d2</td><td>NC</td></tr>\n<tr><td>5528e71a2a626676</td><td>ND</td></tr>\n<tr><td>ff6fec03fcfaa7d1</td><td>OH</td></tr>\n<tr><td>36552f81875623ad</td><td>OK</td></tr>\n<tr><td>e3fd17f3f015b908</td><td>OR</td></tr>\n<tr><td>1c96f4e30d829772</td><td>PA</td></tr>\n<tr><td>1e58e23ec4a87036</td><td>RI</td></tr>\n<tr><td>d2bbb1305f460a69</td><td>SC</td></tr>\n<tr><td>4e4a5bc7fcf5abd2</td><td>SD</td></tr>\n<tr><td>13f00f61a16fdabd</td><td>TN</td></tr>\n<tr><td>7dac61e5b25e151a</td><td>TX</td></tr>\n<tr><td>5da0217cd400f37a</td><td>UT</td></tr>\n<tr><td>3683a6d2eec6b45c</td><td>VT</td></tr>\n<tr><td>f568e8571666ccd6</td><td>VA</td></tr>\n<tr><td>05a2dfcf81d37e7d</td><td>WA</td></tr>\n<tr><td>aa5a1dfcbdd37d25</td><td>WV</td></tr>\n<tr><td>920abf5751681231</td><td>WI</td></tr>\n<tr><td>0132461d340cded0</td><td>WY</td></tr>\n</table>",
+        "operationId": "add_location_handler_locations__location_public_id__put",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "location_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Location Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateLocationRequest"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Location Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountLegalEntityLocation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/locations/{region_platform_public_id}": {
+      "patch": {
+        "summary": "Update Location Configuration",
+        "description": "Updates the configuration for the specified legal entity and region.\nAn optional configuration can be provided to help decide if some tasks should be included or not.\n\n<table>\n<tr><td>has_employees</td><td>Include or filter out tasks that are applicable when employees are living or working in the location. Once payroll is connected for the legal entity, this value will be kept in sync. <b>This cannot be updated once payroll is connected.\"</b></td></tr>\n<tr><td>has_physical_location</td><td>Include or filter out tasks that are applicable when the legal entity has a physical presence (such as an office) in the location.</td></tr>\n</table>",
+        "operationId": "update_location_handler_locations__region_platform_public_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region_platform_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Region Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountLegalEntityLocation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "summary": "List Tasks",
+        "description": "Returns a list of tasks relevant for the authenticated legal entity. Tasks are sorted algorithmically by importance. To filter by status include a `status` parameter for each status you wish to be included in the response.",
+        "operationId": "list_tasks_handler_tasks_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "definition_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Definition Id"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Date"
+            }
+          },
+          {
+            "name": "include_managed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": false,
+              "title": "Include Managed"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountTaskStatus"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountTaskTag"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Tags are filtering criteria for tasks. When multiple tags are passed, tasks associated with at least one of the tags are returned.",
+              "title": "Tags"
+            },
+            "description": "Tags are filtering criteria for tasks. When multiple tags are passed, tasks associated with at least one of the tags are returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountTask"
+                  },
+                  "title": "Response List Tasks Handler Tasks Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/locations/{region_platform_public_id}/tasks": {
+      "get": {
+        "summary": "List Tasks for Location",
+        "description": "Returns a list of tasks relevant for the authenticated legal entity for the specified location. Tasks are sorted by their due date in ascending order, where tasks without a due date are first.",
+        "operationId": "list_location_tasks_handler_locations__region_platform_public_id__tasks_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region_platform_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Region Platform Public Id"
+            }
+          },
+          {
+            "name": "definition_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Definition Id"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Date"
+            }
+          },
+          {
+            "name": "include_managed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": false,
+              "title": "Include Managed"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountTaskStatus"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccountTask"
+                  },
+                  "title": "Response List Location Tasks Handler Locations  Region Platform Public Id  Tasks Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{task_id}": {
+      "get": {
+        "summary": "Get Task",
+        "description": "Returns the specified task.",
+        "operationId": "get_task_handler_tasks__task_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountTask"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Task Status",
+        "description": "Updates the status for the specified task. Returns the updated task.",
+        "operationId": "patch_task_handler_tasks__task_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountTaskUpdateStatus"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountTask"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/{task_id}/automate/sessions": {
+      "post": {
+        "summary": "Create Hosted Session to Automate Task",
+        "description": "Starts the Mosey automation for the task. If the automation  requires input from the user, the response will include a URL that will redirect them to a form to collect it.",
+        "operationId": "automate_task_handler_tasks__task_id__automate_sessions_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/sessions": {
+      "post": {
+        "summary": "Create Hosted Session to View Tasks",
+        "description": "Returns a URL with session, where the tasks are hosted at Mosey. Users can filter tasks based on location and status. Users can also act on these tasks",
+        "operationId": "hosted_task_tasks_sessions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TasksSessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TasksSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/legal_entity": {
+      "get": {
+        "summary": "Get Legal Entity",
+        "description": "Returns information for the authorized legal entity",
+        "operationId": "get_legal_entity_handler_legal_entity_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountLegalEntity"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/locations/{location_public_id}/logins": {
+      "get": {
+        "summary": "List Account Logins for Location",
+        "description": "Lists _Account Login_ for the current _Legal Entity_ and location id.",
+        "operationId": "list_account_logins_for_location_locations__location_public_id__logins_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "location_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Location Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformLegalEntityAccountLogin"
+                  },
+                  "title": "Response List Account Logins For Location Locations  Location Public Id  Logins Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logins": {
+      "get": {
+        "summary": "List Legal Entity's Account Logins",
+        "description": "Lists _Account Login_ for the current _Legal Entity_.\n\nRetrieving a login's information is a **three-step process**:\n1. the returned objects will contain, amongst other information, the `id` of the Account Login.\n1. the hosted url can be obtained by calling `/logins/<id>/sessions`\n1. the Account Login data will be available following the previous response's `url`\n\n### Example\n\n1. Request all logins for the current Legal Entity: `/logins`\n1. Response:\n   ```\n   [\n      {\n        \"id\": \"abc1234\",\n        \"name\": \"Account for Tax Office in Nevada\",\n        \"region_code\": \"NV\",\n        \"login_url\": \"https://tax.neveda.gov/login\",\n        \"url\": \"https://tax.neveda.gov/login\",\n        \"is_supported\": true,\n      },\n      ...\n  ]\n   ```",
+        "operationId": "list_account_logins_logins_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformLegalEntityAccountLogin"
+                  },
+                  "type": "array",
+                  "title": "Response List Account Logins Logins Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/logins/{legal_entity_account_login_public_id}/sessions": {
+      "post": {
+        "summary": "Create Account Login Session",
+        "description": "Returns the url the end-user should follow to retrieve the Account Login secrets and data",
+        "operationId": "make_account_login_hosted_url_logins__legal_entity_account_login_public_id__sessions_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_account_login_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Legal Entity Account Login Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginsSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformLegalEntityAccountLoginSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mail": {
+      "get": {
+        "summary": "List Mail",
+        "description": "Returns mail information received by the authorized legal entity\n\nFollow each returned `url` in order to download the mail content in PDF format",
+        "operationId": "get_legal_entity_mail_handler_mail_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformMail"
+                  },
+                  "title": "Response Get Legal Entity Mail Handler Mail Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/locations/{region_platform_public_id}/mail": {
+      "get": {
+        "summary": "List Mail by Location",
+        "description": "Returns mail information received by the authorized legal entity in the specified region\n\nFollow each returned `url` in order to download the mail content in PDF format",
+        "operationId": "get_legal_entity_mail_handler_for_location_locations__region_platform_public_id__mail_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region_platform_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Region Platform Public Id"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformMail"
+                  },
+                  "title": "Response Get Legal Entity Mail Handler For Location Locations  Region Platform Public Id  Mail Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agency_accounts": {
+      "get": {
+        "summary": "List Agency Accounts",
+        "operationId": "get_agency_accounts_for_legal_entity_agency_accounts_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/app__api__platform__models__PlatformAgencyAccount"
+                  },
+                  "type": "array",
+                  "title": "Response Get Agency Accounts For Legal Entity Agency Accounts Get"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/locations/{region_platform_public_id}/agency_accounts": {
+      "get": {
+        "summary": "List Agency Accounts for Location",
+        "operationId": "get_agency_accounts_for_legal_entity_and_location_locations__region_platform_public_id__agency_accounts_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region_platform_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Region Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/app__api__platform__models__PlatformAgencyAccount"
+                  },
+                  "title": "Response Get Agency Accounts For Legal Entity And Location Locations  Region Platform Public Id  Agency Accounts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/connect": {
+      "post": {
+        "summary": "Connect Account",
+        "description": "Returns a hosted connection URL, which allows the user to connect to a specific account in the state agency such as accessing Employer Services Online Account in California Employment Development Department. This endpoint returns the connection_id which can be used to query the current status of the connection.",
+        "operationId": "create_connection_handler_accounts_connect_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformConnectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformConnectSession"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/accounts/connections/{connection_id}": {
+      "get": {
+        "summary": "Get Account Connection",
+        "description": "Returns the current status of connection. The statuses can be - Pending/Authenticating/Registering/Connected/Disconnected/Canceled.",
+        "operationId": "get_connection_handler_accounts_connections__connection_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Connection Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformConnection"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/connections/{connection_id}/cancel": {
+      "post": {
+        "summary": "Cancel Account Connection",
+        "description": "Cancels a pending, registering, or authenticating connection for the given connection_id.",
+        "operationId": "cancel_connection_handler_accounts_connections__connection_id__cancel_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Connection Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformConnection"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountLegalEntity": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "notices_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notices Url"
+          },
+          "user_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Email"
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EntityTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_classification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxClassEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "incorporation_location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incorporation Location"
+          },
+          "incorporation_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incorporation Date"
+          },
+          "ein": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ein"
+          },
+          "llc_managed_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LLCManagedTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "business_purpose": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Purpose"
+          },
+          "business_phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Phone"
+          },
+          "business_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Email"
+          },
+          "business_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mailing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "naics_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Naics Code"
+          },
+          "accounting_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_year_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingYearEndMonthNumber"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "futa_liability_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Futa Liability Year"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "notices_url",
+          "user_email",
+          "business_name",
+          "entity_type",
+          "tax_classification",
+          "incorporation_location",
+          "incorporation_date"
+        ],
+        "title": "AccountLegalEntity"
+      },
+      "AccountLegalEntityLocation": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LocationRef"
+          }
+        },
+        "type": "object",
+        "required": [
+          "location"
+        ],
+        "title": "AccountLegalEntityLocation"
+      },
+      "AccountLegalEntityLocationRef": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LocationRef"
+          },
+          "config": {
+            "$ref": "#/components/schemas/LocationConfig"
+          }
+        },
+        "type": "object",
+        "required": [
+          "location",
+          "config"
+        ],
+        "title": "AccountLegalEntityLocationRef"
+      },
+      "AccountManagedProvider": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "AccountManagedProvider"
+      },
+      "AccountTask": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "context": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TaskContextEmployee"
+              },
+              {
+                "$ref": "#/components/schemas/TaskContextLegalEntity"
+              }
+            ],
+            "title": "Context",
+            "discriminator": {
+              "propertyName": "scope",
+              "mapping": {
+                "employee": "#/components/schemas/TaskContextEmployee",
+                "legal-entity": "#/components/schemas/TaskContextLegalEntity"
+              }
+            }
+          },
+          "definition": {
+            "$ref": "#/components/schemas/AccountTaskDefinition"
+          },
+          "resolutions": {
+            "additionalProperties": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/AccountTaskResolutionAction"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountTaskResolutionAutomate"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountTaskResolutionManual"
+                },
+                {
+                  "$ref": "#/components/schemas/AccountTaskResolutionRedirect"
+                }
+              ],
+              "discriminator": {
+                "propertyName": "type",
+                "mapping": {
+                  "action": "#/components/schemas/AccountTaskResolutionAction",
+                  "automate": "#/components/schemas/AccountTaskResolutionAutomate",
+                  "manual": "#/components/schemas/AccountTaskResolutionManual",
+                  "redirect": "#/components/schemas/AccountTaskResolutionRedirect"
+                }
+              }
+            },
+            "type": "object",
+            "title": "Resolutions"
+          },
+          "default_resolution_name": {
+            "type": "string",
+            "title": "Default Resolution Name"
+          },
+          "managed_provider": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountManagedProvider"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/AccountTaskStatus"
+          },
+          "period_start_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period Start Date"
+          },
+          "period_end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period End Date"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due Date"
+          },
+          "unblocks": {
+            "items": {
+              "$ref": "#/components/schemas/AccountTaskDefinition"
+            },
+            "type": "array",
+            "title": "Unblocks"
+          },
+          "fee": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/FeeFixed"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FeeRange"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FeeVariable"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "fixed": "#/components/schemas/FeeFixed",
+                    "range": "#/components/schemas/FeeRange",
+                    "variable": "#/components/schemas/FeeVariable"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fee"
+          },
+          "eta": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountTaskETA"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "priority": {
+            "$ref": "#/components/schemas/TaskPriority",
+            "default": "medium"
+          },
+          "criteria_met": {
+            "items": {
+              "$ref": "#/components/schemas/AccountTaskCriteria"
+            },
+            "type": "array",
+            "title": "Criteria Met"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "context",
+          "definition",
+          "resolutions",
+          "default_resolution_name",
+          "status",
+          "unblocks",
+          "criteria_met"
+        ],
+        "title": "AccountTask"
+      },
+      "AccountTaskAutomationFormSpec": {
+        "properties": {},
+        "type": "object",
+        "title": "AccountTaskAutomationFormSpec"
+      },
+      "AccountTaskCriteria": {
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "Key"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {}
+            ],
+            "title": "Data",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "required": [
+          "key",
+          "reason"
+        ],
+        "title": "AccountTaskCriteria"
+      },
+      "AccountTaskDefinition": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "type": {
+            "$ref": "#/components/schemas/TaskDefinitionType"
+          },
+          "resources": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Resources"
+          },
+          "location": {
+            "$ref": "#/components/schemas/LocationRef"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description",
+          "type",
+          "resources",
+          "location"
+        ],
+        "title": "AccountTaskDefinition"
+      },
+      "AccountTaskETA": {
+        "properties": {
+          "estimation": {
+            "$ref": "#/components/schemas/AccountTaskEstimation"
+          },
+          "earliest_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earliest Date"
+          },
+          "latest_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Date"
+          }
+        },
+        "type": "object",
+        "required": [
+          "estimation"
+        ],
+        "title": "AccountTaskETA"
+      },
+      "AccountTaskEstimation": {
+        "properties": {
+          "min": {
+            "type": "integer",
+            "title": "Min"
+          },
+          "max": {
+            "type": "integer",
+            "title": "Max"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/ETAUnit"
+          }
+        },
+        "type": "object",
+        "required": [
+          "min",
+          "max",
+          "unit"
+        ],
+        "title": "AccountTaskEstimation"
+      },
+      "AccountTaskResolutionAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "action",
+            "title": "Type",
+            "default": "action"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "content_type": {
+            "type": "string",
+            "title": "Content Type"
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/components/schemas/ActionField"
+            },
+            "type": "array",
+            "title": "Fields"
+          }
+        },
+        "type": "object",
+        "required": [
+          "description",
+          "method",
+          "url",
+          "content_type",
+          "fields"
+        ],
+        "title": "AccountTaskResolutionAction"
+      },
+      "AccountTaskResolutionAutomate": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "automate",
+            "title": "Type",
+            "default": "automate"
+          },
+          "form_spec": {
+            "$ref": "#/components/schemas/AccountTaskAutomationFormSpec"
+          },
+          "submit_url": {
+            "type": "string",
+            "title": "Submit Url"
+          },
+          "hosted_url": {
+            "type": "string",
+            "title": "Hosted Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "form_spec",
+          "submit_url",
+          "hosted_url"
+        ],
+        "title": "AccountTaskResolutionAutomate"
+      },
+      "AccountTaskResolutionManual": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "manual",
+            "title": "Type",
+            "default": "manual"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/AccountTaskResolutionManualStep"
+            },
+            "type": "array",
+            "title": "Steps"
+          }
+        },
+        "type": "object",
+        "required": [
+          "steps"
+        ],
+        "title": "AccountTaskResolutionManual"
+      },
+      "AccountTaskResolutionManualStep": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "paths": {
+            "items": {
+              "$ref": "#/components/schemas/AccountTaskResolutionManualStepPath"
+            },
+            "type": "array",
+            "title": "Paths"
+          },
+          "order": {
+            "type": "integer",
+            "title": "Order"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description",
+          "paths",
+          "order"
+        ],
+        "title": "AccountTaskResolutionManualStep"
+      },
+      "AccountTaskResolutionManualStepPath": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "title": "AccountTaskResolutionManualStepPath"
+      },
+      "AccountTaskResolutionRedirect": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "redirect",
+            "title": "Type",
+            "default": "redirect"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "title": "AccountTaskResolutionRedirect"
+      },
+      "AccountTaskStatus": {
+        "type": "string",
+        "enum": [
+          "todo",
+          "dismissed",
+          "in-progress",
+          "done"
+        ],
+        "title": "AccountTaskStatus"
+      },
+      "AccountTaskTag": {
+        "type": "string",
+        "enum": [
+          "certificate-of-good-standing",
+          "charity-registration",
+          "charity-registration-renewal",
+          "employee-final-wage-payment",
+          "employee-new-hire-reporting",
+          "employee-onboarding",
+          "employee-termination",
+          "exemption",
+          "foreign-qualification",
+          "initial-statement",
+          "local-business-setup",
+          "local-payroll-setup",
+          "newspaper-publication",
+          "notices",
+          "payroll-setup",
+          "registered-agent",
+          "sos-report",
+          "setup"
+        ],
+        "title": "AccountTaskTag"
+      },
+      "AccountTaskUpdateStatus": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/AccountTaskStatus"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "AccountTaskUpdateStatus"
+      },
+      "AccountingMethod": {
+        "type": "string",
+        "enum": [
+          "accrual",
+          "cash"
+        ],
+        "title": "AccountingMethod"
+      },
+      "AccountingPeriod": {
+        "type": "string",
+        "enum": [
+          "fiscal",
+          "calendar"
+        ],
+        "title": "AccountingPeriod"
+      },
+      "AccountingYearEndMonthNumber": {
+        "type": "integer",
+        "enum": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "title": "AccountingYearEndMonthNumber"
+      },
+      "ActionField": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "required",
+          "type"
+        ],
+        "title": "ActionField"
+      },
+      "Address": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "address_line_1": {
+            "type": "string",
+            "title": "Address Line 1"
+          },
+          "address_line_2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Line 2"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "state": {
+            "type": "string",
+            "title": "State"
+          },
+          "country": {
+            "type": "string",
+            "title": "Country"
+          },
+          "postal_code": {
+            "type": "string",
+            "title": "Postal Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "address_line_1",
+          "city",
+          "state",
+          "country",
+          "postal_code"
+        ],
+        "title": "Address"
+      },
+      "AuthSessionResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "const": "bearer",
+            "title": "Token Type",
+            "default": "bearer"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          }
+        },
+        "type": "object",
+        "required": [
+          "access_token"
+        ],
+        "title": "AuthSessionResponse"
+      },
+      "AutomationSessionRequest": {
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "callback_url"
+        ],
+        "title": "AutomationSessionRequest"
+      },
+      "AutomationSessionResponse": {
+        "properties": {
+          "automation_url": {
+            "type": "string",
+            "title": "Automation Url"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "automation_url",
+          "created_at",
+          "expires_at"
+        ],
+        "title": "AutomationSessionResponse"
+      },
+      "CreateLocationRequest": {
+        "properties": {
+          "config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LocationConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "CreateLocationRequest"
+      },
+      "ETAUnit": {
+        "type": "string",
+        "enum": [
+          "hour",
+          "day",
+          "week",
+          "month"
+        ],
+        "title": "ETAUnit"
+      },
+      "EmbeddedSignupRequest": {
+        "properties": {
+          "user_email": {
+            "type": "string",
+            "title": "User Email"
+          },
+          "business_name": {
+            "type": "string",
+            "title": "Business Name"
+          },
+          "entity_type": {
+            "$ref": "#/components/schemas/EntityTypeEnum"
+          },
+          "tax_classification": {
+            "$ref": "#/components/schemas/TaxClassEnum"
+          },
+          "incorporation_location": {
+            "type": "string",
+            "title": "Incorporation Location"
+          },
+          "incorporation_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Incorporation Date"
+          },
+          "ein": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ein"
+          },
+          "llc_managed_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LLCManagedTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "business_purpose": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Purpose"
+          },
+          "business_phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Phone"
+          },
+          "business_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Email"
+          },
+          "business_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mailing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "naics_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Naics Code"
+          },
+          "accounting_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_year_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingYearEndMonthNumber"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "futa_liability_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Futa Liability Year"
+          },
+          "external_company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Company Id"
+          },
+          "authorization_callback_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authorization Callback Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_email",
+          "business_name",
+          "entity_type",
+          "tax_classification",
+          "incorporation_location",
+          "incorporation_date"
+        ],
+        "title": "EmbeddedSignupRequest"
+      },
+      "EmbeddedSignupResponse": {
+        "properties": {
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          },
+          "authorization_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authorization Url",
+            "description": "This is deprecated. Please see url field"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url",
+            "description": "This is a session scoped URL that allows users to complete the signup process."
+          }
+        },
+        "type": "object",
+        "required": [
+          "legal_entity_id"
+        ],
+        "title": "EmbeddedSignupResponse"
+      },
+      "EntityTypeEnum": {
+        "type": "string",
+        "enum": [
+          "unset",
+          "c_corp",
+          "p_corp",
+          "llc",
+          "llp",
+          "lp",
+          "gp"
+        ],
+        "title": "EntityTypeEnum"
+      },
+      "FeeFixed": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "fixed",
+            "title": "Type",
+            "default": "fixed"
+          },
+          "amount": {
+            "type": "string",
+            "title": "Amount"
+          }
+        },
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "title": "FeeFixed"
+      },
+      "FeeRange": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "range",
+            "title": "Type",
+            "default": "range"
+          },
+          "min": {
+            "type": "string",
+            "title": "Min"
+          },
+          "max": {
+            "type": "string",
+            "title": "Max"
+          }
+        },
+        "type": "object",
+        "required": [
+          "min",
+          "max"
+        ],
+        "title": "FeeRange"
+      },
+      "FeeVariable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "variable",
+            "title": "Type",
+            "default": "variable"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reason"
+        ],
+        "title": "FeeVariable"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LLCManagedTypeEnum": {
+        "type": "string",
+        "enum": [
+          "member_managed",
+          "manager_managed"
+        ],
+        "title": "LLCManagedTypeEnum"
+      },
+      "LocationConfig": {
+        "properties": {
+          "has_employees": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Has Employees"
+          },
+          "has_physical_location": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Has Physical Location"
+          }
+        },
+        "type": "object",
+        "title": "LocationConfig"
+      },
+      "LocationRef": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "name"
+        ],
+        "title": "LocationRef"
+      },
+      "LoginsSessionRequest": {
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "callback_url"
+        ],
+        "title": "LoginsSessionRequest"
+      },
+      "MailType": {
+        "type": "string",
+        "enum": [
+          "registered-agent",
+          "external-mail"
+        ],
+        "title": "MailType"
+      },
+      "PlatformAccount": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "agency_account": {
+            "$ref": "#/components/schemas/app__api__platform__accounts__models__PlatformAgencyAccount"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlatformAccountStatus"
+          },
+          "id_number": {
+            "type": "string",
+            "title": "Id Number"
+          },
+          "has_tpa": {
+            "type": "boolean",
+            "title": "Has Tpa"
+          },
+          "tax_rate_percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Rate Percent"
+          },
+          "reporting_schedule": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reporting Schedule"
+          },
+          "balance": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Balance"
+          },
+          "history": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformAccountHistoryItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "History"
+          },
+          "notices": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformAccountNotice"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notices"
+          },
+          "account_login": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformAccountLogin"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "agency_account",
+          "status",
+          "id_number",
+          "has_tpa"
+        ],
+        "title": "PlatformAccount"
+      },
+      "PlatformAccountHistoryItem": {
+        "properties": {
+          "period_start_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Period Start Date"
+          },
+          "period_end_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Period End Date"
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Payment Date"
+          },
+          "filing_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Filing Date"
+          },
+          "payment_amount": {
+            "type": "integer",
+            "title": "Payment Amount"
+          },
+          "amount_due": {
+            "type": "integer",
+            "title": "Amount Due"
+          },
+          "amount_applied": {
+            "type": "integer",
+            "title": "Amount Applied"
+          },
+          "raw_data": {
+            "type": "object",
+            "title": "Raw Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "period_start_date",
+          "period_end_date",
+          "payment_date",
+          "filing_date",
+          "payment_amount",
+          "amount_due",
+          "amount_applied",
+          "raw_data"
+        ],
+        "title": "PlatformAccountHistoryItem"
+      },
+      "PlatformAccountLogin": {
+        "properties": {
+          "login_url": {
+            "type": "string",
+            "title": "Login Url"
+          },
+          "user_name": {
+            "type": "string",
+            "title": "User Name"
+          },
+          "two_factor_enabled": {
+            "type": "boolean",
+            "title": "Two Factor Enabled"
+          }
+        },
+        "type": "object",
+        "required": [
+          "login_url",
+          "user_name",
+          "two_factor_enabled"
+        ],
+        "title": "PlatformAccountLogin"
+      },
+      "PlatformAccountNotice": {
+        "properties": {
+          "mail_classification": {
+            "$ref": "#/components/schemas/PlatformMailClassification"
+          },
+          "received_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Received On"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "signed_url": {
+            "type": "string",
+            "title": "Signed Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mail_classification",
+          "received_on",
+          "description",
+          "summary",
+          "signed_url"
+        ],
+        "title": "PlatformAccountNotice"
+      },
+      "PlatformAccountStatus": {
+        "type": "string",
+        "enum": [
+          "active",
+          "exception",
+          "closed"
+        ],
+        "title": "PlatformAccountStatus"
+      },
+      "PlatformAgency": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "website": {
+            "type": "string",
+            "title": "Website"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "website"
+        ],
+        "title": "PlatformAgency"
+      },
+      "PlatformAgencyAttributeAndValue": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "value"
+        ],
+        "title": "PlatformAgencyAttributeAndValue"
+      },
+      "PlatformAuthenticateRequest": {
+        "properties": {
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "legal_entity_id"
+        ],
+        "title": "PlatformAuthenticateRequest"
+      },
+      "PlatformAutomationSessionRequest": {
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "callback_url"
+        ],
+        "title": "PlatformAutomationSessionRequest"
+      },
+      "PlatformConnectRequest": {
+        "properties": {
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          },
+          "agency_account_id": {
+            "type": "string",
+            "title": "Agency Account Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "legal_entity_id",
+          "agency_account_id"
+        ],
+        "title": "PlatformConnectRequest"
+      },
+      "PlatformConnectSession": {
+        "properties": {
+          "connect_url": {
+            "type": "string",
+            "title": "Connect Url"
+          },
+          "connection": {
+            "$ref": "#/components/schemas/PlatformConnection"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connect_url",
+          "connection"
+        ],
+        "title": "PlatformConnectSession"
+      },
+      "PlatformConnection": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlatformConnectionStatus"
+          },
+          "account": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformAccount"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "account"
+        ],
+        "title": "PlatformConnection"
+      },
+      "PlatformConnectionStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "authenticating",
+          "registering",
+          "connected",
+          "disconnected",
+          "canceled"
+        ],
+        "title": "PlatformConnectionStatus"
+      },
+      "PlatformHandbook": {
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/PlatformHandbookSummary"
+          },
+          "details": {
+            "$ref": "#/components/schemas/PlatformHandbookDetails"
+          }
+        },
+        "type": "object",
+        "required": [
+          "summary",
+          "details"
+        ],
+        "title": "PlatformHandbook"
+      },
+      "PlatformHandbookAcknowledgementStats": {
+        "properties": {
+          "signed": {
+            "type": "integer",
+            "title": "Signed"
+          },
+          "outdated": {
+            "type": "integer",
+            "title": "Outdated"
+          },
+          "pending": {
+            "type": "integer",
+            "title": "Pending"
+          }
+        },
+        "type": "object",
+        "required": [
+          "signed",
+          "outdated",
+          "pending"
+        ],
+        "title": "PlatformHandbookAcknowledgementStats"
+      },
+      "PlatformHandbookAutomationSessionResponse": {
+        "properties": {
+          "automation_url": {
+            "type": "string",
+            "title": "Automation Url"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "automation_url",
+          "created_at",
+          "expires_at"
+        ],
+        "title": "PlatformHandbookAutomationSessionResponse"
+      },
+      "PlatformHandbookDetails": {
+        "properties": {
+          "handbook_automation_url": {
+            "type": "string",
+            "title": "Handbook Automation Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "handbook_automation_url"
+        ],
+        "title": "PlatformHandbookDetails"
+      },
+      "PlatformHandbookSummary": {
+        "properties": {
+          "number_of_adopotable_policies": {
+            "type": "integer",
+            "title": "Number Of Adopotable Policies"
+          },
+          "publishable": {
+            "type": "boolean",
+            "title": "Publishable"
+          },
+          "has_published": {
+            "type": "boolean",
+            "title": "Has Published"
+          },
+          "acknowledgement_stats": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformHandbookAcknowledgementStats"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "number_of_adopotable_policies",
+          "publishable",
+          "has_published"
+        ],
+        "title": "PlatformHandbookSummary"
+      },
+      "PlatformLegalEntityAccountLogin": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The identifier of this Account Login"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the Login"
+          },
+          "location_id": {
+            "type": "string",
+            "title": "Location Id",
+            "description": "The location id the login belongs to"
+          },
+          "login_url": {
+            "type": "string",
+            "title": "Login Url",
+            "description": "This field is deprecated, please use url."
+          },
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "The url pointing to the login page for this Login"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "location_id",
+          "login_url",
+          "url"
+        ],
+        "title": "PlatformLegalEntityAccountLogin"
+      },
+      "PlatformLegalEntityAccountLoginSessionResponse": {
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "title": "Created At",
+            "description": "This is the time the `url` became accessible"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At",
+            "description": "This is the time after which the `url` will no longer accessible"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "A temporary link the user must follow if they want to access the Login information (including passwords and user names)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "created_at",
+          "expires_at",
+          "url"
+        ],
+        "title": "PlatformLegalEntityAccountLoginSessionResponse"
+      },
+      "PlatformMail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "location_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Location Id"
+          },
+          "type": {
+            "$ref": "#/components/schemas/MailType"
+          },
+          "received": {
+            "type": "string",
+            "format": "date",
+            "title": "Received"
+          },
+          "sender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender"
+          },
+          "file_url": {
+            "type": "string",
+            "title": "File Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "received",
+          "file_url"
+        ],
+        "title": "PlatformMail"
+      },
+      "PlatformMailClassification": {
+        "type": "string",
+        "enum": [
+          "penalty",
+          "underpayment",
+          "tax_rate_change",
+          "other"
+        ],
+        "title": "PlatformMailClassification"
+      },
+      "PlatformTask": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlatformTaskStatus"
+          },
+          "source": {
+            "$ref": "#/components/schemas/PlatformTaskRequirement"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "status",
+          "source"
+        ],
+        "title": "PlatformTask"
+      },
+      "PlatformTaskRequirement": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "requirement",
+            "title": "Type",
+            "default": "requirement"
+          },
+          "requirement_id": {
+            "type": "string",
+            "title": "Requirement Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requirement_id"
+        ],
+        "title": "PlatformTaskRequirement"
+      },
+      "PlatformTaskStatus": {
+        "type": "string",
+        "enum": [
+          "todo",
+          "deferred",
+          "in-progress",
+          "done"
+        ],
+        "title": "PlatformTaskStatus"
+      },
+      "StateCode": {
+        "type": "string",
+        "enum": [
+          "AL",
+          "AK",
+          "AZ",
+          "AR",
+          "CA",
+          "CO",
+          "CT",
+          "DE",
+          "DC",
+          "FL",
+          "GA",
+          "HI",
+          "ID",
+          "IL",
+          "IN",
+          "IA",
+          "KS",
+          "KY",
+          "LA",
+          "ME",
+          "MD",
+          "MA",
+          "MI",
+          "MN",
+          "MS",
+          "MO",
+          "MT",
+          "NE",
+          "NV",
+          "NH",
+          "NJ",
+          "NM",
+          "NY",
+          "NC",
+          "ND",
+          "OH",
+          "OK",
+          "OR",
+          "PA",
+          "RI",
+          "SC",
+          "SD",
+          "TN",
+          "TX",
+          "UT",
+          "VT",
+          "VA",
+          "WA",
+          "WV",
+          "WI",
+          "WY"
+        ],
+        "title": "StateCode"
+      },
+      "TaskContextEmployee": {
+        "properties": {
+          "scope": {
+            "type": "string",
+            "const": "employee",
+            "title": "Scope",
+            "default": "employee"
+          },
+          "employee_id": {
+            "type": "string",
+            "title": "Employee Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "employee_id"
+        ],
+        "title": "TaskContextEmployee"
+      },
+      "TaskContextLegalEntity": {
+        "properties": {
+          "scope": {
+            "type": "string",
+            "const": "legal-entity",
+            "title": "Scope",
+            "default": "legal-entity"
+          },
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "legal_entity_id"
+        ],
+        "title": "TaskContextLegalEntity"
+      },
+      "TaskDefinitionType": {
+        "type": "string",
+        "enum": [
+          "requirement",
+          "data-collection",
+          "criteria-collection"
+        ],
+        "title": "TaskDefinitionType"
+      },
+      "TaskPriority": {
+        "type": "string",
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ],
+        "title": "TaskPriority"
+      },
+      "TasksSessionRequest": {
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "callback_url"
+        ],
+        "title": "TasksSessionRequest"
+      },
+      "TasksSessionResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "created_at",
+          "expires_at"
+        ],
+        "title": "TasksSessionResponse"
+      },
+      "TaxClassEnum": {
+        "type": "string",
+        "enum": [
+          "unset",
+          "corp",
+          "s_corp",
+          "partnership",
+          "disregarded",
+          "tax_exempt"
+        ],
+        "title": "TaxClassEnum",
+        "description": "The IRS tax classification for an entity.\n\nIn some circumstances, a company can elect to be treated different\nfrom the entity type for tax purposes. For example, an LLC can\nelect to be taxed as a corporation.\n- Corp: taxed as a corporation, the default for C Corps\n- S Corp: election using IRS Form 2553\n- Partnership: taxed as a partnership, the default for LPs\n- Disregarded: taxes pass through to the members, default for LLCs\n- Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings"
+      },
+      "UpdateLocationRequest": {
+        "properties": {
+          "config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LocationConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "UpdateLocationRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "app__api__platform__accounts__models__PlatformAgencyAccount": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "agency_id": {
+            "type": "string",
+            "title": "Agency Id"
+          },
+          "region": {
+            "type": "string",
+            "title": "Region"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "agency_id",
+          "region",
+          "name"
+        ],
+        "title": "PlatformAgencyAccount"
+      },
+      "app__api__platform__auth__HostedSignupRequest": {
+        "properties": {
+          "business_name": {
+            "type": "string",
+            "title": "Business Name"
+          },
+          "user_email": {
+            "type": "string",
+            "title": "User Email"
+          },
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          },
+          "legal_entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Entity Id"
+          },
+          "business_information": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__api__platform__auth__HostedSignupRequestBusinessInformation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "external_company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Company Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "business_name",
+          "user_email",
+          "callback_url"
+        ],
+        "title": "HostedSignupRequest"
+      },
+      "app__api__platform__auth__HostedSignupRequestBusinessInformation": {
+        "properties": {
+          "incorporation_region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incorporation Region"
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EntityTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_classification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxClassEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "llc_managed_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LLCManagedTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "business_purpose": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Purpose"
+          },
+          "ein": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ein"
+          },
+          "incorporation_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incorporation Date"
+          },
+          "naics_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Naics Code"
+          },
+          "accounting_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_year_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingYearEndMonthNumber"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "futa_liability_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Futa Liability Year"
+          }
+        },
+        "type": "object",
+        "title": "HostedSignupRequestBusinessInformation"
+      },
+      "app__api__platform__auth__HostedSignupResponse": {
+        "properties": {
+          "signup_url": {
+            "type": "string",
+            "title": "Signup Url",
+            "description": "This is a deprecated field, please use url"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "This is a session scoped URL which allows users to completed the signup process."
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          },
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "signup_url",
+          "url",
+          "created_at",
+          "expires_at",
+          "legal_entity_id"
+        ],
+        "title": "HostedSignupResponse"
+      },
+      "app__api__platform__models__PlatformAgencyAccount": {
+        "properties": {
+          "location_id": {
+            "type": "string",
+            "title": "Location Id"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "agency": {
+            "$ref": "#/components/schemas/PlatformAgency"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformAgencyAttributeAndValue"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "logins": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformLegalEntityAccountLogin"
+            },
+            "type": "array",
+            "title": "Logins"
+          }
+        },
+        "type": "object",
+        "required": [
+          "location_id",
+          "id",
+          "name",
+          "agency",
+          "data",
+          "logins"
+        ],
+        "title": "PlatformAgencyAccount"
+      },
+      "app__platform__public__HostedSignupRequest": {
+        "properties": {
+          "business_name": {
+            "type": "string",
+            "title": "Business Name"
+          },
+          "user_email": {
+            "type": "string",
+            "title": "User Email"
+          },
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          },
+          "legal_entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Entity Id"
+          },
+          "business_information": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/app__platform__public__HostedSignupRequestBusinessInformation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "external_company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Company Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "business_name",
+          "user_email",
+          "callback_url"
+        ],
+        "title": "HostedSignupRequest"
+      },
+      "app__platform__public__HostedSignupRequestBusinessInformation": {
+        "properties": {
+          "incorporation_region": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StateCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EntityTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_classification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxClassEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "llc_managed_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LLCManagedTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "business_purpose": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Purpose"
+          },
+          "ein": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ein"
+          },
+          "incorporation_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incorporation Date"
+          },
+          "naics_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Naics Code"
+          },
+          "accounting_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_year_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingYearEndMonthNumber"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "futa_liability_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Futa Liability Year"
+          }
+        },
+        "type": "object",
+        "title": "HostedSignupRequestBusinessInformation"
+      },
+      "app__platform__public__HostedSignupResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "This is a session scoped URL which allows users to completed the signup process."
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          },
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "created_at",
+          "expires_at",
+          "legal_entity_id"
+        ],
+        "title": "HostedSignupResponse"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/api/token"
+          }
+        }
+      }
+    }
+  }
+}

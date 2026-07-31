@@ -1,0 +1,4692 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Mosey API",
+    "description": "If you'd like to use the Mosey API, please contact sales@mosey.com.",
+    "version": "V2",
+    "x-logo": {
+      "url": null
+    }
+  },
+  "paths": {
+    "/v2/signup": {
+      "post": {
+        "summary": "Signup To Create A Legal Entity",
+        "operationId": "Signup_to_create_a_legal_entity_v2_signup_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformSignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformSignupResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformSignupRequestValidationException"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/v2/signup/session": {
+      "post": {
+        "summary": "Create A Hosted Signup Session",
+        "operationId": "Create_a_Hosted_Signup_Session_v2_signup_session_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostedSignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostedSignupResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/auth/payroll": {
+      "post": {
+        "summary": "Setup Payroll Connection for Legal Entity",
+        "operationId": "setup_payroll_v2_auth_payroll_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformAuthenticationSessionPayrollSetupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformAuthenticationSessionPayrollSetupResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/auth": {
+      "post": {
+        "summary": "Authenticate Legal Entity",
+        "operationId": "authenticate_v2_auth_post",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformAuthenticationSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformAuthenticationSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/legal_entity": {
+      "get": {
+        "summary": "Get Legal Entity Details",
+        "operationId": "Get_Legal_Entity_details_v2_legal_entity_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformLegalEntity"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/regions": {
+      "get": {
+        "summary": "List Regions",
+        "description": "Returns the list of regions associated with the authenticated legal entity.",
+        "operationId": "list_regions_handler_v2_regions_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformRegion"
+                  },
+                  "title": "Response List Regions Handler V2 Regions Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add multiple regions",
+        "description": "Add multiple regions to the authenticated legal entity.\nProviding the employee count will configure the region and generate applicable tasks.\nThe employee count is expected to consist of all current full time employees.\n\n### Example\n\n    Request\n    ```\n        \"config\": {\n            \"AL\": {\"employee_count\": 1},\n            \"AK\": {\"employee_count\": 10},\n        }\n    }\n    ```",
+        "operationId": "add_multiple_regions_handler_v2_regions_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformBatchRegionConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A successful response will contain the dictionary containing regions, with employee counts. For a successful response, this will match the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformBatchRegionConfig"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/v2/regions/{region}": {
+      "put": {
+        "summary": "Add region",
+        "description": "Add a region to the authenticated legal entity.\nProviding the employee count will configure the region and generate applicable tasks.\nThe employee count is expected to consist of all current full time employees.",
+        "operationId": "add_region_handler_v2_regions__region__put",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/StateCode"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformRegionConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformRegionConfig"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/v2/tasks": {
+      "get": {
+        "summary": "List Tasks",
+        "description": "List of tasks based on the filters provided as query parameters.\n\nThe Response Headers include\n- `X-Mosey-Page-Size`: indicates requested page size\n- `X-Mosey-Page`: indicates current page number\n- `X-Mosey-Next-Page`: constructed endpoint to query the next page of tasks\n- `X-Mosey-Total`: the total number of tasks",
+        "operationId": "List_Tasks_v2_tasks_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/StateCode"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Region"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Date"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/PlatformTaskType"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Type"
+            }
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskStatus"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Statuses"
+            }
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformTaskTag"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Tags"
+            }
+          },
+          {
+            "name": "categories",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TaskCategory"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Categories"
+            }
+          },
+          {
+            "name": "definition_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Definition Id"
+            }
+          },
+          {
+            "name": "include_managed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Include Managed"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Tasks are paginated on a given page size. If no page size is specified, a default of 50 is used.",
+              "default": 50,
+              "title": "Page Size"
+            },
+            "description": "Tasks are paginated on a given page size. If no page size is specified, a default of 50 is used."
+          },
+          {
+            "name": "page_num",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "description": "Page number for the paginated tasks. If no page number is specified, a default of 1 is used.",
+              "default": 1,
+              "title": "Page Num"
+            },
+            "description": "Page number for the paginated tasks. If no page number is specified, a default of 1 is used."
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformTask"
+                  },
+                  "title": "Response List Tasks V2 Tasks Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/tasks/{task_id}": {
+      "get": {
+        "summary": "Get Task",
+        "operationId": "Get_Task_v2_tasks__task_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformTask"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Task Status",
+        "description": "Updates the status of the specified requirement task.\nQuestion task's status cannot be updated.\nTask status can be updated to todo or done only.\nAfter a successful update, the updated task is returned.",
+        "operationId": "patch_task_handler_v2_tasks__task_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformTaskUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformUpdateTaskStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v2/tasks/questions/{question_task_id}": {
+      "patch": {
+        "summary": "Update Question Task Answer",
+        "description": "Answer a question task.\nA question could accept a boolean (true/false) answer or numerical answer or a date\nAfter a successful update, the task's status is returned.",
+        "operationId": "patch_question_task_handler_v2_tasks_questions__question_task_id__patch",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "question_task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Question Task Id"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformQuestionTaskUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformUpdateQuestionTaskStatusResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v2/tasks/manage/session": {
+      "post": {
+        "summary": "Create Tasks Management Session",
+        "description": "Creates an authenticated session to enter the Mosey app, and returns\nthe url on which a user can view and manage tasks.\n\nThe tasks shown are dictated by the values provided in the request:\n`task_type` and optionally `status`.\n\nWhen requesting question tasks, only `todo` and `done` statuses\ncan be requested.",
+        "operationId": "Create_Tasks_Management_Session_v2_tasks_manage_session_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostedManageTasksSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostedSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/v2/tasks/{task_id}/session": {
+      "post": {
+        "summary": "Create A Task Resolution Session",
+        "operationId": "Create_a_Task_Resolution_Session_v2_tasks__task_id__session_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Task Id"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostedSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostedSessionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHttpException"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/handbook": {
+      "get": {
+        "summary": "Display Handbook Summary",
+        "operationId": "Display_Handbook_Summary_v2_handbook_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformHandbookSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/handbook/session": {
+      "post": {
+        "summary": "Create Handbook Session",
+        "operationId": "Create_Handbook_Session_v2_handbook_session_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostedSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostedSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/logins": {
+      "get": {
+        "summary": "List Legal Entity's Account Logins",
+        "description": "Lists _Account Login_ for the current _Legal Entity_.\n\nRetrieving a login's information is a **three-step process**:\n1. the returned objects will contain, amongst other information, the `id` of the Account Login.\n1. the hosted url can be obtained by calling `/logins/<id>/sessions`\n1. the Account Login data will be available following the previous response's `url`\n\n### Example\n\n1. Request all logins for the current Legal Entity: `/logins`\n1. Response:\n   ```\n   [\n      {\n        \"id\": \"abc1234\",\n        \"name\": \"Account for Tax Office in Nevada\",\n        \"region\": \"NV\",\n        \"url\": \"https://tax.neveda.gov/login\",\n        \"is_supported\": true,\n      },\n      ...\n  ]\n   ```",
+        "operationId": "list_account_logins_v2_logins_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/StateCode"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Region"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformLegalEntityAccountLogin"
+                  },
+                  "title": "Response List Account Logins V2 Logins Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/logins/{account_login_public_id}/session": {
+      "post": {
+        "summary": "Create Account Login Session",
+        "operationId": "Create_Account_Login_Session_v2_logins__account_login_public_id__session_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_login_public_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Account Login Public Id"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostedSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostedSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/accounts/manage/session": {
+      "post": {
+        "summary": "Create Agency Accounts Management Session",
+        "description": "Creates an authenticated session to enter the Mosey app, and returns\nthe url on which a user can view accounts registered with state agencies and login credentials if present with state agencies.\n\nThe list of agencies supported can be viewed at /v2/agency_accounts",
+        "operationId": "Create_Agency_Accounts_Management_Session_v2_accounts_manage_session_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScopedHostedSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostedSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/documents/manage/session": {
+      "post": {
+        "summary": "Create Documents Management Session",
+        "description": "Creates an authenticated session to enter the Mosey app, and returns\nthe url on which a user can view documents received from State agencies.",
+        "operationId": "Create_Documents_Management_Session_v2_documents_manage_session_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HostedSessionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HostedSessionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/mail": {
+      "get": {
+        "summary": "List Mail",
+        "description": "Returns mail information received by the authorized legal entity\n\nFollow each returned `url` in order to download the mail content in PDF format",
+        "operationId": "get_legal_entity_mail_handler_v2_mail_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Start Date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "End Date"
+            }
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/StateCode"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Region"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformMail"
+                  },
+                  "title": "Response Get Legal Entity Mail Handler V2 Mail Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/agency_accounts": {
+      "get": {
+        "summary": "List Agency Accounts",
+        "operationId": "list_agency_accounts_handler_v2_agency_accounts_get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/StateCode"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Region"
+            }
+          },
+          {
+            "name": "legal_entity_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Legal Entity Public Id"
+            }
+          },
+          {
+            "name": "user_or_platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "User Or Platform Public Id"
+            }
+          },
+          {
+            "name": "platform_public_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Platform Public Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlatformAgencyAccount"
+                  },
+                  "title": "Response List Agency Accounts Handler V2 Agency Accounts Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountingMethod": {
+        "type": "string",
+        "enum": ["accrual", "cash"],
+        "title": "AccountingMethod"
+      },
+      "AccountingPeriod": {
+        "type": "string",
+        "enum": ["fiscal", "calendar"],
+        "title": "AccountingPeriod"
+      },
+      "AccountingYearEndMonth": {
+        "type": "string",
+        "enum": [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December"
+        ],
+        "title": "AccountingYearEndMonth"
+      },
+      "AccountingYearEndMonthNumber": {
+        "type": "integer",
+        "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        "title": "AccountingYearEndMonthNumber"
+      },
+      "ActionField": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "required": {
+            "type": "boolean",
+            "title": "Required"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          }
+        },
+        "type": "object",
+        "required": ["name", "description", "required", "type"],
+        "title": "ActionField"
+      },
+      "Address": {
+        "properties": {
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "address_line_1": {
+            "type": "string",
+            "title": "Address Line 1"
+          },
+          "address_line_2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Address Line 2"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "state": {
+            "type": "string",
+            "title": "State"
+          },
+          "country": {
+            "type": "string",
+            "title": "Country"
+          },
+          "postal_code": {
+            "type": "string",
+            "title": "Postal Code"
+          }
+        },
+        "type": "object",
+        "required": [
+          "address_line_1",
+          "city",
+          "state",
+          "country",
+          "postal_code"
+        ],
+        "title": "Address"
+      },
+      "CriteriaType": {
+        "type": "string",
+        "enum": [
+          "has-employees",
+          "employee-count",
+          "employee-count-previous-year",
+          "total-employee-count-in-period",
+          "has-non-exempt-employees",
+          "employee-terminated",
+          "payroll-amount",
+          "has-physical-location",
+          "foreign-qualification-date",
+          "date-attribute",
+          "doing-business",
+          "business-income-tax-nexus",
+          "sales-tax-nexus",
+          "estimated-tax-liability",
+          "single-requirement",
+          "charitable-registration-nexus",
+          "partner-nexus"
+        ],
+        "title": "CriteriaType"
+      },
+      "ETAUnit": {
+        "type": "string",
+        "enum": ["hour", "day", "week", "month"],
+        "title": "ETAUnit"
+      },
+      "EntityTypeEnum": {
+        "type": "string",
+        "enum": ["unset", "c_corp", "p_corp", "pllc", "llc", "llp", "lp", "gp"],
+        "title": "EntityTypeEnum"
+      },
+      "FeeFixed": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "fixed",
+            "title": "Type",
+            "default": "fixed"
+          },
+          "amount": {
+            "type": "string",
+            "title": "Amount"
+          }
+        },
+        "type": "object",
+        "required": ["amount"],
+        "title": "FeeFixed"
+      },
+      "FeeRange": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "range",
+            "title": "Type",
+            "default": "range"
+          },
+          "min": {
+            "type": "string",
+            "title": "Min"
+          },
+          "max": {
+            "type": "string",
+            "title": "Max"
+          }
+        },
+        "type": "object",
+        "required": ["min", "max"],
+        "title": "FeeRange"
+      },
+      "FeeVariable": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "variable",
+            "title": "Type",
+            "default": "variable"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "required": ["reason"],
+        "title": "FeeVariable"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HostedManageTasksSessionRequest": {
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          },
+          "region_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region Id"
+          },
+          "task_type": {
+            "$ref": "#/components/schemas/PlatformTaskType"
+          },
+          "status": {
+            "$ref": "#/components/schemas/TasksFilterStatus",
+            "default": "todo"
+          }
+        },
+        "type": "object",
+        "required": ["callback_url", "task_type"],
+        "title": "HostedManageTasksSessionRequest"
+      },
+      "HostedSessionRequest": {
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          }
+        },
+        "type": "object",
+        "required": ["callback_url"],
+        "title": "HostedSessionRequest"
+      },
+      "HostedSessionResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          }
+        },
+        "type": "object",
+        "required": ["url", "created_at", "expires_at"],
+        "title": "HostedSessionResponse"
+      },
+      "HostedSignupRequest": {
+        "properties": {
+          "business_name": {
+            "type": "string",
+            "title": "Business Name"
+          },
+          "user_email": {
+            "type": "string",
+            "title": "User Email"
+          },
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          },
+          "legal_entity_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Legal Entity Id"
+          },
+          "business_information": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HostedSignupRequestBusinessInformation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "external_company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Company Id"
+          }
+        },
+        "type": "object",
+        "required": ["business_name", "user_email", "callback_url"],
+        "title": "HostedSignupRequest"
+      },
+      "HostedSignupRequestBusinessInformation": {
+        "properties": {
+          "incorporation_region": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StateCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EntityTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_classification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxClassEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "llc_managed_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LLCManagedTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "business_purpose": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Purpose"
+          },
+          "ein": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ein"
+          },
+          "incorporation_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incorporation Date"
+          },
+          "naics_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Naics Code"
+          },
+          "accounting_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_year_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingYearEndMonthNumber"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "futa_liability_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Futa Liability Year"
+          }
+        },
+        "type": "object",
+        "title": "HostedSignupRequestBusinessInformation"
+      },
+      "HostedSignupResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "This is a session scoped URL which allows users to completed the signup process."
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "expires_at": {
+            "type": "string",
+            "title": "Expires At"
+          },
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          }
+        },
+        "type": "object",
+        "required": ["url", "created_at", "expires_at", "legal_entity_id"],
+        "title": "HostedSignupResponse"
+      },
+      "LLCManagedTypeEnum": {
+        "type": "string",
+        "enum": ["member_managed", "manager_managed"],
+        "title": "LLCManagedTypeEnum"
+      },
+      "LocationScope": {
+        "type": "string",
+        "enum": ["entity", "region", "zip", "city"],
+        "title": "LocationScope"
+      },
+      "MailType": {
+        "type": "string",
+        "enum": ["registered-agent", "external-mail"],
+        "title": "MailType"
+      },
+      "PlatformAgency": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "website": {
+            "type": "string",
+            "title": "Website"
+          }
+        },
+        "type": "object",
+        "required": ["id", "name", "website"],
+        "title": "PlatformAgency"
+      },
+      "PlatformAgencyAccount": {
+        "properties": {
+          "region": {
+            "$ref": "#/components/schemas/StateCode"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "agency": {
+            "$ref": "#/components/schemas/PlatformAgency"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformAgencyAttributeAndValue"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "logins": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformLegalEntityAccountLogin"
+            },
+            "type": "array",
+            "title": "Logins"
+          }
+        },
+        "type": "object",
+        "required": ["region", "id", "name", "agency", "data", "logins"],
+        "title": "PlatformAgencyAccount"
+      },
+      "PlatformAgencyAttributeAndValue": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlatformAgencyAttributeStatus"
+          }
+        },
+        "type": "object",
+        "required": ["name", "description", "value", "status"],
+        "title": "PlatformAgencyAttributeAndValue"
+      },
+      "PlatformAgencyAttributeStatus": {
+        "type": "string",
+        "enum": ["todo", "in-progress", "done"],
+        "title": "PlatformAgencyAttributeStatus"
+      },
+      "PlatformAuthenticationSessionPayrollSetupRequest": {
+        "properties": {
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          },
+          "authorization_callback_url": {
+            "type": "string",
+            "title": "Authorization Callback Url"
+          }
+        },
+        "type": "object",
+        "required": ["legal_entity_id", "authorization_callback_url"],
+        "title": "PlatformAuthenticationSessionPayrollSetupRequest"
+      },
+      "PlatformAuthenticationSessionPayrollSetupResponse": {
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "required": ["url"],
+        "title": "PlatformAuthenticationSessionPayrollSetupResponse"
+      },
+      "PlatformAuthenticationSessionRequest": {
+        "properties": {
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          }
+        },
+        "type": "object",
+        "required": ["legal_entity_id"],
+        "title": "PlatformAuthenticationSessionRequest"
+      },
+      "PlatformAuthenticationSessionResponse": {
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "title": "Access Token"
+          },
+          "token_type": {
+            "type": "string",
+            "const": "bearer",
+            "title": "Token Type",
+            "default": "bearer"
+          },
+          "state": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "State"
+          }
+        },
+        "type": "object",
+        "required": ["access_token"],
+        "title": "PlatformAuthenticationSessionResponse"
+      },
+      "PlatformBatchRegionConfig": {
+        "properties": {
+          "config": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/PlatformRegionConfig"
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/StateCode"
+            },
+            "type": "object",
+            "title": "Config",
+            "description": "A dictionary with two character state code as key and regional configuration as value."
+          }
+        },
+        "type": "object",
+        "required": ["config"],
+        "title": "PlatformBatchRegionConfig",
+        "description": "A dictionary mapping state codes to their respective platform region configurations.\nThe key for the dictionary is the StateCode which is the 2 character state code. To view the entire list of supported state codes, see [StateCode enum](/api-reference/v2/add-region#parameter-region)."
+      },
+      "PlatformHandbookAcknowledgementStats": {
+        "properties": {
+          "signed": {
+            "type": "integer",
+            "title": "Signed"
+          },
+          "outdated": {
+            "type": "integer",
+            "title": "Outdated"
+          },
+          "pending": {
+            "type": "integer",
+            "title": "Pending"
+          },
+          "missing_emails": {
+            "type": "integer",
+            "title": "Missing Emails"
+          }
+        },
+        "type": "object",
+        "required": ["signed", "outdated", "pending", "missing_emails"],
+        "title": "PlatformHandbookAcknowledgementStats"
+      },
+      "PlatformHandbookSummary": {
+        "properties": {
+          "number_of_adoptable_policies": {
+            "type": "integer",
+            "title": "Number Of Adoptable Policies"
+          },
+          "publishable": {
+            "type": "boolean",
+            "title": "Publishable"
+          },
+          "has_published": {
+            "type": "boolean",
+            "title": "Has Published"
+          },
+          "acknowledgement_stats": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformHandbookAcknowledgementStats"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "number_of_adoptable_policies",
+          "publishable",
+          "has_published"
+        ],
+        "title": "PlatformHandbookSummary"
+      },
+      "PlatformHttpException": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "detail": {
+            "type": "string",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "required": ["message", "detail"],
+        "title": "PlatformHttpException"
+      },
+      "PlatformLegalEntity": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "notices_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notices Url"
+          },
+          "user_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Email"
+          },
+          "business_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Name"
+          },
+          "entity_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EntityTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tax_classification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaxClassEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "incorporation_region": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StateCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "incorporated_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incorporated Date"
+          },
+          "ein": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ein"
+          },
+          "llc_managed_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LLCManagedTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "business_purpose": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Purpose"
+          },
+          "business_phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Phone"
+          },
+          "business_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Email"
+          },
+          "business_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mailing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "naics_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Naics Code"
+          },
+          "accounting_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_year_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingYearEndMonth"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "futa_liability_year": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Futa Liability Year"
+          },
+          "last_payroll_update": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Payroll Update"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "notices_url",
+          "user_email",
+          "business_name",
+          "entity_type",
+          "tax_classification",
+          "incorporation_region",
+          "incorporated_date"
+        ],
+        "title": "PlatformLegalEntity"
+      },
+      "PlatformLegalEntityAccountLogin": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The identifier of this Account Login"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the Login"
+          },
+          "region": {
+            "$ref": "#/components/schemas/StateCode",
+            "description": "The state which the login belongs to"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url",
+            "description": "The url pointing to the login page for this Login"
+          }
+        },
+        "type": "object",
+        "required": ["id", "name", "region", "url"],
+        "title": "PlatformLegalEntityAccountLogin"
+      },
+      "PlatformMail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StateCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "$ref": "#/components/schemas/MailType"
+          },
+          "received": {
+            "type": "string",
+            "format": "date",
+            "title": "Received"
+          },
+          "sender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sender"
+          },
+          "file_url": {
+            "type": "string",
+            "title": "File Url"
+          }
+        },
+        "type": "object",
+        "required": ["id", "type", "received", "file_url"],
+        "title": "PlatformMail"
+      },
+      "PlatformQuestionTaskUpdate": {
+        "properties": {
+          "answer": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "title": "Answer"
+          }
+        },
+        "type": "object",
+        "required": ["answer"],
+        "title": "PlatformQuestionTaskUpdate"
+      },
+      "PlatformRegion": {
+        "properties": {
+          "region": {
+            "$ref": "#/components/schemas/PlatformRegionRef"
+          },
+          "config": {
+            "$ref": "#/components/schemas/PlatformRegionConfig"
+          }
+        },
+        "type": "object",
+        "required": ["region", "config"],
+        "title": "PlatformRegion"
+      },
+      "PlatformRegionConfig": {
+        "properties": {
+          "employee_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Employee Count"
+          }
+        },
+        "type": "object",
+        "required": ["employee_count"],
+        "title": "PlatformRegionConfig"
+      },
+      "PlatformRegionRef": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": ["id", "code", "name"],
+        "title": "PlatformRegionRef"
+      },
+      "PlatformRequirementTaskAutomationStatus": {
+        "type": "string",
+        "enum": [
+          "started",
+          "waiting_for_start_file_date",
+          "waiting_on_state",
+          "waiting_on_signature",
+          "waiting_on_customer_response",
+          "complete",
+          "canceled"
+        ],
+        "title": "PlatformRequirementTaskAutomationStatus"
+      },
+      "PlatformRequirementTaskAutomationStatusChange": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/PlatformRequirementTaskAutomationStatus"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          }
+        },
+        "type": "object",
+        "required": ["status", "updated_at"],
+        "title": "PlatformRequirementTaskAutomationStatusChange"
+      },
+      "PlatformSignupRequest": {
+        "properties": {
+          "user_email": {
+            "type": "string",
+            "title": "User Email"
+          },
+          "business_name": {
+            "type": "string",
+            "title": "Business Name"
+          },
+          "entity_type": {
+            "$ref": "#/components/schemas/EntityTypeEnum"
+          },
+          "tax_class": {
+            "$ref": "#/components/schemas/TaxClassEnum"
+          },
+          "incorporation_region": {
+            "$ref": "#/components/schemas/StateCode"
+          },
+          "incorporated_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Incorporated Date"
+          },
+          "ein": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ein"
+          },
+          "llc_managed_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LLCManagedTypeEnum"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "business_purpose": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Purpose"
+          },
+          "business_phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Phone"
+          },
+          "business_email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Business Email"
+          },
+          "business_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "mailing_address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Address"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "naics_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Naics Code"
+          },
+          "accounting_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingMethod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_period": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accounting_year_end": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountingYearEndMonth"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "futa_liability_year": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Futa Liability Year"
+          },
+          "external_company_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Company Id"
+          },
+          "authorization_callback_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Authorization Callback Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "user_email",
+          "business_name",
+          "entity_type",
+          "tax_class",
+          "incorporation_region",
+          "incorporated_date"
+        ],
+        "title": "PlatformSignupRequest"
+      },
+      "PlatformSignupRequestValidationException": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              }
+            ],
+            "title": "Detail"
+          },
+          "body": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Body"
+          }
+        },
+        "type": "object",
+        "required": ["message", "detail", "body"],
+        "title": "PlatformSignupRequestValidationException"
+      },
+      "PlatformSignupResponse": {
+        "properties": {
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url",
+            "description": "This is the next URL to follow to complete the signup process."
+          }
+        },
+        "type": "object",
+        "required": ["legal_entity_id"],
+        "title": "PlatformSignupResponse"
+      },
+      "PlatformTask": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlatformTaskStatus"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskRequirement"
+              },
+              {
+                "$ref": "#/components/schemas/PlatformTaskQuestion"
+              }
+            ],
+            "title": "Source"
+          },
+          "priority": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TaskPriority"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": "medium"
+          },
+          "is_managed": {
+            "type": "boolean",
+            "title": "Is Managed",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": ["id", "title", "status", "source"],
+        "title": "PlatformTask"
+      },
+      "PlatformTaskETA": {
+        "properties": {
+          "estimation": {
+            "$ref": "#/components/schemas/PlatformTaskEstimation"
+          },
+          "earliest_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Earliest Date"
+          },
+          "latest_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Date"
+          }
+        },
+        "type": "object",
+        "required": ["estimation"],
+        "title": "PlatformTaskETA"
+      },
+      "PlatformTaskEstimation": {
+        "properties": {
+          "min": {
+            "type": "integer",
+            "title": "Min"
+          },
+          "max": {
+            "type": "integer",
+            "title": "Max"
+          },
+          "unit": {
+            "$ref": "#/components/schemas/ETAUnit"
+          }
+        },
+        "type": "object",
+        "required": ["min", "max", "unit"],
+        "title": "PlatformTaskEstimation"
+      },
+      "PlatformTaskQuestion": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "question",
+            "title": "Type",
+            "default": "question"
+          },
+          "regions": {
+            "items": {
+              "$ref": "#/components/schemas/RegionRef"
+            },
+            "type": "array",
+            "title": "Regions"
+          },
+          "region_scope": {
+            "$ref": "#/components/schemas/LocationScope"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "answer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Answer"
+          },
+          "is_editable": {
+            "type": "boolean",
+            "title": "Is Editable"
+          },
+          "resolutions": {
+            "$ref": "#/components/schemas/PlatformTaskQuestionResolutions"
+          },
+          "categories": {
+            "items": {
+              "$ref": "#/components/schemas/TaskCategory"
+            },
+            "type": "array",
+            "title": "Categories"
+          }
+        },
+        "type": "object",
+        "required": [
+          "regions",
+          "region_scope",
+          "is_editable",
+          "resolutions",
+          "categories"
+        ],
+        "title": "PlatformTaskQuestion"
+      },
+      "PlatformTaskQuestionResolutions": {
+        "properties": {
+          "hosted": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskResolutionHosted"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "endpoint": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskResolutionEndpoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "PlatformTaskQuestionResolutions"
+      },
+      "PlatformTaskRequirement": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "requirement",
+            "title": "Type",
+            "default": "requirement"
+          },
+          "context": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TaskContextEmployee"
+              },
+              {
+                "$ref": "#/components/schemas/TaskContextLegalEntity"
+              }
+            ],
+            "title": "Context",
+            "discriminator": {
+              "propertyName": "scope",
+              "mapping": {
+                "employee": "#/components/schemas/TaskContextEmployee",
+                "legal-entity": "#/components/schemas/TaskContextLegalEntity"
+              }
+            }
+          },
+          "requirement_id": {
+            "type": "string",
+            "title": "Requirement Id"
+          },
+          "definition": {
+            "type": "string",
+            "title": "Definition"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          },
+          "resources": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Resources"
+          },
+          "period_start_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period Start Date"
+          },
+          "period_end_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Period End Date"
+          },
+          "due_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Due Date"
+          },
+          "region": {
+            "$ref": "#/components/schemas/RegionRef"
+          },
+          "fee": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/FeeFixed"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FeeRange"
+                  },
+                  {
+                    "$ref": "#/components/schemas/FeeVariable"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "fixed": "#/components/schemas/FeeFixed",
+                    "range": "#/components/schemas/FeeRange",
+                    "variable": "#/components/schemas/FeeVariable"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fee"
+          },
+          "eta": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskETA"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/TagInstance"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
+          "default_resolution_name": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskResolutionType"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "resolutions": {
+            "$ref": "#/components/schemas/PlatformTaskRequirementResolutions"
+          },
+          "criteria_met": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformTaskRequirementCriteria"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Criteria Met"
+          },
+          "unlocks": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformTaskUnlocks"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unlocks"
+          },
+          "category": {
+            "$ref": "#/components/schemas/TaskCategory"
+          },
+          "automation_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformRequirementTaskAutomationStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "automation_status_logs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformRequirementTaskAutomationStatusChange"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Automation Status Logs"
+          },
+          "agency_accounts": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformAgencyAccount"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Agency Accounts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "context",
+          "requirement_id",
+          "definition",
+          "resources",
+          "region",
+          "default_resolution_name",
+          "resolutions",
+          "category"
+        ],
+        "title": "PlatformTaskRequirement"
+      },
+      "PlatformTaskRequirementCriteria": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskRequirementCriteriaType"
+              },
+              {
+                "$ref": "#/components/schemas/CriteriaType"
+              }
+            ],
+            "title": "Type"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "task_id": {
+            "type": "string",
+            "title": "Task Id"
+          }
+        },
+        "type": "object",
+        "required": ["type", "reason", "task_id"],
+        "title": "PlatformTaskRequirementCriteria"
+      },
+      "PlatformTaskRequirementCriteriaType": {
+        "type": "string",
+        "enum": ["requirement-done"],
+        "title": "PlatformTaskRequirementCriteriaType"
+      },
+      "PlatformTaskRequirementResolutions": {
+        "properties": {
+          "hosted": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskResolutionHosted"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "manual": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformTaskResolutionManual"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "PlatformTaskRequirementResolutions"
+      },
+      "PlatformTaskResolutionEndpoint": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "endpoint",
+            "title": "Type",
+            "default": "endpoint"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "content_type": {
+            "type": "string",
+            "title": "Content Type"
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/components/schemas/ActionField"
+            },
+            "type": "array",
+            "title": "Fields"
+          }
+        },
+        "type": "object",
+        "required": ["description", "method", "url", "content_type", "fields"],
+        "title": "PlatformTaskResolutionEndpoint",
+        "description": "Directs a user to take action in order to resolve the task using an API endpoint."
+      },
+      "PlatformTaskResolutionHosted": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "hosted",
+            "title": "Type",
+            "default": "hosted"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "method": {
+            "type": "string",
+            "title": "Method"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "content_type": {
+            "type": "string",
+            "title": "Content Type"
+          },
+          "fields": {
+            "items": {
+              "$ref": "#/components/schemas/ActionField"
+            },
+            "type": "array",
+            "title": "Fields"
+          }
+        },
+        "type": "object",
+        "required": ["description", "method", "url", "content_type", "fields"],
+        "title": "PlatformTaskResolutionHosted",
+        "description": "Directs a user to take action in order to start a hosted session to complete an action."
+      },
+      "PlatformTaskResolutionManual": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "manual",
+            "title": "Type",
+            "default": "manual"
+          },
+          "steps": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformTaskResolutionManualStep"
+            },
+            "type": "array",
+            "title": "Steps"
+          }
+        },
+        "type": "object",
+        "required": ["steps"],
+        "title": "PlatformTaskResolutionManual"
+      },
+      "PlatformTaskResolutionManualStep": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "paths": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformTaskResolutionManualStepPath"
+            },
+            "type": "array",
+            "title": "Paths"
+          },
+          "order": {
+            "type": "integer",
+            "title": "Order"
+          }
+        },
+        "type": "object",
+        "required": ["id", "title", "description", "paths", "order"],
+        "title": "PlatformTaskResolutionManualStep"
+      },
+      "PlatformTaskResolutionManualStepPath": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": ["type", "value"],
+        "title": "PlatformTaskResolutionManualStepPath"
+      },
+      "PlatformTaskResolutionType": {
+        "type": "string",
+        "enum": ["manual", "hosted", "endpoint"],
+        "title": "PlatformTaskResolutionType"
+      },
+      "PlatformTaskStatus": {
+        "type": "string",
+        "enum": ["todo", "deferred", "in-progress", "done"],
+        "title": "PlatformTaskStatus"
+      },
+      "PlatformTaskStatusUpdate": {
+        "type": "string",
+        "enum": ["todo", "done"],
+        "title": "PlatformTaskStatusUpdate"
+      },
+      "PlatformTaskTag": {
+        "type": "string",
+        "enum": [
+          "certificate-of-good-standing",
+          "charity-registration",
+          "charity-registration-renewal",
+          "employee-final-wage-payment",
+          "employee-new-hire-reporting",
+          "employee-onboarding",
+          "employee-requirement",
+          "employee-termination",
+          "exemption",
+          "foreign-qualification",
+          "handbook",
+          "initial-statement",
+          "local-business-exemption-setup",
+          "local-business-setup",
+          "local-business-registration-renewal",
+          "local-payroll-setup",
+          "local-business-tax-setup",
+          "newspaper-publication",
+          "notices",
+          "payroll-setup",
+          "registered-agent",
+          "sales-tax",
+          "setup",
+          "sos-report",
+          "warn-notice"
+        ],
+        "title": "PlatformTaskTag"
+      },
+      "PlatformTaskType": {
+        "type": "string",
+        "enum": ["requirement", "question"],
+        "title": "PlatformTaskType"
+      },
+      "PlatformTaskUnlocks": {
+        "properties": {
+          "requirement_id": {
+            "type": "string",
+            "title": "Requirement Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "definition": {
+            "type": "string",
+            "title": "Definition"
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          },
+          "resources": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Resources"
+          },
+          "region": {
+            "$ref": "#/components/schemas/RegionRef"
+          },
+          "tags": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/TagInstance"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tags"
+          },
+          "source": {
+            "type": "string",
+            "const": "requirement",
+            "title": "Source",
+            "default": "requirement"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requirement_id",
+          "title",
+          "definition",
+          "resources",
+          "region"
+        ],
+        "title": "PlatformTaskUnlocks"
+      },
+      "PlatformTaskUpdate": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/PlatformTaskStatusUpdate"
+          }
+        },
+        "type": "object",
+        "required": ["status"],
+        "title": "PlatformTaskUpdate"
+      },
+      "PlatformUpdateQuestionTaskStatusResponse": {
+        "properties": {
+          "unlocked_tasks": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformTask"
+            },
+            "type": "array",
+            "title": "Unlocked Tasks"
+          }
+        },
+        "type": "object",
+        "required": ["unlocked_tasks"],
+        "title": "PlatformUpdateQuestionTaskStatusResponse"
+      },
+      "PlatformUpdateTaskStatusResponse": {
+        "properties": {
+          "task": {
+            "$ref": "#/components/schemas/PlatformTask"
+          },
+          "unlocked_tasks": {
+            "items": {
+              "$ref": "#/components/schemas/PlatformTask"
+            },
+            "type": "array",
+            "title": "Unlocked Tasks"
+          }
+        },
+        "type": "object",
+        "required": ["task", "unlocked_tasks"],
+        "title": "PlatformUpdateTaskStatusResponse"
+      },
+      "RegionRef": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "parent_region": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RegionRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": ["id", "name"],
+        "title": "RegionRef"
+      },
+      "ScopedHostedSessionRequest": {
+        "properties": {
+          "callback_url": {
+            "type": "string",
+            "title": "Callback Url"
+          },
+          "region_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Region Id"
+          }
+        },
+        "type": "object",
+        "required": ["callback_url"],
+        "title": "ScopedHostedSessionRequest"
+      },
+      "StateCode": {
+        "type": "string",
+        "enum": [
+          "AL",
+          "AK",
+          "AZ",
+          "AR",
+          "CA",
+          "CO",
+          "CT",
+          "DE",
+          "DC",
+          "FL",
+          "GA",
+          "HI",
+          "ID",
+          "IL",
+          "IN",
+          "IA",
+          "KS",
+          "KY",
+          "LA",
+          "ME",
+          "MD",
+          "MA",
+          "MI",
+          "MN",
+          "MS",
+          "MO",
+          "MT",
+          "NE",
+          "NV",
+          "NH",
+          "NJ",
+          "NM",
+          "NY",
+          "NC",
+          "ND",
+          "OH",
+          "OK",
+          "OR",
+          "PA",
+          "RI",
+          "SC",
+          "SD",
+          "TN",
+          "TX",
+          "UT",
+          "VT",
+          "VA",
+          "WA",
+          "WV",
+          "WI",
+          "WY"
+        ],
+        "title": "StateCode"
+      },
+      "TagInstance": {
+        "type": "string",
+        "enum": [
+          "certificate-of-good-standing",
+          "charity-registration",
+          "charity-registration-renewal",
+          "employee-final-wage-payment",
+          "employee-new-hire-reporting",
+          "employee-onboarding",
+          "employee-termination",
+          "employee-requirement",
+          "exemption",
+          "foreign-qualification",
+          "foreign-state-only",
+          "handbook",
+          "home-state-only",
+          "initial-statement",
+          "local-business-exemption-setup",
+          "local-business-setup",
+          "local-business-registration-renewal",
+          "local-business-tax-setup",
+          "local-payroll-setup",
+          "newspaper-publication",
+          "notices",
+          "payroll-setup",
+          "registered-agent",
+          "sos-report",
+          "check-account-logins",
+          "setup",
+          "tpa-setup",
+          "task-applicability-override",
+          "sales-tax",
+          "warn-notice",
+          "password-update",
+          "mail-delivery"
+        ],
+        "title": "TagInstance"
+      },
+      "TaskCategory": {
+        "type": "string",
+        "enum": [
+          "hr",
+          "insurance",
+          "payroll",
+          "registration",
+          "registration-maintenance",
+          "tax",
+          "sales-tax"
+        ],
+        "title": "TaskCategory"
+      },
+      "TaskContextEmployee": {
+        "properties": {
+          "scope": {
+            "type": "string",
+            "const": "employee",
+            "title": "Scope",
+            "default": "employee"
+          },
+          "employee_id": {
+            "type": "string",
+            "title": "Employee Id"
+          }
+        },
+        "type": "object",
+        "required": ["employee_id"],
+        "title": "TaskContextEmployee"
+      },
+      "TaskContextLegalEntity": {
+        "properties": {
+          "scope": {
+            "type": "string",
+            "const": "legal-entity",
+            "title": "Scope",
+            "default": "legal-entity"
+          },
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          }
+        },
+        "type": "object",
+        "required": ["legal_entity_id"],
+        "title": "TaskContextLegalEntity"
+      },
+      "TaskPriority": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "title": "TaskPriority"
+      },
+      "TaskStatus": {
+        "type": "string",
+        "enum": ["todo", "deferred", "in-progress", "done"],
+        "title": "TaskStatus"
+      },
+      "TasksFilterStatus": {
+        "type": "string",
+        "enum": ["todo", "overdue", "done", "automated", "managed"],
+        "title": "TasksFilterStatus"
+      },
+      "TaxClassEnum": {
+        "type": "string",
+        "enum": [
+          "unset",
+          "corp",
+          "s_corp",
+          "partnership",
+          "disregarded",
+          "tax_exempt"
+        ],
+        "title": "TaxClassEnum",
+        "description": "The IRS tax classification for an entity.\n\nIn some circumstances, a company can elect to be treated different\nfrom the entity type for tax purposes. For example, an LLC can\nelect to be taxed as a corporation.\n- Corp: taxed as a corporation, the default for C Corps\n- S Corp: election using IRS Form 2553\n- Partnership: taxed as a partnership, the default for LPs\n- Disregarded: taxes pass through to the members, default for LLCs\n- Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/api/token"
+          }
+        }
+      }
+    }
+  }
+}

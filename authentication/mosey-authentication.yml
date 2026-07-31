@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/mosey-openapi.json, openapi/mosey-openapi_v1.json, openapi/mosey-openapi_v2.json
+summary:
+  types:
+  - oauth2
+  oauth2_flows:
+  - password
+schemes:
+- name: OAuth2PasswordBearer
+  type: oauth2
+  flows:
+  - flow: password
+    tokenUrl: /api/token
+    scopes: 0
+  sources:
+  - openapi/mosey-openapi.json
+  - openapi/mosey-openapi_v1.json
+  - openapi/mosey-openapi_v2.json

@@ -1,0 +1,548 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Mosey API",
+    "description": "If you'd like to use the Mosey API, please contact sales@mosey.com.",
+    "version": "V1",
+    "x-logo": {
+      "url": null
+    }
+  },
+  "paths": {
+    "/accounts/connect": {
+      "post": {
+        "summary": "Connect Account",
+        "description": "Returns a hosted connection URL, which allows the user to connect to a specific account in the state agency such as accessing Employer Services Online Account in California Employment Development Department. This endpoint returns the connection_id which can be used to query the current status of the connection.",
+        "operationId": "create_connection_handler_accounts_connect_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlatformConnectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformConnectSession"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ]
+      }
+    },
+    "/accounts/connections/{connection_id}": {
+      "get": {
+        "summary": "Get Account Connection",
+        "description": "Returns the current status of connection. The statuses can be - Pending/Authenticating/Registering/Connected/Disconnected/Canceled.",
+        "operationId": "get_connection_handler_accounts_connections__connection_id__get",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Connection Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformConnection"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts/connections/{connection_id}/cancel": {
+      "post": {
+        "summary": "Cancel Account Connection",
+        "description": "Cancels a pending, registering, or authenticating connection for the given connection_id.",
+        "operationId": "cancel_connection_handler_accounts_connections__connection_id__cancel_post",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Connection Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlatformConnection"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "PlatformAccount": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "agency_account": {
+            "$ref": "#/components/schemas/PlatformAgencyAccount"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlatformAccountStatus"
+          },
+          "id_number": {
+            "type": "string",
+            "title": "Id Number"
+          },
+          "has_tpa": {
+            "type": "boolean",
+            "title": "Has Tpa"
+          },
+          "tax_rate_percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Rate Percent"
+          },
+          "reporting_schedule": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reporting Schedule"
+          },
+          "balance": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Balance"
+          },
+          "history": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformAccountHistoryItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "History"
+          },
+          "notices": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PlatformAccountNotice"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notices"
+          },
+          "account_login": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformAccountLogin"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "agency_account",
+          "status",
+          "id_number",
+          "has_tpa"
+        ],
+        "title": "PlatformAccount"
+      },
+      "PlatformAccountHistoryItem": {
+        "properties": {
+          "period_start_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Period Start Date"
+          },
+          "period_end_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Period End Date"
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Payment Date"
+          },
+          "filing_date": {
+            "type": "string",
+            "format": "date",
+            "title": "Filing Date"
+          },
+          "payment_amount": {
+            "type": "integer",
+            "title": "Payment Amount"
+          },
+          "amount_due": {
+            "type": "integer",
+            "title": "Amount Due"
+          },
+          "amount_applied": {
+            "type": "integer",
+            "title": "Amount Applied"
+          },
+          "raw_data": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Raw Data"
+          }
+        },
+        "type": "object",
+        "required": [
+          "period_start_date",
+          "period_end_date",
+          "payment_date",
+          "filing_date",
+          "payment_amount",
+          "amount_due",
+          "amount_applied",
+          "raw_data"
+        ],
+        "title": "PlatformAccountHistoryItem"
+      },
+      "PlatformAccountLogin": {
+        "properties": {
+          "login_url": {
+            "type": "string",
+            "title": "Login Url"
+          },
+          "user_name": {
+            "type": "string",
+            "title": "User Name"
+          },
+          "two_factor_enabled": {
+            "type": "boolean",
+            "title": "Two Factor Enabled"
+          }
+        },
+        "type": "object",
+        "required": [
+          "login_url",
+          "user_name",
+          "two_factor_enabled"
+        ],
+        "title": "PlatformAccountLogin"
+      },
+      "PlatformAccountNotice": {
+        "properties": {
+          "mail_classification": {
+            "$ref": "#/components/schemas/PlatformMailClassification"
+          },
+          "received_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Received On"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "signed_url": {
+            "type": "string",
+            "title": "Signed Url"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mail_classification",
+          "received_on",
+          "description",
+          "summary",
+          "signed_url"
+        ],
+        "title": "PlatformAccountNotice"
+      },
+      "PlatformAccountStatus": {
+        "type": "string",
+        "enum": [
+          "active",
+          "exception",
+          "closed"
+        ],
+        "title": "PlatformAccountStatus"
+      },
+      "PlatformAgencyAccount": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "agency_id": {
+            "type": "string",
+            "title": "Agency Id"
+          },
+          "region": {
+            "type": "string",
+            "title": "Region"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "agency_id",
+          "region",
+          "name"
+        ],
+        "title": "PlatformAgencyAccount"
+      },
+      "PlatformConnectRequest": {
+        "properties": {
+          "legal_entity_id": {
+            "type": "string",
+            "title": "Legal Entity Id"
+          },
+          "agency_account_id": {
+            "type": "string",
+            "title": "Agency Account Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "legal_entity_id",
+          "agency_account_id"
+        ],
+        "title": "PlatformConnectRequest"
+      },
+      "PlatformConnectSession": {
+        "properties": {
+          "connect_url": {
+            "type": "string",
+            "title": "Connect Url"
+          },
+          "connection": {
+            "$ref": "#/components/schemas/PlatformConnection"
+          }
+        },
+        "type": "object",
+        "required": [
+          "connect_url",
+          "connection"
+        ],
+        "title": "PlatformConnectSession"
+      },
+      "PlatformConnection": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlatformConnectionStatus"
+          },
+          "account": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlatformAccount"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "account"
+        ],
+        "title": "PlatformConnection"
+      },
+      "PlatformConnectionStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "authenticating",
+          "registering",
+          "connected",
+          "disconnected",
+          "canceled"
+        ],
+        "title": "PlatformConnectionStatus"
+      },
+      "PlatformMailClassification": {
+        "type": "string",
+        "enum": [
+          "penalty",
+          "underpayment",
+          "tax_rate_change",
+          "other"
+        ],
+        "title": "PlatformMailClassification"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2PasswordBearer": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "scopes": {},
+            "tokenUrl": "/api/token"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/mosey-openapi.json
+note: >-
+  Agent Skills generated from the Mosey API OpenAPI; every step is grounded in a
+  verbatim operationId from openapi/mosey-openapi.json. Mosey publishes no first-party
+  Agent Skills / AGENTS.md.
+skills:
+  - file: mosey-onboard-and-generate-tasks.md
+    name: Onboard a legal entity and generate compliance tasks
+    api: openapi/mosey-openapi.json
+    operations:
+      - account_authenticate_accounts_auth_post
+      - embedded_signup_handler_accounts_signup_post
+      - add_location_handler_locations__location_public_id__put
+      - list_locations_handler_locations_get
+      - list_tasks_handler_tasks_get
+  - file: mosey-monitor-and-resolve-tasks.md
+    name: Monitor and resolve compliance tasks
+    api: openapi/mosey-openapi.json
+    operations:
+      - list_tasks_handler_tasks_get
+      - get_task_handler_tasks__task_id__get
+      - patch_task_handler_tasks__task_id__patch
+      - automate_task_handler_tasks__task_id__automate_sessions_post
+      - hosted_task_tasks_sessions_post

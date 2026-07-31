@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Mosey API
+  version: 1.0.0
+extends: openapi/mosey-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-20'
+      x-apievangelist-provider: mosey
+      x-apievangelist-category: state-compliance
+      x-base-url: https://api.mosey.com
+  - target: $.servers
+    update:
+      - url: https://api.mosey.com
+        description: Mosey API production host (derived; the harvested spec omits servers[]).
+  - target: $.info
+    update:
+      x-auth-model: 'OAuth2 password grant; token endpoint POST https://api.mosey.com/api/token'
+      x-error-envelope: 'FastAPI validation envelope detail[]{loc,msg,type} (application/json, 422)'
+      x-hosted-sessions: >-
+        Several operations return short-lived hosted app URLs (signup, task
+        resolution, agency-accounts, documents, handbook, tasks management) for
+        embedding Mosey flows in a partner UI.

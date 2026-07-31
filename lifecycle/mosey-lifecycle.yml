@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.mosey.com/api-reference/introduction
+versioning:
+  scheme: uri-path
+  versions: [v1, v2]
+  current: v2
+  note: >-
+    The API exposes both legacy (openapi_v1.json) and current (openapi_v2.json)
+    surfaces; v2 paths are prefixed /v2/. A superset openapi.json is also published.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No RFC 8594 Sunset/Deprecation header policy is documented. Business-level
+    sunset: Gusto acquired Mosey; per public reporting, non-Gusto customers lose
+    access after 2026-06-30. This is a commercial wind-down, not a versioned API
+    deprecation policy.
+sla:
+  url: null
+status_page: null
+status_page_note: >-
+  mosey.statuspage.io resolves but 302-redirects to the generic statuspage.io
+  landing page — no dedicated Mosey status page was found.
+deprecated_operations: []
