@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mosey Accounts Legal Entity API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Legal Entity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Legal Entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/legal_entity",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns information for the authorized legal entity"
+        },
+        {
+          "info": {
+            "name": "Get Legal Entity Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/legal_entity",
+            "params": [
+              {
+                "name": "legal_entity_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_or_platform_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "platform_public_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Legal Entity Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

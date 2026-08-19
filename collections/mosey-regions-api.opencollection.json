@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mosey Accounts Regions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v2/regions",
+            "params": [
+              {
+                "name": "legal_entity_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_or_platform_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "platform_public_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the list of regions associated with the authenticated legal entity."
+        },
+        {
+          "info": {
+            "name": "Add multiple regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/regions",
+            "params": [
+              {
+                "name": "legal_entity_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_or_platform_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "platform_public_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add multiple regions to the authenticated legal entity.\nProviding the employee count will configure the region and generate applicable tasks.\nThe employee count is expected to consist of all current full time employees.\n\n### Example\n\n    Request\n    ```\n        \"config\": {\n            \"AL\": {\"employee_count\": 1},\n            \"AK\": {\"employee_count\": 10},\n        }\n    }\n    ```"
+        },
+        {
+          "info": {
+            "name": "Add region",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v2/regions/:region",
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "legal_entity_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_or_platform_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "platform_public_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add a region to the authenticated legal entity.\nProviding the employee count will configure the region and generate applicable tasks.\nThe employee count is expected to consist of all current full time employees."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

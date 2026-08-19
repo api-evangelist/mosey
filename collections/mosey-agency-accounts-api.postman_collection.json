@@ -1,0 +1,307 @@
+{
+  "item": [
+    {
+      "id": "5700119f-f613-4e52-acc7-b20ac5555269",
+      "name": "Agency Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "798b24eb-0f19-421c-b6af-f90a5b4b73db",
+          "name": "List Agency Accounts",
+          "request": {
+            "name": "List Agency Accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "agency_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7fe55e1f-192c-467f-b54f-d7a1fa6034ad",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "agency_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"location_id\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"agency\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"website\": \"string\"\n    },\n    \"data\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"logins\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  {\n    \"location_id\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"agency\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"website\": \"string\"\n    },\n    \"data\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"logins\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40901b70-24d8-4dbb-abf6-b3da0b09f7f4",
+          "name": "List Agency Accounts",
+          "request": {
+            "name": "List Agency Accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "agency_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "legal_entity_public_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_or_platform_public_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "platform_public_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6c982cd1-9324-4f42-9699-d48a2f2de4fd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "agency_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "region",
+                      "value": "PA"
+                    },
+                    {
+                      "key": "legal_entity_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_or_platform_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platform_public_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"region\": \"SD\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"agency\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"website\": \"string\"\n    },\n    \"data\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\",\n        \"status\": \"in-progress\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\",\n        \"status\": \"in-progress\"\n      }\n    ],\n    \"logins\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"region\": \"GA\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"region\": \"LA\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  {\n    \"region\": \"AL\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"agency\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"website\": \"string\"\n    },\n    \"data\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\",\n        \"status\": \"todo\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\",\n        \"status\": \"in-progress\"\n      }\n    ],\n    \"logins\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"region\": \"RI\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"region\": \"MD\",\n        \"url\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99be66e4-6b08-49ed-a455-a6bc9513cb1f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "agency_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "region",
+                      "value": "PA"
+                    },
+                    {
+                      "key": "legal_entity_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_or_platform_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platform_public_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "55ee49fe-fe58-44d7-b210-1e7d4b7a32c7",
+    "name": "Mosey Accounts Agency Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "If you'd like to use the Mosey API, please contact sales@mosey.com.",
+      "type": "text/plain"
+    }
+  }
+}

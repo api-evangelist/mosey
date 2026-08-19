@@ -1,0 +1,1234 @@
+{
+  "item": [
+    {
+      "id": "fae63c04-321a-43e9-9d38-fc1e67bf1ba1",
+      "name": "Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a12bc45-5c48-4200-951c-81c9f7f56353",
+          "name": "Embedded Signup",
+          "request": {
+            "name": "Embedded Signup",
+            "description": {},
+            "url": {
+              "path": [
+                "accounts",
+                "signup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "verbose",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_email\": \"<string>\",\n  \"business_name\": \"<string>\",\n  \"entity_type\": \"<string>\",\n  \"tax_classification\": \"<string>\",\n  \"incorporation_location\": \"<string>\",\n  \"incorporation_date\": \"<date>\",\n  \"ein\": \"<string>\",\n  \"llc_managed_type\": \"<string>\",\n  \"business_purpose\": \"<string>\",\n  \"business_phone\": \"<string>\",\n  \"business_email\": \"<string>\",\n  \"business_address\": {\n    \"address_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"id\": \"<string>\",\n    \"address_line_2\": \"<string>\"\n  },\n  \"mailing_address\": {\n    \"address_line_1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"postal_code\": \"<string>\",\n    \"id\": \"<string>\",\n    \"address_line_2\": \"<string>\"\n  },\n  \"naics_code\": \"<string>\",\n  \"accounting_method\": \"<string>\",\n  \"accounting_period\": \"<string>\",\n  \"accounting_year_end\": \"<integer>\",\n  \"futa_liability_year\": \"<string>\",\n  \"external_company_id\": \"<string>\",\n  \"authorization_callback_url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9431a644-facd-40c7-86c4-aacbc0baf190",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "signup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verbose",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "string",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_email\": \"<string>\",\n  \"business_name\": \"<string>\",\n  \"entity_type\": \"unset\",\n  \"tax_classification\": \"tax_exempt\",\n  \"incorporation_location\": \"<string>\",\n  \"incorporation_date\": \"<date>\",\n  \"ein\": \"<string>\",\n  \"llc_managed_type\": \"member_managed\",\n  \"business_purpose\": \"<string>\",\n  \"business_phone\": \"<string>\",\n  \"business_email\": \"<string>\",\n  \"business_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"mailing_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"naics_code\": \"<string>\",\n  \"accounting_method\": \"accrual\",\n  \"accounting_period\": \"fiscal\",\n  \"accounting_year_end\": 3,\n  \"futa_liability_year\": \"<string>\",\n  \"external_company_id\": \"<string>\",\n  \"authorization_callback_url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"legal_entity_id\": \"string\",\n  \"authorization_url\": \"string\",\n  \"url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "636c8447-72b7-42bd-8dd9-6a7ff9c2d361",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "signup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verbose",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "string",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_email\": \"<string>\",\n  \"business_name\": \"<string>\",\n  \"entity_type\": \"unset\",\n  \"tax_classification\": \"tax_exempt\",\n  \"incorporation_location\": \"<string>\",\n  \"incorporation_date\": \"<date>\",\n  \"ein\": \"<string>\",\n  \"llc_managed_type\": \"member_managed\",\n  \"business_purpose\": \"<string>\",\n  \"business_phone\": \"<string>\",\n  \"business_email\": \"<string>\",\n  \"business_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"mailing_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"naics_code\": \"<string>\",\n  \"accounting_method\": \"accrual\",\n  \"accounting_period\": \"fiscal\",\n  \"accounting_year_end\": 3,\n  \"futa_liability_year\": \"<string>\",\n  \"external_company_id\": \"<string>\",\n  \"authorization_callback_url\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecf25ac0-1a58-4d13-9e9f-a6a733966cf4",
+          "name": "Create Hosted Signup Session",
+          "request": {
+            "name": "Create Hosted Signup Session",
+            "description": {
+              "content": "Provides a URL for directing a user through the hosted signup experience. Upon successful completion the user will be redirected to the callback_url. The returned legal entity id will not be active until the user has completed their signup. If a subsequent signup needs to be generated for a user the returned legal_entity_id from the first should be included in the request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "signup",
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "verbose",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_name\": \"<string>\",\n  \"user_email\": \"<string>\",\n  \"callback_url\": \"<string>\",\n  \"legal_entity_id\": \"<string>\",\n  \"business_information\": {\n    \"incorporation_region\": \"<string>\",\n    \"entity_type\": \"<string>\",\n    \"tax_classification\": \"<string>\",\n    \"llc_managed_type\": \"<string>\",\n    \"business_name\": \"<string>\",\n    \"business_purpose\": \"<string>\",\n    \"ein\": \"<string>\",\n    \"incorporation_date\": \"<date>\",\n    \"naics_code\": \"<string>\",\n    \"accounting_method\": \"<string>\",\n    \"accounting_period\": \"<string>\",\n    \"accounting_year_end\": \"<integer>\",\n    \"futa_liability_year\": \"<string>\"\n  },\n  \"external_company_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "94227317-139a-41c4-b939-4719561e2751",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "signup",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verbose",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "string",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_name\": \"<string>\",\n  \"user_email\": \"<string>\",\n  \"callback_url\": \"<string>\",\n  \"legal_entity_id\": \"<string>\",\n  \"business_information\": {\n    \"incorporation_region\": \"string\",\n    \"entity_type\": \"llp\",\n    \"tax_classification\": \"s_corp\",\n    \"llc_managed_type\": \"member_managed\",\n    \"business_name\": \"string\",\n    \"business_purpose\": \"string\",\n    \"ein\": \"string\",\n    \"incorporation_date\": \"1947-03-12\",\n    \"naics_code\": \"string\",\n    \"accounting_method\": \"cash\",\n    \"accounting_period\": \"fiscal\",\n    \"accounting_year_end\": 12,\n    \"futa_liability_year\": \"string\"\n  },\n  \"external_company_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"signup_url\": \"string\",\n  \"url\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\",\n  \"legal_entity_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2a715ef-4a2e-4b58-b64d-2417a3d9976b",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "signup",
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verbose",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "string",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"business_name\": \"<string>\",\n  \"user_email\": \"<string>\",\n  \"callback_url\": \"<string>\",\n  \"legal_entity_id\": \"<string>\",\n  \"business_information\": {\n    \"incorporation_region\": \"string\",\n    \"entity_type\": \"llp\",\n    \"tax_classification\": \"s_corp\",\n    \"llc_managed_type\": \"member_managed\",\n    \"business_name\": \"string\",\n    \"business_purpose\": \"string\",\n    \"ein\": \"string\",\n    \"incorporation_date\": \"1947-03-12\",\n    \"naics_code\": \"string\",\n    \"accounting_method\": \"cash\",\n    \"accounting_period\": \"fiscal\",\n    \"accounting_year_end\": 12,\n    \"futa_liability_year\": \"string\"\n  },\n  \"external_company_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e2753dac-6dfa-4110-bf2e-02a78307669b",
+          "name": "Authenticate Legal Entity",
+          "request": {
+            "name": "Authenticate Legal Entity",
+            "description": {
+              "content": "Provides a short-lived authentication token scoped to the requested legal entity. Tokens must be included as an Authorization header for all API requests on behalf of the legal entity. They are valid for 10 minutes. Your API key will be provided to you by Mosey.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "verbose",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"legal_entity_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b98de7db-1d47-4ff9-ae76-99eb460c6832",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verbose",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "string",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"legal_entity_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"bearer\",\n  \"state\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86f505bd-8bbe-41a1-a4eb-68cfeed888f9",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "verbose",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "key": "authorization",
+                    "value": "string",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"legal_entity_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "593b4a58-5dc6-41c4-be00-4fd20e69f180",
+          "name": "Connect Account",
+          "request": {
+            "name": "Connect Account",
+            "description": {
+              "content": "Returns a hosted connection URL, which allows the user to connect to a specific account in the state agency such as accessing Employer Services Online Account in California Employment Development Department. This endpoint returns the connection_id which can be used to query the current status of the connection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "connect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"legal_entity_id\": \"<string>\",\n  \"agency_account_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f07458bd-4f23-42bd-8986-59c78682f54a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "connect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"legal_entity_id\": \"<string>\",\n  \"agency_account_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"connect_url\": \"string\",\n  \"connection\": {\n    \"id\": \"string\",\n    \"status\": \"pending\",\n    \"account\": {\n      \"id\": \"string\",\n      \"agency_account\": {\n        \"id\": \"string\",\n        \"agency_id\": \"string\",\n        \"region\": \"string\",\n        \"name\": \"string\"\n      },\n      \"status\": \"exception\",\n      \"id_number\": \"string\",\n      \"has_tpa\": true,\n      \"tax_rate_percent\": 4455.26645069452,\n      \"reporting_schedule\": \"string\",\n      \"balance\": 1857,\n      \"history\": [\n        {\n          \"period_start_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"period_end_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"payment_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filing_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"payment_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount_due\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount_applied\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"raw_data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"period_start_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"period_end_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"payment_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"filing_date\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"payment_amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount_due\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount_applied\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"raw_data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"notices\": [\n        {\n          \"mail_classification\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"received_on\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"signed_url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"mail_classification\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"received_on\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"summary\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"signed_url\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"account_login\": {\n        \"login_url\": \"string\",\n        \"user_name\": \"string\",\n        \"two_factor_enabled\": true\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "831ad360-c29d-4fd4-85c3-397bbca16530",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "connect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"legal_entity_id\": \"<string>\",\n  \"agency_account_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1bb07682-f9af-4e6e-a3e5-8d65faf46a36",
+          "name": "Get Account Connection",
+          "request": {
+            "name": "Get Account Connection",
+            "description": {
+              "content": "Returns the current status of connection. The statuses can be - Pending/Authenticating/Registering/Connected/Disconnected/Canceled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "connections",
+                ":connection_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "connection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0a6f08e6-aedb-434d-b4ac-3ca8845034c6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "connections",
+                    ":connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"registering\",\n  \"account\": {\n    \"id\": \"string\",\n    \"agency_account\": {\n      \"id\": \"string\",\n      \"agency_id\": \"string\",\n      \"region\": \"string\",\n      \"name\": \"string\"\n    },\n    \"status\": \"exception\",\n    \"id_number\": \"string\",\n    \"has_tpa\": false,\n    \"tax_rate_percent\": 4044.767377032551,\n    \"reporting_schedule\": \"string\",\n    \"balance\": 4670,\n    \"history\": [\n      {\n        \"period_start_date\": \"1963-02-10\",\n        \"period_end_date\": \"2002-03-27\",\n        \"payment_date\": \"1995-11-02\",\n        \"filing_date\": \"1983-06-19\",\n        \"payment_amount\": 1175,\n        \"amount_due\": 7754,\n        \"amount_applied\": 27,\n        \"raw_data\": {}\n      },\n      {\n        \"period_start_date\": \"1984-02-17\",\n        \"period_end_date\": \"1991-08-20\",\n        \"payment_date\": \"1972-01-11\",\n        \"filing_date\": \"1971-11-27\",\n        \"payment_amount\": 5321,\n        \"amount_due\": 358,\n        \"amount_applied\": 5763,\n        \"raw_data\": {}\n      }\n    ],\n    \"notices\": [\n      {\n        \"mail_classification\": \"other\",\n        \"received_on\": \"1976-03-31\",\n        \"description\": \"string\",\n        \"summary\": \"string\",\n        \"signed_url\": \"string\"\n      },\n      {\n        \"mail_classification\": \"underpayment\",\n        \"received_on\": \"2003-06-21\",\n        \"description\": \"string\",\n        \"summary\": \"string\",\n        \"signed_url\": \"string\"\n      }\n    ],\n    \"account_login\": {\n      \"login_url\": \"string\",\n      \"user_name\": \"string\",\n      \"two_factor_enabled\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a80aa54-32b5-4ffc-b604-04fafa8db564",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "connections",
+                    ":connection_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eade0310-5ae2-4d7d-8b31-d5060854b988",
+          "name": "Cancel Account Connection",
+          "request": {
+            "name": "Cancel Account Connection",
+            "description": {
+              "content": "Cancels a pending, registering, or authenticating connection for the given connection_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "connections",
+                ":connection_id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "connection_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ac770e8f-0e51-4604-9431-07b5ab598db2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "connections",
+                    ":connection_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"registering\",\n  \"account\": {\n    \"id\": \"string\",\n    \"agency_account\": {\n      \"id\": \"string\",\n      \"agency_id\": \"string\",\n      \"region\": \"string\",\n      \"name\": \"string\"\n    },\n    \"status\": \"exception\",\n    \"id_number\": \"string\",\n    \"has_tpa\": false,\n    \"tax_rate_percent\": 4044.767377032551,\n    \"reporting_schedule\": \"string\",\n    \"balance\": 4670,\n    \"history\": [\n      {\n        \"period_start_date\": \"1963-02-10\",\n        \"period_end_date\": \"2002-03-27\",\n        \"payment_date\": \"1995-11-02\",\n        \"filing_date\": \"1983-06-19\",\n        \"payment_amount\": 1175,\n        \"amount_due\": 7754,\n        \"amount_applied\": 27,\n        \"raw_data\": {}\n      },\n      {\n        \"period_start_date\": \"1984-02-17\",\n        \"period_end_date\": \"1991-08-20\",\n        \"payment_date\": \"1972-01-11\",\n        \"filing_date\": \"1971-11-27\",\n        \"payment_amount\": 5321,\n        \"amount_due\": 358,\n        \"amount_applied\": 5763,\n        \"raw_data\": {}\n      }\n    ],\n    \"notices\": [\n      {\n        \"mail_classification\": \"other\",\n        \"received_on\": \"1976-03-31\",\n        \"description\": \"string\",\n        \"summary\": \"string\",\n        \"signed_url\": \"string\"\n      },\n      {\n        \"mail_classification\": \"underpayment\",\n        \"received_on\": \"2003-06-21\",\n        \"description\": \"string\",\n        \"summary\": \"string\",\n        \"signed_url\": \"string\"\n      }\n    ],\n    \"account_login\": {\n      \"login_url\": \"string\",\n      \"user_name\": \"string\",\n      \"two_factor_enabled\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6d54cb5-f1f4-4d82-827a-d3a6df78bb03",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "connections",
+                    ":connection_id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "connection_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9870831f-3ff9-46e6-882e-34841b0b3eff",
+          "name": "Create Agency Accounts Management Session",
+          "request": {
+            "name": "Create Agency Accounts Management Session",
+            "description": {
+              "content": "Creates an authenticated session to enter the Mosey app, and returns\nthe url on which a user can view accounts registered with state agencies and login credentials if present with state agencies.\n\nThe list of agencies supported can be viewed at /v2/agency_accounts",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "accounts",
+                "manage",
+                "session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "legal_entity_public_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_or_platform_public_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "platform_public_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"callback_url\": \"<string>\",\n  \"region_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ada0ab5d-a278-422f-9f92-686d626737ca",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "manage",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "legal_entity_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_or_platform_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platform_public_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callback_url\": \"<string>\",\n  \"region_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"string\",\n  \"created_at\": \"string\",\n  \"expires_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c59d6a78-b3bb-48fc-9d35-9e6e97113ed6",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "accounts",
+                    "manage",
+                    "session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "legal_entity_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_or_platform_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platform_public_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callback_url\": \"<string>\",\n  \"region_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "329e52c0-3fe9-485a-8362-f693670ecb14",
+    "name": "Mosey Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "If you'd like to use the Mosey API, please contact sales@mosey.com.",
+      "type": "text/plain"
+    }
+  }
+}

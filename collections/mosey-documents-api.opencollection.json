@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mosey Accounts Documents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Documents Management Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/documents/manage/session",
+            "params": [
+              {
+                "name": "legal_entity_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user_or_platform_public_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "platform_public_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Creates an authenticated session to enter the Mosey app, and returns\nthe url on which a user can view documents received from State agencies."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

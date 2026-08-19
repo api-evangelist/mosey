@@ -1,0 +1,297 @@
+{
+  "item": [
+    {
+      "id": "5447f51e-fa77-41dc-a9e7-6906e7120f9d",
+      "name": "Legal Entity",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0b26961e-0998-46ff-be49-6be25b96d175",
+          "name": "Get Legal Entity",
+          "request": {
+            "name": "Get Legal Entity",
+            "description": {
+              "content": "Returns information for the authorized legal entity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "legal_entity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1776cd2f-b568-40f0-b87e-4f3f97d3a53f",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "legal_entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"notices_url\": \"string\",\n  \"user_email\": \"string\",\n  \"business_name\": \"string\",\n  \"entity_type\": \"c_corp\",\n  \"tax_classification\": \"s_corp\",\n  \"incorporation_location\": \"string\",\n  \"incorporation_date\": \"2010-08-18\",\n  \"ein\": \"string\",\n  \"llc_managed_type\": \"manager_managed\",\n  \"business_purpose\": \"string\",\n  \"business_phone\": \"string\",\n  \"business_email\": \"string\",\n  \"business_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"mailing_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"naics_code\": \"string\",\n  \"accounting_method\": \"accrual\",\n  \"accounting_period\": \"calendar\",\n  \"accounting_year_end\": 5,\n  \"futa_liability_year\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b798128-6b18-40a8-b274-bd321f1c54f2",
+          "name": "Get Legal Entity Details",
+          "request": {
+            "name": "Get Legal Entity Details",
+            "description": {},
+            "url": {
+              "path": [
+                "v2",
+                "legal_entity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "legal_entity_public_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_or_platform_public_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "platform_public_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8f9dc8f3-e2e5-43f8-a05e-e1f7e1106d9a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "legal_entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "legal_entity_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_or_platform_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platform_public_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"notices_url\": \"string\",\n  \"user_email\": \"string\",\n  \"business_name\": \"string\",\n  \"entity_type\": \"pllc\",\n  \"tax_classification\": \"tax_exempt\",\n  \"incorporation_region\": \"MT\",\n  \"incorporated_date\": \"2014-08-24\",\n  \"ein\": \"string\",\n  \"llc_managed_type\": \"member_managed\",\n  \"business_purpose\": \"string\",\n  \"business_phone\": \"string\",\n  \"business_email\": \"string\",\n  \"business_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"mailing_address\": {\n    \"address_line_1\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"postal_code\": \"string\",\n    \"id\": \"string\",\n    \"address_line_2\": \"string\"\n  },\n  \"naics_code\": \"string\",\n  \"accounting_method\": \"cash\",\n  \"accounting_period\": \"fiscal\",\n  \"accounting_year_end\": \"August\",\n  \"futa_liability_year\": 9150,\n  \"last_payroll_update\": \"1986-04-04T20:06:58.171Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2748a3fb-f573-413c-8f30-5352a9e4a0bc",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "legal_entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "legal_entity_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_or_platform_public_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "platform_public_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f2de7d69-345f-4bc7-b4e4-0e1ea835613f",
+    "name": "Mosey Accounts Legal Entity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "If you'd like to use the Mosey API, please contact sales@mosey.com.",
+      "type": "text/plain"
+    }
+  }
+}

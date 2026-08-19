@@ -1,0 +1,243 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mosey Accounts Locations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locations",
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the list of locations associated with the authenticated legal entity."
+        },
+        {
+          "info": {
+            "name": "Add Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/locations/:location_public_id",
+            "params": [
+              {
+                "name": "location_public_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the specified location that is associated with the authenticated legal entity.\nAn optional configuration can be provided to help decide if some tasks should be included or not.\n\n<table>\n<tr><td>has_employees</td><td>Include or filter out tasks that are applicable when employees are living or working in the location. Once payroll is connected for the legal entity, this value will be kept in sync.</td></tr>\n<tr><td>has_physical_location</td><td>Include or filter out tasks that are applicab"
+        },
+        {
+          "info": {
+            "name": "Update Location Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/locations/:region_platform_public_id",
+            "params": [
+              {
+                "name": "region_platform_public_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Updates the configuration for the specified legal entity and region.\nAn optional configuration can be provided to help decide if some tasks should be included or not.\n\n<table>\n<tr><td>has_employees</td><td>Include or filter out tasks that are applicable when employees are living or working in the location. Once payroll is connected for the legal entity, this value will be kept in sync. <b>This cannot be updated once payroll is connected.\"</b></td></tr>\n<tr><td>has_physical_location</td><td>Inclu"
+        },
+        {
+          "info": {
+            "name": "List Tasks for Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locations/:region_platform_public_id/tasks",
+            "params": [
+              {
+                "name": "region_platform_public_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "definition_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include_managed",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a list of tasks relevant for the authenticated legal entity for the specified location. Tasks are sorted by their due date in ascending order, where tasks without a due date are first."
+        },
+        {
+          "info": {
+            "name": "List Account Logins for Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locations/:location_public_id/logins",
+            "params": [
+              {
+                "name": "location_public_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Lists _Account Login_ for the current _Legal Entity_ and location id."
+        },
+        {
+          "info": {
+            "name": "List Mail by Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locations/:region_platform_public_id/mail",
+            "params": [
+              {
+                "name": "region_platform_public_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns mail information received by the authorized legal entity in the specified region\n\nFollow each returned `url` in order to download the mail content in PDF format"
+        },
+        {
+          "info": {
+            "name": "List Agency Accounts for Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/locations/:region_platform_public_id/agency_accounts",
+            "params": [
+              {
+                "name": "region_platform_public_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "resource_owner_password_credentials",
+              "accessTokenUrl": "/api/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Agency Accounts for Location"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

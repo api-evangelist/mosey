@@ -1,0 +1,1259 @@
+{
+  "item": [
+    {
+      "id": "20d51da2-a093-475d-8eee-e6cb042c269d",
+      "name": "Locations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "abadac34-5397-4762-ac06-b6edbd1152e5",
+          "name": "List Locations",
+          "request": {
+            "name": "List Locations",
+            "description": {
+              "content": "Returns the list of locations associated with the authenticated legal entity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "291557bd-7f57-4dfc-9ac3-d615baa73a70",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"location\": {\n      \"id\": \"string\",\n      \"code\": \"string\",\n      \"name\": \"string\"\n    },\n    \"config\": {\n      \"has_employees\": true,\n      \"has_physical_location\": false\n    }\n  },\n  {\n    \"location\": {\n      \"id\": \"string\",\n      \"code\": \"string\",\n      \"name\": \"string\"\n    },\n    \"config\": {\n      \"has_employees\": true,\n      \"has_physical_location\": true\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "119177b0-0fd7-46d0-b417-9a194ad4d78c",
+          "name": "Add Location",
+          "request": {
+            "name": "Add Location",
+            "description": {
+              "content": "Returns the specified location that is associated with the authenticated legal entity.\nAn optional configuration can be provided to help decide if some tasks should be included or not.\n\n<table>\n<tr><td>has_employees</td><td>Include or filter out tasks that are applicable when employees are living or working in the location. Once payroll is connected for the legal entity, this value will be kept in sync.</td></tr>\n<tr><td>has_physical_location</td><td>Include or filter out tasks that are applicable when the legal entity has a physical presence (such as an office) in the location.</td></tr>\n</table>\n\nThis table maps Location IDs to the state abbreviation code it represents. The IDs are globally unique and are used regardless of which legal entity is authenticated.\n\n<table>\n<tr><td>e5aa6d3222d22de2</td><td>AL</td></tr>\n<tr><td>86e384ec4456dd93</td><td>AK</td></tr>\n<tr><td>43c2b058fdc38bd0</td><td>AZ</td></tr>\n<tr><td>8a3248de4ff636d4</td><td>AR</td></tr>\n<tr><td>99be5e8f54c4680d</td><td>CA</td></tr>\n<tr><td>e8239e013ff4cde4</td><td>CO</td></tr>\n<tr><td>e69817cba25a7fa6</td><td>CT</td></tr>\n<tr><td>1f1cc147c009b409</td><td>DE</td></tr>\n<tr><td>afb903b3dcbe23fc</td><td>DC</td></tr>\n<tr><td>33cf440c464d38f5</td><td>FL</td></tr>\n<tr><td>5c392fde8d78eb3c</td><td>GA</td></tr>\n<tr><td>dcb44d856176eb43</td><td>HI</td></tr>\n<tr><td>a71f627b1843088a</td><td>ID</td></tr>\n<tr><td>30c18f24ba96c1e2</td><td>IL</td></tr>\n<tr><td>fbe3a2db6d46f2fe</td><td>IN</td></tr>\n<tr><td>81fb4925ba83f81b</td><td>IA</td></tr>\n<tr><td>f60f094906bf6e61</td><td>KS</td></tr>\n<tr><td>0fced19468cca680</td><td>KY</td></tr>\n<tr><td>b51b14eb685c802f</td><td>LA</td></tr>\n<tr><td>50b6e06268188bff</td><td>ME</td></tr>\n<tr><td>784c3796c1f6931f</td><td>MD</td></tr>\n<tr><td>d26e531db2dcbb50</td><td>MA</td></tr>\n<tr><td>b07e8933d62889e9</td><td>MI</td></tr>\n<tr><td>2577a77a916b01bd</td><td>MN</td></tr>\n<tr><td>4641d29a7416dae8</td><td>MS</td></tr>\n<tr><td>4eecb1031e0ecc97</td><td>MO</td></tr>\n<tr><td>3c6de0a85af1153b</td><td>MT</td></tr>\n<tr><td>47b790d36c9135fe</td><td>NE</td></tr>\n<tr><td>c2473d37f8547551</td><td>NV</td></tr>\n<tr><td>e4656a4c283b7c15</td><td>NH</td></tr>\n<tr><td>a3cc7e50a63fb347</td><td>NJ</td></tr>\n<tr><td>43ca15ae2aa526e9</td><td>NM</td></tr>\n<tr><td>5894aa7b4729ed13</td><td>NY</td></tr>\n<tr><td>aa79248e404b74d2</td><td>NC</td></tr>\n<tr><td>5528e71a2a626676</td><td>ND</td></tr>\n<tr><td>ff6fec03fcfaa7d1</td><td>OH</td></tr>\n<tr><td>36552f81875623ad</td><td>OK</td></tr>\n<tr><td>e3fd17f3f015b908</td><td>OR</td></tr>\n<tr><td>1c96f4e30d829772</td><td>PA</td></tr>\n<tr><td>1e58e23ec4a87036</td><td>RI</td></tr>\n<tr><td>d2bbb1305f460a69</td><td>SC</td></tr>\n<tr><td>4e4a5bc7fcf5abd2</td><td>SD</td></tr>\n<tr><td>13f00f61a16fdabd</td><td>TN</td></tr>\n<tr><td>7dac61e5b25e151a</td><td>TX</td></tr>\n<tr><td>5da0217cd400f37a</td><td>UT</td></tr>\n<tr><td>3683a6d2eec6b45c</td><td>VT</td></tr>\n<tr><td>f568e8571666ccd6</td><td>VA</td></tr>\n<tr><td>05a2dfcf81d37e7d</td><td>WA</td></tr>\n<tr><td>aa5a1dfcbdd37d25</td><td>WV</td></tr>\n<tr><td>920abf5751681231</td><td>WI</td></tr>\n<tr><td>0132461d340cded0</td><td>WY</td></tr>\n</table>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":location_public_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "location_public_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"has_employees\": \"<boolean>\",\n    \"has_physical_location\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6b8f44f-e933-419d-8fe9-bb40d9c50ceb",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":location_public_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "location_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"has_employees\": true,\n    \"has_physical_location\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": {\n    \"id\": \"string\",\n    \"code\": \"string\",\n    \"name\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ba9ce76-cb6f-4f02-9785-7678b587a552",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":location_public_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "location_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"has_employees\": true,\n    \"has_physical_location\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f80d90bf-edec-4f22-9ada-566ee71ae57e",
+          "name": "Update Location Configuration",
+          "request": {
+            "name": "Update Location Configuration",
+            "description": {
+              "content": "Updates the configuration for the specified legal entity and region.\nAn optional configuration can be provided to help decide if some tasks should be included or not.\n\n<table>\n<tr><td>has_employees</td><td>Include or filter out tasks that are applicable when employees are living or working in the location. Once payroll is connected for the legal entity, this value will be kept in sync. <b>This cannot be updated once payroll is connected.\"</b></td></tr>\n<tr><td>has_physical_location</td><td>Include or filter out tasks that are applicable when the legal entity has a physical presence (such as an office) in the location.</td></tr>\n</table>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":region_platform_public_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "region_platform_public_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"has_employees\": \"<boolean>\",\n    \"has_physical_location\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cbed478f-6517-476e-8b29-26fe845c48e6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"has_employees\": true,\n    \"has_physical_location\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"location\": {\n    \"id\": \"string\",\n    \"code\": \"string\",\n    \"name\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3f34005-fbc4-49e2-a656-448cbcd09603",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"has_employees\": true,\n    \"has_physical_location\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a43d51da-d000-4f5a-a448-ca291eb780f5",
+          "name": "List Tasks for Location",
+          "request": {
+            "name": "List Tasks for Location",
+            "description": {
+              "content": "Returns a list of tasks relevant for the authenticated legal entity for the specified location. Tasks are sorted by their due date in ascending order, where tasks without a due date are first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":region_platform_public_id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "definition_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_managed",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "region_platform_public_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9aa07715-6a37-4e2b-bee0-d6127ec75afc",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "definition_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "include_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "done"
+                    },
+                    {
+                      "key": "status",
+                      "value": "in-progress"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"context\": {\n      \"employee_id\": \"string\",\n      \"scope\": \"employee\"\n    },\n    \"definition\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"criteria-collection\",\n      \"resources\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\"\n        }\n      ],\n      \"location\": {\n        \"id\": \"string\",\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"summary\": \"string\"\n    },\n    \"resolutions\": {\n      \"key_0\": {\n        \"description\": \"string\",\n        \"method\": \"string\",\n        \"url\": \"string\",\n        \"content_type\": \"string\",\n        \"fields\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"required\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"required\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"type\": \"action\"\n      }\n    },\n    \"default_resolution_name\": \"string\",\n    \"status\": \"in-progress\",\n    \"unblocks\": [\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"type\": \"data-collection\",\n        \"resources\": [\n          {\n            \"key_0\": \"string\"\n          },\n          {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        ],\n        \"location\": {\n          \"id\": \"string\",\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"summary\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"type\": \"requirement\",\n        \"resources\": [\n          {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          }\n        ],\n        \"location\": {\n          \"id\": \"string\",\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"summary\": \"string\"\n      }\n    ],\n    \"criteria_met\": [\n      {\n        \"key\": \"string\",\n        \"reason\": \"string\",\n        \"data\": {}\n      },\n      {\n        \"key\": \"string\",\n        \"reason\": \"string\",\n        \"data\": {}\n      }\n    ],\n    \"managed_provider\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    \"period_start_date\": \"1946-10-27\",\n    \"period_end_date\": \"2019-07-06\",\n    \"due_date\": \"2008-12-11\",\n    \"fee\": {\n      \"amount\": \"string\",\n      \"type\": \"fixed\"\n    },\n    \"eta\": {\n      \"estimation\": {\n        \"min\": 6197,\n        \"max\": 2942,\n        \"unit\": \"hour\"\n      },\n      \"earliest_date\": \"2016-06-21T17:16:05.356Z\",\n      \"latest_date\": \"2012-05-30T18:31:52.151Z\"\n    },\n    \"priority\": \"medium\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"context\": {\n      \"employee_id\": \"string\",\n      \"scope\": \"employee\"\n    },\n    \"definition\": {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"requirement\",\n      \"resources\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      ],\n      \"location\": {\n        \"id\": \"string\",\n        \"code\": \"string\",\n        \"name\": \"string\"\n      },\n      \"summary\": \"string\"\n    },\n    \"resolutions\": {\n      \"key_0\": {\n        \"description\": \"string\",\n        \"method\": \"string\",\n        \"url\": \"string\",\n        \"content_type\": \"string\",\n        \"fields\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"required\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"required\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"type\": \"action\"\n      },\n      \"key_1\": {\n        \"description\": \"string\",\n        \"method\": \"string\",\n        \"url\": \"string\",\n        \"content_type\": \"string\",\n        \"fields\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"required\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"required\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"type\": \"action\"\n      }\n    },\n    \"default_resolution_name\": \"string\",\n    \"status\": \"todo\",\n    \"unblocks\": [\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"type\": \"requirement\",\n        \"resources\": [\n          {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\"\n          },\n          {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        ],\n        \"location\": {\n          \"id\": \"string\",\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"summary\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"type\": \"requirement\",\n        \"resources\": [\n          {\n            \"key_0\": \"string\"\n          },\n          {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        ],\n        \"location\": {\n          \"id\": \"string\",\n          \"code\": \"string\",\n          \"name\": \"string\"\n        },\n        \"summary\": \"string\"\n      }\n    ],\n    \"criteria_met\": [\n      {\n        \"key\": \"string\",\n        \"reason\": \"string\",\n        \"data\": {}\n      },\n      {\n        \"key\": \"string\",\n        \"reason\": \"string\",\n        \"data\": {}\n      }\n    ],\n    \"managed_provider\": {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    \"period_start_date\": \"2012-12-08\",\n    \"period_end_date\": \"1964-12-13\",\n    \"due_date\": \"2025-12-11\",\n    \"fee\": {\n      \"amount\": \"string\",\n      \"type\": \"fixed\"\n    },\n    \"eta\": {\n      \"estimation\": {\n        \"min\": 9027,\n        \"max\": 5037,\n        \"unit\": \"week\"\n      },\n      \"earliest_date\": \"1998-01-07T12:38:09.680Z\",\n      \"latest_date\": \"1995-01-09T12:22:05.163Z\"\n    },\n    \"priority\": \"medium\",\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbb11a03-83a7-430e-a117-b80fcd543ee0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "definition_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "include_managed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "done"
+                    },
+                    {
+                      "key": "status",
+                      "value": "in-progress"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e73ea6d-64f0-4083-a3ca-ec7c42d606d1",
+          "name": "List Account Logins for Location",
+          "request": {
+            "name": "List Account Logins for Location",
+            "description": {
+              "content": "Lists _Account Login_ for the current _Legal Entity_ and location id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":location_public_id",
+                "logins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "location_public_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f74919bc-acee-4265-8287-92f562fc09c1",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":location_public_id",
+                    "logins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "location_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"location_id\": \"string\",\n    \"login_url\": \"string\",\n    \"url\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"location_id\": \"string\",\n    \"login_url\": \"string\",\n    \"url\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba10dcf4-9a71-4e81-91e5-2febf260ac42",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":location_public_id",
+                    "logins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "location_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d9937ec-15ae-4804-a481-ca60e130ad17",
+          "name": "List Mail by Location",
+          "request": {
+            "name": "List Mail by Location",
+            "description": {
+              "content": "Returns mail information received by the authorized legal entity in the specified region\n\nFollow each returned `url` in order to download the mail content in PDF format",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":region_platform_public_id",
+                "mail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "region_platform_public_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "feaae325-4893-4629-85ab-a7bcd901f6dd",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id",
+                    "mail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"type\": \"external-mail\",\n    \"received\": \"1952-08-11\",\n    \"file_url\": \"string\",\n    \"location_id\": \"string\",\n    \"sender\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"type\": \"external-mail\",\n    \"received\": \"1970-10-18\",\n    \"file_url\": \"string\",\n    \"location_id\": \"string\",\n    \"sender\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d7b6d17-0c27-43df-8910-d5e2ff211950",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id",
+                    "mail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76bc67fe-6cac-4dc1-bd70-09d21c533182",
+          "name": "List Agency Accounts for Location",
+          "request": {
+            "name": "List Agency Accounts for Location",
+            "description": {},
+            "url": {
+              "path": [
+                "locations",
+                ":region_platform_public_id",
+                "agency_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "region_platform_public_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "accessTokenUrl",
+                  "value": "/api/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6748ffdf-1094-4d26-adf1-6edffbc2a96d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id",
+                    "agency_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"location_id\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"agency\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"website\": \"string\"\n    },\n    \"data\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"logins\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  },\n  {\n    \"location_id\": \"string\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"agency\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"website\": \"string\"\n    },\n    \"data\": [\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"logins\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"location_id\": \"string\",\n        \"login_url\": \"string\",\n        \"url\": \"string\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b77e4da0-84b1-4ed9-b62e-f854b5463481",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":region_platform_public_id",
+                    "agency_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "region_platform_public_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cd53447a-2dc3-48f4-a29c-cc0937fc89ef",
+    "name": "Mosey Accounts Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "If you'd like to use the Mosey API, please contact sales@mosey.com.",
+      "type": "text/plain"
+    }
+  }
+}

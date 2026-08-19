@@ -2,50 +2,55 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/mosey-openapi.json
-note: >-
-  Mosey does not publish an official MCP server. This is a candidate tool list
-  derived one-to-one from the Mosey API OpenAPI operations so an MCP server could
-  be forged from the spec. Not an authoritative provider claim.
+note: Mosey does not publish an official MCP server. This is a candidate tool list derived one-to-one
+  from the Mosey API OpenAPI operations so an MCP server could be forged from the spec. Not an authoritative
+  provider claim.
 server:
   name: mosey
   transport: http
 tools:
-  - name: authenticate_legal_entity
-    description: Authenticate a legal entity and obtain an access token.
-    source_operation: openapi/mosey-openapi.json#account_authenticate_accounts_auth_post
-  - name: embedded_signup
-    description: Create a legal entity via embedded signup.
-    source_operation: openapi/mosey-openapi.json#embedded_signup_handler_accounts_signup_post
-  - name: create_hosted_signup_session
-    description: Create a hosted signup session URL.
-    source_operation: openapi/mosey-openapi.json#Create_Hosted_Signup_Session_v2_signup_sessions_post
-  - name: list_locations
-    description: List regions/locations for the authenticated legal entity.
-    source_operation: openapi/mosey-openapi.json#list_locations_handler_locations_get
-  - name: add_location
-    description: Add a region/location to the legal entity.
-    source_operation: openapi/mosey-openapi.json#add_location_handler_locations__location_public_id__put
-  - name: list_tasks
-    description: List compliance tasks filtered by query parameters.
-    source_operation: openapi/mosey-openapi.json#list_tasks_handler_tasks_get
-  - name: get_task
-    description: Retrieve a single compliance task by id.
-    source_operation: openapi/mosey-openapi.json#get_task_handler_tasks__task_id__get
-  - name: update_task_status
-    description: Update the status of a requirement task (todo/done).
-    source_operation: openapi/mosey-openapi.json#patch_task_handler_tasks__task_id__patch
-  - name: get_legal_entity
-    description: Get details for the authenticated legal entity.
-    source_operation: openapi/mosey-openapi.json#get_legal_entity_handler_legal_entity_get
-  - name: list_account_logins
-    description: List the legal entity's state-agency account logins.
-    source_operation: openapi/mosey-openapi.json#list_account_logins_logins_get
-  - name: list_mail
-    description: List physical mail received on behalf of the legal entity.
-    source_operation: openapi/mosey-openapi.json#get_legal_entity_mail_handler_mail_get
-  - name: list_agency_accounts
-    description: List state/local agency accounts for the legal entity.
-    source_operation: openapi/mosey-openapi.json#get_agency_accounts_for_legal_entity_agency_accounts_get
-  - name: connect_account
-    description: Create an account connection (Tax Accounts API, preview).
-    source_operation: openapi/mosey-openapi.json#create_connection_handler_accounts_connect_post
+- name: authenticate_legal_entity
+  description: Authenticate a legal entity and obtain an access token.
+  source_operation: openapi/mosey-openapi.json#account_authenticate_accounts_auth_post
+- name: embedded_signup
+  description: Create a legal entity via embedded signup.
+  source_operation: openapi/mosey-openapi.json#embedded_signup_handler_accounts_signup_post
+- name: create_hosted_signup_session
+  description: Create a hosted signup session URL.
+  source_operation: openapi/mosey-openapi.json#Create_Hosted_Signup_Session_v2_signup_sessions_post
+- name: list_locations
+  description: List regions/locations for the authenticated legal entity.
+  source_operation: openapi/mosey-openapi.json#list_locations_handler_locations_get
+- name: add_location
+  description: Add a region/location to the legal entity.
+  source_operation: openapi/mosey-openapi.json#add_location_handler_locations__location_public_id__put
+- name: list_tasks
+  description: List compliance tasks filtered by query parameters.
+  source_operation: openapi/mosey-openapi.json#list_tasks_handler_tasks_get
+- name: get_task
+  description: Retrieve a single compliance task by id.
+  source_operation: openapi/mosey-openapi.json#get_task_handler_tasks__task_id__get
+- name: update_task_status
+  description: Update the status of a requirement task (todo/done).
+  source_operation: openapi/mosey-openapi.json#patch_task_handler_tasks__task_id__patch
+- name: get_legal_entity
+  description: Get details for the authenticated legal entity.
+  source_operation: openapi/mosey-openapi.json#get_legal_entity_handler_legal_entity_get
+- name: list_account_logins
+  description: List the legal entity's state-agency account logins.
+  source_operation: openapi/mosey-openapi.json#list_account_logins_logins_get
+- name: list_mail
+  description: List physical mail received on behalf of the legal entity.
+  source_operation: openapi/mosey-openapi.json#get_legal_entity_mail_handler_mail_get
+- name: list_agency_accounts
+  description: List state/local agency accounts for the legal entity.
+  source_operation: openapi/mosey-openapi.json#get_agency_accounts_for_legal_entity_agency_accounts_get
+- name: connect_account
+  description: Create an account connection (Tax Accounts API, preview).
+  source_operation: openapi/mosey-openapi.json#create_connection_handler_accounts_connect_post
+deployment:
+  mode: none
+  verified: derived
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census
