@@ -55,6 +55,8 @@ apis:
   humanURL: https://docs.mosey.com/api-reference/introduction
   baseURL: https://api.mosey.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -87,6 +89,8 @@ apis:
   humanURL: https://docs.mosey.com/api-reference/introduction
   baseURL: https://api.mosey.com
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -215,6 +219,8 @@ apis:
   humanURL: https://docs.mosey.com/api-reference/introduction
   baseURL: https://api.mosey.com
   tags:
+  - Sign Up
+  tags_raw:
   - Signup
   properties:
   - type: OpenAPI
@@ -231,6 +237,8 @@ apis:
   humanURL: https://docs.mosey.com/api-reference/introduction
   baseURL: https://api.mosey.com
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
