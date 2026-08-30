@@ -267,6 +267,11 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: ParentCompany
+  url: https://apis.io/providers/gusto/
+  name: Gusto
+  x-relationship: acquired
+  x-evidence: "Mosey partnered with Gusto, Stripe, and Sequoia Consulting Group and was subsequently acquired by Gusto. This profile was surfaced as a Canaan Partners portfolio company and enriched by the API Evangelist pipeline from Mosey's public OpenAP"
 - type: DomainSecurity
   url: security/mosey-domain-security.yml
 - type: DeveloperPortal
