@@ -267,6 +267,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Website
+  url: https://www.mosey.com/
 - type: ParentCompany
   url: https://apis.io/providers/gusto/
   name: Gusto
