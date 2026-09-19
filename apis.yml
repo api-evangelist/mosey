@@ -58,6 +58,15 @@ tags:
 - State Compliance
 - Tax
 - Payroll
+- Human Resources
+- Business Operations
+tags_raw:
+- Company
+- Compliance
+- Regulatory Technology
+- State Compliance
+- Tax
+- Payroll
 - HR
 - Business Operations
 apis:
@@ -167,6 +176,8 @@ apis:
   humanURL: https://docs.mosey.com/api-reference/introduction
   baseURL: https://api.mosey.com
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
