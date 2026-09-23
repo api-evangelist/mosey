@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mosey Accounts Handbook API
-  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
-  version: 1.0.0
+  title: Mosey Handbook API
   x-logo:
     url: null
+  version: '1.0'
+  description: 'Operations tagged Handbook across 2 of this provider''s published API definitions: mosey-openapi.json, mosey-openapi_v2.json. Each path carries the servers of the definition it was published in.'
 tags:
 - name: Handbook
 paths:
@@ -26,7 +26,7 @@ paths:
       - Handbook
   /v2/handbook/automate/sessions:
     post:
-      summary: Provide A Session Scoped Handbook Builder Page.
+      summary: Provide A Session Scoped Handbook Builder Page
       operationId: Provide_a_session_scoped_handbook_builder_page__v2_handbook_automate_sessions_post
       requestBody:
         content:
@@ -106,61 +106,6 @@ paths:
       - Handbook
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformHandbookAutomationSessionResponse:
-      properties:
-        automation_url:
-          type: string
-          title: Automation Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
-      type: object
-      required:
-      - automation_url
-      - created_at
-      - expires_at
-      title: PlatformHandbookAutomationSessionResponse
-    PlatformHandbook:
-      properties:
-        summary:
-          $ref: '#/components/schemas/PlatformHandbookSummary'
-        details:
-          $ref: '#/components/schemas/PlatformHandbookDetails'
-      type: object
-      required:
-      - summary
-      - details
-      title: PlatformHandbook
-    HostedSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: HostedSessionRequest
-    PlatformHandbookDetails:
-      properties:
-        handbook_automation_url:
-          type: string
-          title: Handbook Automation Url
-      type: object
-      required:
-      - handbook_automation_url
-      title: PlatformHandbookDetails
     ValidationError:
       properties:
         loc:
@@ -182,23 +127,32 @@ components:
       - msg
       - type
       title: ValidationError
-    HostedSessionResponse:
+    PlatformHandbookAcknowledgementStats:
       properties:
-        url:
-          type: string
-          title: Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
+        signed:
+          type: integer
+          title: Signed
+        outdated:
+          type: integer
+          title: Outdated
+        pending:
+          type: integer
+          title: Pending
       type: object
       required:
-      - url
-      - created_at
-      - expires_at
-      title: HostedSessionResponse
+      - signed
+      - outdated
+      - pending
+      title: PlatformHandbookAcknowledgementStats
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     PlatformHandbookSummary:
       properties:
         number_of_adopotable_policies:
@@ -229,7 +183,79 @@ components:
       required:
       - callback_url
       title: PlatformAutomationSessionRequest
-    PlatformHandbookAcknowledgementStats:
+    PlatformHandbookAutomationSessionResponse:
+      properties:
+        automation_url:
+          type: string
+          title: Automation Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - automation_url
+      - created_at
+      - expires_at
+      title: PlatformHandbookAutomationSessionResponse
+    PlatformHandbook:
+      properties:
+        summary:
+          $ref: '#/components/schemas/PlatformHandbookSummary'
+        details:
+          $ref: '#/components/schemas/PlatformHandbookDetails'
+      type: object
+      required:
+      - summary
+      - details
+      title: PlatformHandbook
+    PlatformHandbookDetails:
+      properties:
+        handbook_automation_url:
+          type: string
+          title: Handbook Automation Url
+      type: object
+      required:
+      - handbook_automation_url
+      title: PlatformHandbookDetails
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
+    ValidationError_2:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PlatformHandbookAcknowledgementStats_2:
       properties:
         signed:
           type: integer
@@ -240,12 +266,54 @@ components:
         pending:
           type: integer
           title: Pending
+        missing_emails:
+          type: integer
+          title: Missing Emails
       type: object
       required:
       - signed
       - outdated
       - pending
+      - missing_emails
       title: PlatformHandbookAcknowledgementStats
+    HostedSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: HostedSessionResponse
+    PlatformHandbookSummary_2:
+      properties:
+        number_of_adoptable_policies:
+          type: integer
+          title: Number Of Adoptable Policies
+        publishable:
+          type: boolean
+          title: Publishable
+        has_published:
+          type: boolean
+          title: Has Published
+        acknowledgement_stats:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformHandbookAcknowledgementStats_2'
+          - type: 'null'
+      type: object
+      required:
+      - number_of_adoptable_policies
+      - publishable
+      - has_published
+      title: PlatformHandbookSummary
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
@@ -253,3 +321,6 @@ components:
         password:
           scopes: {}
           tokenUrl: /api/token
+x-refined-from:
+- mosey-openapi.json
+- mosey-openapi_v2.json

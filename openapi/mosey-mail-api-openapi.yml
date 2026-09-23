@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mosey Accounts Mail API
-  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
-  version: 1.0.0
+  title: Mosey Mail API
   x-logo:
     url: null
+  version: '1.0'
+  description: 'Operations tagged Mail across 2 of this provider''s published API definitions: mosey-openapi.json, mosey-openapi_v2.json. Each path carries the servers of the definition it was published in.'
 tags:
 - name: Mail
 paths:
@@ -146,15 +146,22 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    PlatformMail_2:
+    MailType:
+      type: string
+      enum:
+      - registered-agent
+      - external-mail
+      title: MailType
+    PlatformMail:
       properties:
         id:
           type: string
           title: Id
-        region:
+        location_id:
           anyOf:
-          - $ref: '#/components/schemas/StateCode'
+          - type: string
           - type: 'null'
+          title: Location Id
         type:
           $ref: '#/components/schemas/MailType'
         received:
@@ -197,43 +204,32 @@ components:
       - msg
       - type
       title: ValidationError
-    PlatformMail:
+    ValidationError_2:
       properties:
-        id:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          title: Id
-        location_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Location Id
+          title: Message
         type:
-          $ref: '#/components/schemas/MailType'
-        received:
           type: string
-          format: date
-          title: Received
-        sender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sender
-        file_url:
-          type: string
-          title: File Url
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - id
+      - loc
+      - msg
       - type
-      - received
-      - file_url
-      title: PlatformMail
-    MailType:
-      type: string
-      enum:
-      - registered-agent
-      - external-mail
-      title: MailType
+      title: ValidationError
     StateCode:
       type: string
       enum:
@@ -289,6 +285,36 @@ components:
       - WI
       - WY
       title: StateCode
+    PlatformMail_2:
+      properties:
+        id:
+          type: string
+          title: Id
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+        type:
+          $ref: '#/components/schemas/MailType'
+        received:
+          type: string
+          format: date
+          title: Received
+        sender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sender
+        file_url:
+          type: string
+          title: File Url
+      type: object
+      required:
+      - id
+      - type
+      - received
+      - file_url
+      title: PlatformMail
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
@@ -296,3 +322,6 @@ components:
         password:
           scopes: {}
           tokenUrl: /api/token
+x-refined-from:
+- mosey-openapi.json
+- mosey-openapi_v2.json

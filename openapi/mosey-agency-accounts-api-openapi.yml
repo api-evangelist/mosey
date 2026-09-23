@@ -1,10 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mosey Accounts Agency Accounts API
-  description: If you'd like to use the Mosey API, please contact sales@mosey.com.
-  version: 1.0.0
+  title: Mosey Agency Accounts API
   x-logo:
     url: null
+  version: '1.0'
+  description: 'Operations tagged Agency Accounts across 2 of this provider''s published API definitions: mosey-openapi.json, mosey-openapi_v2.json. Each path carries the servers of the definition it was published in.'
 tags:
 - name: Agency Accounts
 paths:
@@ -86,6 +86,59 @@ paths:
       - Agency Accounts
 components:
   schemas:
+    PlatformAgencyAttributeAndValue:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+      type: object
+      required:
+      - name
+      - description
+      - value
+      title: PlatformAgencyAttributeAndValue
+    app__api__platform__models__PlatformAgencyAccount:
+      properties:
+        location_id:
+          type: string
+          title: Location Id
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        agency:
+          $ref: '#/components/schemas/PlatformAgency'
+        data:
+          items:
+            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue'
+          type: array
+          title: Data
+        logins:
+          items:
+            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
+          type: array
+          title: Logins
+      type: object
+      required:
+      - location_id
+      - id
+      - name
+      - agency
+      - data
+      - logins
+      title: PlatformAgencyAccount
     PlatformAgency:
       properties:
         id:
@@ -103,15 +156,62 @@ components:
       - name
       - website
       title: PlatformAgency
-    HTTPValidationError:
+    PlatformLegalEntityAccountLogin:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        location_id:
+          type: string
+          title: Location Id
+          description: The location id the login belongs to
+        login_url:
+          type: string
+          title: Login Url
+          description: This field is deprecated, please use url.
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
       type: object
-      title: HTTPValidationError
+      required:
+      - id
+      - name
+      - location_id
+      - login_url
+      - url
+      title: PlatformLegalEntityAccountLogin
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     StateCode:
       type: string
       enum:
@@ -167,63 +267,6 @@ components:
       - WI
       - WY
       title: StateCode
-    PlatformAgencyAttributeStatus:
-      type: string
-      enum:
-      - todo
-      - in-progress
-      - done
-      title: PlatformAgencyAttributeStatus
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    PlatformAgencyAttributeAndValue_2:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-        status:
-          $ref: '#/components/schemas/PlatformAgencyAttributeStatus'
-      type: object
-      required:
-      - name
-      - description
-      - value
-      - status
-      title: PlatformAgencyAttributeAndValue
     PlatformLegalEntityAccountLogin_2:
       properties:
         id:
@@ -248,27 +291,6 @@ components:
       - region
       - url
       title: PlatformLegalEntityAccountLogin
-    PlatformAgencyAttributeAndValue:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-      type: object
-      required:
-      - name
-      - description
-      - value
-      title: PlatformAgencyAttributeAndValue
     PlatformAgencyAccount:
       properties:
         region:
@@ -300,68 +322,46 @@ components:
       - data
       - logins
       title: PlatformAgencyAccount
-    app__api__platform__models__PlatformAgencyAccount:
+    HTTPValidationError:
       properties:
-        location_id:
-          type: string
-          title: Location Id
-        id:
-          type: string
-          title: Id
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformAgencyAttributeAndValue_2:
+      properties:
         name:
           type: string
           title: Name
-        agency:
-          $ref: '#/components/schemas/PlatformAgency'
-        data:
-          items:
-            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue'
-          type: array
-          title: Data
-        logins:
-          items:
-            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
-          type: array
-          title: Logins
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+        status:
+          $ref: '#/components/schemas/PlatformAgencyAttributeStatus'
       type: object
       required:
-      - location_id
-      - id
       - name
-      - agency
-      - data
-      - logins
-      title: PlatformAgencyAccount
-    PlatformLegalEntityAccountLogin:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The identifier of this Account Login
-        name:
-          type: string
-          title: Name
-          description: The name of the Login
-        location_id:
-          type: string
-          title: Location Id
-          description: The location id the login belongs to
-        login_url:
-          type: string
-          title: Login Url
-          description: This field is deprecated, please use url.
-        url:
-          type: string
-          title: Url
-          description: The url pointing to the login page for this Login
-      type: object
-      required:
-      - id
-      - name
-      - location_id
-      - login_url
-      - url
-      title: PlatformLegalEntityAccountLogin
+      - description
+      - value
+      - status
+      title: PlatformAgencyAttributeAndValue
+    PlatformAgencyAttributeStatus:
+      type: string
+      enum:
+      - todo
+      - in-progress
+      - done
+      title: PlatformAgencyAttributeStatus
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
@@ -369,3 +369,6 @@ components:
         password:
           scopes: {}
           tokenUrl: /api/token
+x-refined-from:
+- mosey-openapi.json
+- mosey-openapi_v2.json

@@ -1,8 +1,8 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Mosey Accounts Auth API
+  title: Mosey Auth API
   description: If you'd like to use the Mosey API, please contact sales@mosey.com.
-  version: 1.0.0
+  version: V2
   x-logo:
     url: null
 tags:
@@ -78,37 +78,6 @@ paths:
       - Auth
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformAuthenticationSessionPayrollSetupRequest:
-      properties:
-        legal_entity_id:
-          type: string
-          title: Legal Entity Id
-        authorization_callback_url:
-          type: string
-          title: Authorization Callback Url
-      type: object
-      required:
-      - legal_entity_id
-      - authorization_callback_url
-      title: PlatformAuthenticationSessionPayrollSetupRequest
-    PlatformAuthenticationSessionPayrollSetupResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: PlatformAuthenticationSessionPayrollSetupResponse
     ValidationError:
       properties:
         loc:
@@ -135,15 +104,6 @@ components:
       - msg
       - type
       title: ValidationError
-    PlatformAuthenticationSessionRequest:
-      properties:
-        legal_entity_id:
-          type: string
-          title: Legal Entity Id
-      type: object
-      required:
-      - legal_entity_id
-      title: PlatformAuthenticationSessionRequest
     PlatformAuthenticationSessionResponse:
       properties:
         access_token:
@@ -164,6 +124,46 @@ components:
       required:
       - access_token
       title: PlatformAuthenticationSessionResponse
+    PlatformAuthenticationSessionPayrollSetupResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: PlatformAuthenticationSessionPayrollSetupResponse
+    PlatformAuthenticationSessionRequest:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+      type: object
+      required:
+      - legal_entity_id
+      title: PlatformAuthenticationSessionRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformAuthenticationSessionPayrollSetupRequest:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+        authorization_callback_url:
+          type: string
+          title: Authorization Callback Url
+      type: object
+      required:
+      - legal_entity_id
+      - authorization_callback_url
+      title: PlatformAuthenticationSessionPayrollSetupRequest
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
