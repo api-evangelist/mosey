@@ -118,127 +118,103 @@ paths:
       - Signup
 components:
   schemas:
-    ValidationError:
+    app__platform__public__HostedSignupRequestBusinessInformation:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        incorporation_region:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+        entity_type:
+          anyOf:
+          - $ref: '#/components/schemas/EntityTypeEnum'
+          - type: 'null'
+        tax_classification:
+          anyOf:
+          - $ref: '#/components/schemas/TaxClassEnum'
+          - type: 'null'
+        llc_managed_type:
+          anyOf:
+          - $ref: '#/components/schemas/LLCManagedTypeEnum'
+          - type: 'null'
+        business_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Name
+        business_purpose:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Purpose
+        ein:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Ein
+        incorporation_date:
+          anyOf:
+          - type: string
+            format: date
+          - type: 'null'
+          title: Incorporation Date
+        naics_code:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Naics Code
+        accounting_method:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingMethod'
+          - type: 'null'
+        accounting_period:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingPeriod'
+          - type: 'null'
+        accounting_year_end:
+          anyOf:
+          - $ref: '#/components/schemas/AccountingYearEndMonthNumber'
+          - type: 'null'
+        futa_liability_year:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Futa Liability Year
+      type: object
+      title: HostedSignupRequestBusinessInformation
+    app__platform__public__HostedSignupResponse:
+      properties:
+        url:
           type: string
-          title: Message
-        type:
+          title: Url
+          description: This is a session scoped URL which allows users to completed the signup process.
+        created_at:
           type: string
-          title: Error Type
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    TaxClassEnum:
+      - url
+      - created_at
+      - expires_at
+      - legal_entity_id
+      title: HostedSignupResponse
+    AccountingMethod:
       type: string
       enum:
-      - unset
-      - corp
-      - s_corp
-      - partnership
-      - disregarded
-      - tax_exempt
-      title: TaxClassEnum
-      description: 'The IRS tax classification for an entity.
-
-
-        In some circumstances, a company can elect to be treated different
-
-        from the entity type for tax purposes. For example, an LLC can
-
-        elect to be taxed as a corporation.
-
-        - Corp: taxed as a corporation, the default for C Corps
-
-        - S Corp: election using IRS Form 2553
-
-        - Partnership: taxed as a partnership, the default for LPs
-
-        - Disregarded: taxes pass through to the members, default for LLCs
-
-        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
+      - accrual
+      - cash
+      title: AccountingMethod
     AccountingPeriod:
       type: string
       enum:
       - fiscal
       - calendar
       title: AccountingPeriod
-    StateCode:
-      type: string
-      enum:
-      - AL
-      - AK
-      - AZ
-      - AR
-      - CA
-      - CO
-      - CT
-      - DE
-      - DC
-      - FL
-      - GA
-      - HI
-      - ID
-      - IL
-      - IN
-      - IA
-      - KS
-      - KY
-      - LA
-      - ME
-      - MD
-      - MA
-      - MI
-      - MN
-      - MS
-      - MO
-      - MT
-      - NE
-      - NV
-      - NH
-      - NJ
-      - NM
-      - NY
-      - NC
-      - ND
-      - OH
-      - OK
-      - OR
-      - PA
-      - RI
-      - SC
-      - SD
-      - TN
-      - TX
-      - UT
-      - VT
-      - VA
-      - WA
-      - WV
-      - WI
-      - WY
-      title: StateCode
-    EntityTypeEnum:
-      type: string
-      enum:
-      - unset
-      - c_corp
-      - p_corp
-      - llc
-      - llp
-      - lp
-      - gp
-      title: EntityTypeEnum
     AccountingYearEndMonthNumber:
       type: integer
       enum:
@@ -295,13 +271,144 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    AccountingMethod:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LLCManagedTypeEnum:
       type: string
       enum:
-      - accrual
-      - cash
-      title: AccountingMethod
-    app__platform__public__HostedSignupResponse:
+      - member_managed
+      - manager_managed
+      title: LLCManagedTypeEnum
+    EntityTypeEnum:
+      type: string
+      enum:
+      - unset
+      - c_corp
+      - p_corp
+      - llc
+      - llp
+      - lp
+      - gp
+      title: EntityTypeEnum
+    StateCode:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: StateCode
+    TaxClassEnum:
+      type: string
+      enum:
+      - unset
+      - corp
+      - s_corp
+      - partnership
+      - disregarded
+      - tax_exempt
+      title: TaxClassEnum
+      description: 'The IRS tax classification for an entity.
+
+
+        In some circumstances, a company can elect to be treated different
+
+        from the entity type for tax purposes. For example, an LLC can
+
+        elect to be taxed as a corporation.
+
+        - Corp: taxed as a corporation, the default for C Corps
+
+        - S Corp: election using IRS Form 2553
+
+        - Partnership: taxed as a partnership, the default for LPs
+
+        - Disregarded: taxes pass through to the members, default for LLCs
+
+        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
+    AccountingYearEndMonth:
+      type: string
+      enum:
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+      title: AccountingYearEndMonth
+    HostedSignupResponse:
       properties:
         url:
           type: string
@@ -323,13 +430,80 @@ components:
       - expires_at
       - legal_entity_id
       title: HostedSignupResponse
-    LLCManagedTypeEnum:
-      type: string
-      enum:
-      - member_managed
-      - manager_managed
-      title: LLCManagedTypeEnum
-    app__platform__public__HostedSignupRequestBusinessInformation:
+    PlatformHttpException:
+      properties:
+        message:
+          type: string
+          title: Message
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - message
+      - detail
+      title: PlatformHttpException
+    PlatformSignupRequestValidationException:
+      properties:
+        message:
+          type: string
+          title: Message
+        detail:
+          anyOf:
+          - type: string
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          title: Detail
+        body:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Body
+      type: object
+      required:
+      - message
+      - detail
+      - body
+      title: PlatformSignupRequestValidationException
+    Address:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        country:
+          type: string
+          title: Country
+        postal_code:
+          type: string
+          title: Postal Code
+      type: object
+      required:
+      - address_line_1
+      - city
+      - state
+      - country
+      - postal_code
+      title: Address
+    HostedSignupRequestBusinessInformation:
       properties:
         incorporation_region:
           anyOf:
@@ -337,7 +511,7 @@ components:
           - type: 'null'
         entity_type:
           anyOf:
-          - $ref: '#/components/schemas/EntityTypeEnum'
+          - $ref: '#/components/schemas/EntityTypeEnum_2'
           - type: 'null'
         tax_classification:
           anyOf:
@@ -404,113 +578,6 @@ components:
       - lp
       - gp
       title: EntityTypeEnum
-    ValidationError_2:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    PlatformSignupResponse:
-      properties:
-        legal_entity_id:
-          type: string
-          title: Legal Entity Id
-        url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Url
-          description: This is the next URL to follow to complete the signup process.
-      type: object
-      required:
-      - legal_entity_id
-      title: PlatformSignupResponse
-    Address:
-      properties:
-        id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Id
-        address_line_1:
-          type: string
-          title: Address Line 1
-        address_line_2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Address Line 2
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        country:
-          type: string
-          title: Country
-        postal_code:
-          type: string
-          title: Postal Code
-      type: object
-      required:
-      - address_line_1
-      - city
-      - state
-      - country
-      - postal_code
-      title: Address
-    HostedSignupRequest:
-      properties:
-        business_name:
-          type: string
-          title: Business Name
-        user_email:
-          type: string
-          title: User Email
-        callback_url:
-          type: string
-          title: Callback Url
-        legal_entity_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Legal Entity Id
-        business_information:
-          anyOf:
-          - $ref: '#/components/schemas/HostedSignupRequestBusinessInformation'
-          - type: 'null'
-        external_company_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: External Company Id
-      type: object
-      required:
-      - business_name
-      - user_email
-      - callback_url
-      title: HostedSignupRequest
     PlatformSignupRequest:
       properties:
         user_email:
@@ -602,145 +669,78 @@ components:
       - incorporation_region
       - incorporated_date
       title: PlatformSignupRequest
-    HostedSignupResponse:
+    HostedSignupRequest:
       properties:
-        url:
+        business_name:
           type: string
-          title: Url
-          description: This is a session scoped URL which allows users to completed the signup process.
-        created_at:
+          title: Business Name
+        user_email:
           type: string
-          title: Created At
-        expires_at:
+          title: User Email
+        callback_url:
           type: string
-          title: Expires At
+          title: Callback Url
+        legal_entity_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Legal Entity Id
+        business_information:
+          anyOf:
+          - $ref: '#/components/schemas/HostedSignupRequestBusinessInformation'
+          - type: 'null'
+        external_company_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: External Company Id
+      type: object
+      required:
+      - business_name
+      - user_email
+      - callback_url
+      title: HostedSignupRequest
+    PlatformSignupResponse:
+      properties:
         legal_entity_id:
           type: string
           title: Legal Entity Id
+        url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Url
+          description: This is the next URL to follow to complete the signup process.
       type: object
       required:
-      - url
-      - created_at
-      - expires_at
       - legal_entity_id
-      title: HostedSignupResponse
-    AccountingYearEndMonth:
-      type: string
-      enum:
-      - January
-      - February
-      - March
-      - April
-      - May
-      - June
-      - July
-      - August
-      - September
-      - October
-      - November
-      - December
-      title: AccountingYearEndMonth
-    PlatformHttpException:
+      title: PlatformSignupResponse
+    ValidationError_2:
       properties:
-        message:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
           title: Message
-        detail:
+        type:
           type: string
-          title: Detail
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - message
-      - detail
-      title: PlatformHttpException
-    PlatformSignupRequestValidationException:
-      properties:
-        message:
-          type: string
-          title: Message
-        detail:
-          anyOf:
-          - type: string
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          title: Detail
-        body:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Body
-      type: object
-      required:
-      - message
-      - detail
-      - body
-      title: PlatformSignupRequestValidationException
-    HostedSignupRequestBusinessInformation:
-      properties:
-        incorporation_region:
-          anyOf:
-          - $ref: '#/components/schemas/StateCode'
-          - type: 'null'
-        entity_type:
-          anyOf:
-          - $ref: '#/components/schemas/EntityTypeEnum_2'
-          - type: 'null'
-        tax_classification:
-          anyOf:
-          - $ref: '#/components/schemas/TaxClassEnum'
-          - type: 'null'
-        llc_managed_type:
-          anyOf:
-          - $ref: '#/components/schemas/LLCManagedTypeEnum'
-          - type: 'null'
-        business_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Business Name
-        business_purpose:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Business Purpose
-        ein:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Ein
-        incorporation_date:
-          anyOf:
-          - type: string
-            format: date
-          - type: 'null'
-          title: Incorporation Date
-        naics_code:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Naics Code
-        accounting_method:
-          anyOf:
-          - $ref: '#/components/schemas/AccountingMethod'
-          - type: 'null'
-        accounting_period:
-          anyOf:
-          - $ref: '#/components/schemas/AccountingPeriod'
-          - type: 'null'
-        accounting_year_end:
-          anyOf:
-          - $ref: '#/components/schemas/AccountingYearEndMonthNumber'
-          - type: 'null'
-        futa_liability_year:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Futa Liability Year
-      type: object
-      title: HostedSignupRequestBusinessInformation
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

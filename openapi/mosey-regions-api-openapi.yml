@@ -198,6 +198,67 @@ paths:
       - Regions
 components:
   schemas:
+    PlatformRegion:
+      properties:
+        region:
+          $ref: '#/components/schemas/PlatformRegionRef'
+        config:
+          $ref: '#/components/schemas/PlatformRegionConfig'
+      type: object
+      required:
+      - region
+      - config
+      title: PlatformRegion
+    PlatformRegionConfig:
+      properties:
+        employee_count:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Employee Count
+      type: object
+      required:
+      - employee_count
+      title: PlatformRegionConfig
+    PlatformHttpException:
+      properties:
+        message:
+          type: string
+          title: Message
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - message
+      - detail
+      title: PlatformHttpException
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformRegionRef:
+      properties:
+        id:
+          type: string
+          title: Id
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - id
+      - code
+      - name
+      title: PlatformRegionRef
     ValidationError:
       properties:
         loc:
@@ -296,67 +357,6 @@ components:
       description: 'A dictionary mapping state codes to their respective platform region configurations.
 
         The key for the dictionary is the StateCode which is the 2 character state code. To view the entire list of supported state codes, see [StateCode enum](/api-reference/v2/add-region#parameter-region).'
-    PlatformRegion:
-      properties:
-        region:
-          $ref: '#/components/schemas/PlatformRegionRef'
-        config:
-          $ref: '#/components/schemas/PlatformRegionConfig'
-      type: object
-      required:
-      - region
-      - config
-      title: PlatformRegion
-    PlatformRegionConfig:
-      properties:
-        employee_count:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Employee Count
-      type: object
-      required:
-      - employee_count
-      title: PlatformRegionConfig
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformRegionRef:
-      properties:
-        id:
-          type: string
-          title: Id
-        code:
-          type: string
-          title: Code
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - id
-      - code
-      - name
-      title: PlatformRegionRef
-    PlatformHttpException:
-      properties:
-        message:
-          type: string
-          title: Message
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - message
-      - detail
-      title: PlatformHttpException
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

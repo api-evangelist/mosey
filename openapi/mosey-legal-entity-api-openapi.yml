@@ -73,51 +73,34 @@ paths:
       - Legal Entity
 components:
   schemas:
-    EntityTypeEnum:
+    AccountingMethod:
       type: string
       enum:
-      - unset
-      - c_corp
-      - p_corp
-      - llc
-      - llp
-      - lp
-      - gp
-      title: EntityTypeEnum
+      - accrual
+      - cash
+      title: AccountingMethod
     AccountingPeriod:
       type: string
       enum:
       - fiscal
       - calendar
       title: AccountingPeriod
-    TaxClassEnum:
-      type: string
+    AccountingYearEndMonthNumber:
+      type: integer
       enum:
-      - unset
-      - corp
-      - s_corp
-      - partnership
-      - disregarded
-      - tax_exempt
-      title: TaxClassEnum
-      description: 'The IRS tax classification for an entity.
-
-
-        In some circumstances, a company can elect to be treated different
-
-        from the entity type for tax purposes. For example, an LLC can
-
-        elect to be taxed as a corporation.
-
-        - Corp: taxed as a corporation, the default for C Corps
-
-        - S Corp: election using IRS Form 2553
-
-        - Partnership: taxed as a partnership, the default for LPs
-
-        - Disregarded: taxes pass through to the members, default for LLCs
-
-        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      title: AccountingYearEndMonthNumber
     Address:
       properties:
         id:
@@ -153,22 +136,6 @@ components:
       - country
       - postal_code
       title: Address
-    AccountingYearEndMonthNumber:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
-      - 10
-      - 11
-      - 12
-      title: AccountingYearEndMonthNumber
     AccountLegalEntity:
       properties:
         id:
@@ -277,111 +244,67 @@ components:
       - incorporation_location
       - incorporation_date
       title: AccountLegalEntity
-    AccountingMethod:
+    EntityTypeEnum:
       type: string
       enum:
-      - accrual
-      - cash
-      title: AccountingMethod
+      - unset
+      - c_corp
+      - p_corp
+      - llc
+      - llp
+      - lp
+      - gp
+      title: EntityTypeEnum
     LLCManagedTypeEnum:
       type: string
       enum:
       - member_managed
       - manager_managed
       title: LLCManagedTypeEnum
-    EntityTypeEnum_2:
+    TaxClassEnum:
       type: string
       enum:
       - unset
-      - c_corp
-      - p_corp
-      - pllc
-      - llc
-      - llp
-      - lp
-      - gp
-      title: EntityTypeEnum
-    StateCode:
+      - corp
+      - s_corp
+      - partnership
+      - disregarded
+      - tax_exempt
+      title: TaxClassEnum
+      description: 'The IRS tax classification for an entity.
+
+
+        In some circumstances, a company can elect to be treated different
+
+        from the entity type for tax purposes. For example, an LLC can
+
+        elect to be taxed as a corporation.
+
+        - Corp: taxed as a corporation, the default for C Corps
+
+        - S Corp: election using IRS Form 2553
+
+        - Partnership: taxed as a partnership, the default for LPs
+
+        - Disregarded: taxes pass through to the members, default for LLCs
+
+        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
+    AccountingYearEndMonth:
       type: string
       enum:
-      - AL
-      - AK
-      - AZ
-      - AR
-      - CA
-      - CO
-      - CT
-      - DE
-      - DC
-      - FL
-      - GA
-      - HI
-      - ID
-      - IL
-      - IN
-      - IA
-      - KS
-      - KY
-      - LA
-      - ME
-      - MD
-      - MA
-      - MI
-      - MN
-      - MS
-      - MO
-      - MT
-      - NE
-      - NV
-      - NH
-      - NJ
-      - NM
-      - NY
-      - NC
-      - ND
-      - OH
-      - OK
-      - OR
-      - PA
-      - RI
-      - SC
-      - SD
-      - TN
-      - TX
-      - UT
-      - VT
-      - VA
-      - WA
-      - WV
-      - WI
-      - WY
-      title: StateCode
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+      title: AccountingYearEndMonth
     PlatformLegalEntity:
       properties:
         id:
@@ -504,22 +427,99 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    AccountingYearEndMonth:
+    EntityTypeEnum_2:
       type: string
       enum:
-      - January
-      - February
-      - March
-      - April
-      - May
-      - June
-      - July
-      - August
-      - September
-      - October
-      - November
-      - December
-      title: AccountingYearEndMonth
+      - unset
+      - c_corp
+      - p_corp
+      - pllc
+      - llc
+      - llp
+      - lp
+      - gp
+      title: EntityTypeEnum
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    StateCode:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FL
+      - GA
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - OH
+      - OK
+      - OR
+      - PA
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: StateCode
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

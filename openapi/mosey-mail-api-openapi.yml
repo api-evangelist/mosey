@@ -146,12 +146,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    MailType:
-      type: string
-      enum:
-      - registered-agent
-      - external-mail
-      title: MailType
     PlatformMail:
       properties:
         id:
@@ -204,6 +198,42 @@ components:
       - msg
       - type
       title: ValidationError
+    MailType:
+      type: string
+      enum:
+      - registered-agent
+      - external-mail
+      title: MailType
+    PlatformMail_2:
+      properties:
+        id:
+          type: string
+          title: Id
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+        type:
+          $ref: '#/components/schemas/MailType'
+        received:
+          type: string
+          format: date
+          title: Received
+        sender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sender
+        file_url:
+          type: string
+          title: File Url
+      type: object
+      required:
+      - id
+      - type
+      - received
+      - file_url
+      title: PlatformMail
     ValidationError_2:
       properties:
         loc:
@@ -285,36 +315,6 @@ components:
       - WI
       - WY
       title: StateCode
-    PlatformMail_2:
-      properties:
-        id:
-          type: string
-          title: Id
-        region:
-          anyOf:
-          - $ref: '#/components/schemas/StateCode'
-          - type: 'null'
-        type:
-          $ref: '#/components/schemas/MailType'
-        received:
-          type: string
-          format: date
-          title: Received
-        sender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sender
-        file_url:
-          type: string
-          title: File Url
-      type: object
-      required:
-      - id
-      - type
-      - received
-      - file_url
-      title: PlatformMail
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

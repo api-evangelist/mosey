@@ -78,32 +78,6 @@ paths:
       - Auth
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     PlatformAuthenticationSessionResponse:
       properties:
         access_token:
@@ -124,15 +98,6 @@ components:
       required:
       - access_token
       title: PlatformAuthenticationSessionResponse
-    PlatformAuthenticationSessionPayrollSetupResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: PlatformAuthenticationSessionPayrollSetupResponse
     PlatformAuthenticationSessionRequest:
       properties:
         legal_entity_id:
@@ -164,6 +129,41 @@ components:
       - legal_entity_id
       - authorization_callback_url
       title: PlatformAuthenticationSessionPayrollSetupRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    PlatformAuthenticationSessionPayrollSetupResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: PlatformAuthenticationSessionPayrollSetupResponse
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
