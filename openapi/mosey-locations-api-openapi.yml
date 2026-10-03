@@ -473,144 +473,20 @@ paths:
       - Locations
 components:
   schemas:
-    UpdateLocationRequest:
+    LocationConfig:
       properties:
-        config:
+        has_employees:
           anyOf:
-          - $ref: '#/components/schemas/LocationConfig'
+          - type: boolean
           - type: 'null'
-      type: object
-      title: UpdateLocationRequest
-    AccountTaskResolutionManualStep:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        description:
-          type: string
-          title: Description
-        paths:
-          items:
-            $ref: '#/components/schemas/AccountTaskResolutionManualStepPath'
-          type: array
-          title: Paths
-        order:
-          type: integer
-          title: Order
-      type: object
-      required:
-      - id
-      - title
-      - description
-      - paths
-      - order
-      title: AccountTaskResolutionManualStep
-    PlatformMail:
-      properties:
-        id:
-          type: string
-          title: Id
-        location_id:
+          title: Has Employees
+        has_physical_location:
           anyOf:
-          - type: string
+          - type: boolean
           - type: 'null'
-          title: Location Id
-        type:
-          $ref: '#/components/schemas/MailType'
-        received:
-          type: string
-          format: date
-          title: Received
-        sender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sender
-        file_url:
-          type: string
-          title: File Url
+          title: Has Physical Location
       type: object
-      required:
-      - id
-      - type
-      - received
-      - file_url
-      title: PlatformMail
-    AccountTaskDefinition:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        summary:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary
-        description:
-          type: string
-          title: Description
-        type:
-          $ref: '#/components/schemas/TaskDefinitionType'
-        resources:
-          items:
-            additionalProperties:
-              type: string
-            type: object
-          type: array
-          title: Resources
-        location:
-          $ref: '#/components/schemas/LocationRef'
-      type: object
-      required:
-      - id
-      - title
-      - description
-      - type
-      - resources
-      - location
-      title: AccountTaskDefinition
-    MailType:
-      type: string
-      enum:
-      - registered-agent
-      - external-mail
-      title: MailType
-    PlatformLegalEntityAccountLogin:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The identifier of this Account Login
-        name:
-          type: string
-          title: Name
-          description: The name of the Login
-        location_id:
-          type: string
-          title: Location Id
-          description: The location id the login belongs to
-        login_url:
-          type: string
-          title: Login Url
-          description: This field is deprecated, please use url.
-        url:
-          type: string
-          title: Url
-          description: The url pointing to the login page for this Login
-      type: object
-      required:
-      - id
-      - name
-      - location_id
-      - login_url
-      - url
-      title: PlatformLegalEntityAccountLogin
+      title: LocationConfig
     PlatformAgency:
       properties:
         id:
@@ -628,130 +504,20 @@ components:
       - name
       - website
       title: PlatformAgency
-    AccountTaskStatus:
-      type: string
-      enum:
-      - todo
-      - dismissed
-      - in-progress
-      - done
-      title: AccountTaskStatus
-    LocationConfig:
-      properties:
-        has_employees:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Employees
-        has_physical_location:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Has Physical Location
-      type: object
-      title: LocationConfig
-    ActionField:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          type: string
-          title: Description
-        required:
-          type: boolean
-          title: Required
-        type:
-          type: string
-          title: Type
-      type: object
-      required:
-      - name
-      - description
-      - required
-      - type
-      title: ActionField
-    AccountLegalEntityLocation:
-      properties:
-        location:
-          $ref: '#/components/schemas/LocationRef'
-      type: object
-      required:
-      - location
-      title: AccountLegalEntityLocation
-    PlatformAgencyAttributeAndValue:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-      type: object
-      required:
-      - name
-      - description
-      - value
-      title: PlatformAgencyAttributeAndValue
-    FeeFixed:
+    FeeVariable:
       properties:
         type:
           type: string
-          const: fixed
+          const: variable
           title: Type
-          default: fixed
-        amount:
-          type: string
-          title: Amount
-      type: object
-      required:
-      - amount
-      title: FeeFixed
-    TaskDefinitionType:
-      type: string
-      enum:
-      - requirement
-      - data-collection
-      - criteria-collection
-      title: TaskDefinitionType
-    AccountTaskCriteria:
-      properties:
-        key:
-          type: string
-          title: Key
+          default: variable
         reason:
           type: string
           title: Reason
-        data:
-          anyOf:
-          - type: object
-          - {}
-          title: Data
-          default: {}
       type: object
       required:
-      - key
       - reason
-      title: AccountTaskCriteria
-    AccountTaskAutomationFormSpec:
-      properties: {}
-      type: object
-      title: AccountTaskAutomationFormSpec
-    ETAUnit:
-      type: string
-      enum:
-      - hour
-      - day
-      - week
-      - month
-      title: ETAUnit
+      title: FeeVariable
     AccountTaskETA:
       properties:
         estimation:
@@ -772,63 +538,60 @@ components:
       required:
       - estimation
       title: AccountTaskETA
-    AccountTaskResolutionAction:
+    AccountTaskResolutionRedirect:
       properties:
         type:
           type: string
-          const: action
+          const: redirect
           title: Type
-          default: action
-        description:
-          type: string
-          title: Description
-        method:
-          type: string
-          title: Method
+          default: redirect
         url:
           type: string
           title: Url
-        content_type:
-          type: string
-          title: Content Type
-        fields:
-          items:
-            $ref: '#/components/schemas/ActionField'
-          type: array
-          title: Fields
       type: object
       required:
-      - description
-      - method
       - url
-      - content_type
-      - fields
-      title: AccountTaskResolutionAction
-    AccountLegalEntityLocationRef:
+      title: AccountTaskResolutionRedirect
+    ETAUnit:
+      type: string
+      enum:
+      - hour
+      - day
+      - week
+      - month
+      title: ETAUnit
+    app__api__platform__models__PlatformAgencyAccount:
       properties:
-        location:
-          $ref: '#/components/schemas/LocationRef'
-        config:
-          $ref: '#/components/schemas/LocationConfig'
+        location_id:
+          type: string
+          title: Location Id
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        agency:
+          $ref: '#/components/schemas/PlatformAgency'
+        data:
+          items:
+            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue'
+          type: array
+          title: Data
+        logins:
+          items:
+            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
+          type: array
+          title: Logins
       type: object
       required:
-      - location
-      - config
-      title: AccountLegalEntityLocationRef
-    FeeVariable:
-      properties:
-        type:
-          type: string
-          const: variable
-          title: Type
-          default: variable
-        reason:
-          type: string
-          title: Reason
-      type: object
-      required:
-      - reason
-      title: FeeVariable
+      - location_id
+      - id
+      - name
+      - agency
+      - data
+      - logins
+      title: PlatformAgencyAccount
     AccountTask:
       properties:
         id:
@@ -938,90 +701,6 @@ components:
       - unblocks
       - criteria_met
       title: AccountTask
-    LocationRef:
-      properties:
-        id:
-          type: string
-          title: Id
-        code:
-          type: string
-          title: Code
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - id
-      - code
-      - name
-      title: LocationRef
-    AccountTaskResolutionAutomate:
-      properties:
-        type:
-          type: string
-          const: automate
-          title: Type
-          default: automate
-        form_spec:
-          $ref: '#/components/schemas/AccountTaskAutomationFormSpec'
-        submit_url:
-          type: string
-          title: Submit Url
-        hosted_url:
-          type: string
-          title: Hosted Url
-      type: object
-      required:
-      - form_spec
-      - submit_url
-      - hosted_url
-      title: AccountTaskResolutionAutomate
-    TaskContextEmployee:
-      properties:
-        scope:
-          type: string
-          const: employee
-          title: Scope
-          default: employee
-        employee_id:
-          type: string
-          title: Employee Id
-      type: object
-      required:
-      - employee_id
-      title: TaskContextEmployee
-    FeeRange:
-      properties:
-        type:
-          type: string
-          const: range
-          title: Type
-          default: range
-        min:
-          type: string
-          title: Min
-        max:
-          type: string
-          title: Max
-      type: object
-      required:
-      - min
-      - max
-      title: FeeRange
-    AccountTaskResolutionRedirect:
-      properties:
-        type:
-          type: string
-          const: redirect
-          title: Type
-          default: redirect
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: AccountTaskResolutionRedirect
     AccountTaskEstimation:
       properties:
         min:
@@ -1038,6 +717,15 @@ components:
       - max
       - unit
       title: AccountTaskEstimation
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     AccountTaskResolutionManualStepPath:
       properties:
         type:
@@ -1056,13 +744,6 @@ components:
       - type
       - value
       title: AccountTaskResolutionManualStepPath
-    TaskPriority:
-      type: string
-      enum:
-      - high
-      - medium
-      - low
-      title: TaskPriority
     AccountManagedProvider:
       properties:
         id:
@@ -1076,6 +757,90 @@ components:
       - id
       - name
       title: AccountManagedProvider
+    CreateLocationRequest:
+      properties:
+        config:
+          anyOf:
+          - $ref: '#/components/schemas/LocationConfig'
+          - type: 'null'
+      type: object
+      title: CreateLocationRequest
+    AccountLegalEntityLocationRef:
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationRef'
+        config:
+          $ref: '#/components/schemas/LocationConfig'
+      type: object
+      required:
+      - location
+      - config
+      title: AccountLegalEntityLocationRef
+    FeeFixed:
+      properties:
+        type:
+          type: string
+          const: fixed
+          title: Type
+          default: fixed
+        amount:
+          type: string
+          title: Amount
+      type: object
+      required:
+      - amount
+      title: FeeFixed
+    TaskDefinitionType:
+      type: string
+      enum:
+      - requirement
+      - data-collection
+      - criteria-collection
+      title: TaskDefinitionType
+    LocationRef:
+      properties:
+        id:
+          type: string
+          title: Id
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - id
+      - code
+      - name
+      title: LocationRef
+    AccountTaskCriteria:
+      properties:
+        key:
+          type: string
+          title: Key
+        reason:
+          type: string
+          title: Reason
+        data:
+          anyOf:
+          - type: object
+          - {}
+          title: Data
+          default: {}
+      type: object
+      required:
+      - key
+      - reason
+      title: AccountTaskCriteria
+    AccountLegalEntityLocation:
+      properties:
+        location:
+          $ref: '#/components/schemas/LocationRef'
+      type: object
+      required:
+      - location
+      title: AccountLegalEntityLocation
     AccountTaskResolutionManual:
       properties:
         type:
@@ -1092,14 +857,89 @@ components:
       required:
       - steps
       title: AccountTaskResolutionManual
-    CreateLocationRequest:
+    ActionField:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          type: string
+          title: Description
+        required:
+          type: boolean
+          title: Required
+        type:
+          type: string
+          title: Type
+      type: object
+      required:
+      - name
+      - description
+      - required
+      - type
+      title: ActionField
+    FeeRange:
+      properties:
+        type:
+          type: string
+          const: range
+          title: Type
+          default: range
+        min:
+          type: string
+          title: Min
+        max:
+          type: string
+          title: Max
+      type: object
+      required:
+      - min
+      - max
+      title: FeeRange
+    MailType:
+      type: string
+      enum:
+      - registered-agent
+      - external-mail
+      title: MailType
+    PlatformLegalEntityAccountLogin:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        location_id:
+          type: string
+          title: Location Id
+          description: The location id the login belongs to
+        login_url:
+          type: string
+          title: Login Url
+          description: This field is deprecated, please use url.
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - location_id
+      - login_url
+      - url
+      title: PlatformLegalEntityAccountLogin
+    UpdateLocationRequest:
       properties:
         config:
           anyOf:
           - $ref: '#/components/schemas/LocationConfig'
           - type: 'null'
       type: object
-      title: CreateLocationRequest
+      title: UpdateLocationRequest
     TaskContextLegalEntity:
       properties:
         scope:
@@ -1114,15 +954,45 @@ components:
       required:
       - legal_entity_id
       title: TaskContextLegalEntity
-    HTTPValidationError:
+    TaskPriority:
+      type: string
+      enum:
+      - high
+      - medium
+      - low
+      title: TaskPriority
+    AccountTaskResolutionAction:
       properties:
-        detail:
+        type:
+          type: string
+          const: action
+          title: Type
+          default: action
+        description:
+          type: string
+          title: Description
+        method:
+          type: string
+          title: Method
+        url:
+          type: string
+          title: Url
+        content_type:
+          type: string
+          title: Content Type
+        fields:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/ActionField'
           type: array
-          title: Detail
+          title: Fields
       type: object
-      title: HTTPValidationError
+      required:
+      - description
+      - method
+      - url
+      - content_type
+      - fields
+      title: AccountTaskResolutionAction
     ValidationError:
       properties:
         loc:
@@ -1144,38 +1014,168 @@ components:
       - msg
       - type
       title: ValidationError
-    app__api__platform__models__PlatformAgencyAccount:
+    PlatformMail:
       properties:
-        location_id:
-          type: string
-          title: Location Id
         id:
           type: string
           title: Id
+        location_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Location Id
+        type:
+          $ref: '#/components/schemas/MailType'
+        received:
+          type: string
+          format: date
+          title: Received
+        sender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sender
+        file_url:
+          type: string
+          title: File Url
+      type: object
+      required:
+      - id
+      - type
+      - received
+      - file_url
+      title: PlatformMail
+    PlatformAgencyAttributeAndValue:
+      properties:
         name:
           type: string
           title: Name
-        agency:
-          $ref: '#/components/schemas/PlatformAgency'
-        data:
-          items:
-            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue'
-          type: array
-          title: Data
-        logins:
-          items:
-            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
-          type: array
-          title: Logins
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
       type: object
       required:
-      - location_id
-      - id
       - name
-      - agency
-      - data
-      - logins
-      title: PlatformAgencyAccount
+      - description
+      - value
+      title: PlatformAgencyAttributeAndValue
+    AccountTaskAutomationFormSpec:
+      properties: {}
+      type: object
+      title: AccountTaskAutomationFormSpec
+    TaskContextEmployee:
+      properties:
+        scope:
+          type: string
+          const: employee
+          title: Scope
+          default: employee
+        employee_id:
+          type: string
+          title: Employee Id
+      type: object
+      required:
+      - employee_id
+      title: TaskContextEmployee
+    AccountTaskStatus:
+      type: string
+      enum:
+      - todo
+      - dismissed
+      - in-progress
+      - done
+      title: AccountTaskStatus
+    AccountTaskDefinition:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+        description:
+          type: string
+          title: Description
+        type:
+          $ref: '#/components/schemas/TaskDefinitionType'
+        resources:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Resources
+        location:
+          $ref: '#/components/schemas/LocationRef'
+      type: object
+      required:
+      - id
+      - title
+      - description
+      - type
+      - resources
+      - location
+      title: AccountTaskDefinition
+    AccountTaskResolutionAutomate:
+      properties:
+        type:
+          type: string
+          const: automate
+          title: Type
+          default: automate
+        form_spec:
+          $ref: '#/components/schemas/AccountTaskAutomationFormSpec'
+        submit_url:
+          type: string
+          title: Submit Url
+        hosted_url:
+          type: string
+          title: Hosted Url
+      type: object
+      required:
+      - form_spec
+      - submit_url
+      - hosted_url
+      title: AccountTaskResolutionAutomate
+    AccountTaskResolutionManualStep:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        description:
+          type: string
+          title: Description
+        paths:
+          items:
+            $ref: '#/components/schemas/AccountTaskResolutionManualStepPath'
+          type: array
+          title: Paths
+        order:
+          type: integer
+          title: Order
+      type: object
+      required:
+      - id
+      - title
+      - description
+      - paths
+      - order
+      title: AccountTaskResolutionManualStep
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

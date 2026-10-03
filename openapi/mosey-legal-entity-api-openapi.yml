@@ -73,69 +73,34 @@ paths:
       - Legal Entity
 components:
   schemas:
-    AccountingMethod:
+    TaxClassEnum:
       type: string
       enum:
-      - accrual
-      - cash
-      title: AccountingMethod
-    AccountingPeriod:
-      type: string
-      enum:
-      - fiscal
-      - calendar
-      title: AccountingPeriod
-    AccountingYearEndMonthNumber:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 9
-      - 10
-      - 11
-      - 12
-      title: AccountingYearEndMonthNumber
-    Address:
-      properties:
-        id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Id
-        address_line_1:
-          type: string
-          title: Address Line 1
-        address_line_2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Address Line 2
-        city:
-          type: string
-          title: City
-        state:
-          type: string
-          title: State
-        country:
-          type: string
-          title: Country
-        postal_code:
-          type: string
-          title: Postal Code
-      type: object
-      required:
-      - address_line_1
-      - city
-      - state
-      - country
-      - postal_code
-      title: Address
+      - unset
+      - corp
+      - s_corp
+      - partnership
+      - disregarded
+      - tax_exempt
+      title: TaxClassEnum
+      description: 'The IRS tax classification for an entity.
+
+
+        In some circumstances, a company can elect to be treated different
+
+        from the entity type for tax purposes. For example, an LLC can
+
+        elect to be taxed as a corporation.
+
+        - Corp: taxed as a corporation, the default for C Corps
+
+        - S Corp: election using IRS Form 2553
+
+        - Partnership: taxed as a partnership, the default for LPs
+
+        - Disregarded: taxes pass through to the members, default for LLCs
+
+        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
     AccountLegalEntity:
       properties:
         id:
@@ -244,6 +209,28 @@ components:
       - incorporation_location
       - incorporation_date
       title: AccountLegalEntity
+    AccountingYearEndMonthNumber:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      title: AccountingYearEndMonthNumber
+    AccountingMethod:
+      type: string
+      enum:
+      - accrual
+      - cash
+      title: AccountingMethod
     EntityTypeEnum:
       type: string
       enum:
@@ -261,34 +248,73 @@ components:
       - member_managed
       - manager_managed
       title: LLCManagedTypeEnum
-    TaxClassEnum:
+    AccountingPeriod:
       type: string
       enum:
-      - unset
-      - corp
-      - s_corp
-      - partnership
-      - disregarded
-      - tax_exempt
-      title: TaxClassEnum
-      description: 'The IRS tax classification for an entity.
-
-
-        In some circumstances, a company can elect to be treated different
-
-        from the entity type for tax purposes. For example, an LLC can
-
-        elect to be taxed as a corporation.
-
-        - Corp: taxed as a corporation, the default for C Corps
-
-        - S Corp: election using IRS Form 2553
-
-        - Partnership: taxed as a partnership, the default for LPs
-
-        - Disregarded: taxes pass through to the members, default for LLCs
-
-        - Tax Exempt: an entity that is recognized by the IRS as being exempt from paying federal income taxes on its earnings'
+      - fiscal
+      - calendar
+      title: AccountingPeriod
+    Address:
+      properties:
+        id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Id
+        address_line_1:
+          type: string
+          title: Address Line 1
+        address_line_2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Address Line 2
+        city:
+          type: string
+          title: City
+        state:
+          type: string
+          title: State
+        country:
+          type: string
+          title: Country
+        postal_code:
+          type: string
+          title: Postal Code
+      type: object
+      required:
+      - address_line_1
+      - city
+      - state
+      - country
+      - postal_code
+      title: Address
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     AccountingYearEndMonth:
       type: string
       enum:
@@ -305,6 +331,15 @@ components:
       - November
       - December
       title: AccountingYearEndMonth
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     PlatformLegalEntity:
       properties:
         id:
@@ -418,15 +453,6 @@ components:
       - incorporation_region
       - incorporated_date
       title: PlatformLegalEntity
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     EntityTypeEnum_2:
       type: string
       enum:
@@ -439,32 +465,6 @@ components:
       - lp
       - gp
       title: EntityTypeEnum
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     StateCode:
       type: string
       enum:

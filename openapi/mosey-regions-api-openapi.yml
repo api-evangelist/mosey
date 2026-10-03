@@ -198,17 +198,6 @@ paths:
       - Regions
 components:
   schemas:
-    PlatformRegion:
-      properties:
-        region:
-          $ref: '#/components/schemas/PlatformRegionRef'
-        config:
-          $ref: '#/components/schemas/PlatformRegionConfig'
-      type: object
-      required:
-      - region
-      - config
-      title: PlatformRegion
     PlatformRegionConfig:
       properties:
         employee_count:
@@ -220,45 +209,23 @@ components:
       required:
       - employee_count
       title: PlatformRegionConfig
-    PlatformHttpException:
+    PlatformBatchRegionConfig:
       properties:
-        message:
-          type: string
-          title: Message
-        detail:
-          type: string
-          title: Detail
+        config:
+          additionalProperties:
+            $ref: '#/components/schemas/PlatformRegionConfig'
+          propertyNames:
+            $ref: '#/components/schemas/StateCode'
+          type: object
+          title: Config
+          description: A dictionary with two character state code as key and regional configuration as value.
       type: object
       required:
-      - message
-      - detail
-      title: PlatformHttpException
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformRegionRef:
-      properties:
-        id:
-          type: string
-          title: Id
-        code:
-          type: string
-          title: Code
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - id
-      - code
-      - name
-      title: PlatformRegionRef
+      - config
+      title: PlatformBatchRegionConfig
+      description: 'A dictionary mapping state codes to their respective platform region configurations.
+
+        The key for the dictionary is the StateCode which is the 2 character state code. To view the entire list of supported state codes, see [StateCode enum](/api-reference/v2/add-region#parameter-region).'
     ValidationError:
       properties:
         loc:
@@ -285,6 +252,56 @@ components:
       - msg
       - type
       title: ValidationError
+    PlatformHttpException:
+      properties:
+        message:
+          type: string
+          title: Message
+        detail:
+          type: string
+          title: Detail
+      type: object
+      required:
+      - message
+      - detail
+      title: PlatformHttpException
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformRegion:
+      properties:
+        region:
+          $ref: '#/components/schemas/PlatformRegionRef'
+        config:
+          $ref: '#/components/schemas/PlatformRegionConfig'
+      type: object
+      required:
+      - region
+      - config
+      title: PlatformRegion
+    PlatformRegionRef:
+      properties:
+        id:
+          type: string
+          title: Id
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - id
+      - code
+      - name
+      title: PlatformRegionRef
     StateCode:
       type: string
       enum:
@@ -340,23 +357,6 @@ components:
       - WI
       - WY
       title: StateCode
-    PlatformBatchRegionConfig:
-      properties:
-        config:
-          additionalProperties:
-            $ref: '#/components/schemas/PlatformRegionConfig'
-          propertyNames:
-            $ref: '#/components/schemas/StateCode'
-          type: object
-          title: Config
-          description: A dictionary with two character state code as key and regional configuration as value.
-      type: object
-      required:
-      - config
-      title: PlatformBatchRegionConfig
-      description: 'A dictionary mapping state codes to their respective platform region configurations.
-
-        The key for the dictionary is the StateCode which is the 2 character state code. To view the entire list of supported state codes, see [StateCode enum](/api-reference/v2/add-region#parameter-region).'
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

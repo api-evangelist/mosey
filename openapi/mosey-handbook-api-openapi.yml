@@ -106,78 +106,6 @@ paths:
       - Handbook
 components:
   schemas:
-    PlatformAutomationSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: PlatformAutomationSessionRequest
-    PlatformHandbookAutomationSessionResponse:
-      properties:
-        automation_url:
-          type: string
-          title: Automation Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
-      type: object
-      required:
-      - automation_url
-      - created_at
-      - expires_at
-      title: PlatformHandbookAutomationSessionResponse
-    PlatformHandbookAcknowledgementStats:
-      properties:
-        signed:
-          type: integer
-          title: Signed
-        outdated:
-          type: integer
-          title: Outdated
-        pending:
-          type: integer
-          title: Pending
-      type: object
-      required:
-      - signed
-      - outdated
-      - pending
-      title: PlatformHandbookAcknowledgementStats
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformHandbook:
-      properties:
-        summary:
-          $ref: '#/components/schemas/PlatformHandbookSummary'
-        details:
-          $ref: '#/components/schemas/PlatformHandbookDetails'
-      type: object
-      required:
-      - summary
-      - details
-      title: PlatformHandbook
-    PlatformHandbookDetails:
-      properties:
-        handbook_automation_url:
-          type: string
-          title: Handbook Automation Url
-      type: object
-      required:
-      - handbook_automation_url
-      title: PlatformHandbookDetails
     ValidationError:
       properties:
         loc:
@@ -199,6 +127,78 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformAutomationSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: PlatformAutomationSessionRequest
+    PlatformHandbookAcknowledgementStats:
+      properties:
+        signed:
+          type: integer
+          title: Signed
+        outdated:
+          type: integer
+          title: Outdated
+        pending:
+          type: integer
+          title: Pending
+      type: object
+      required:
+      - signed
+      - outdated
+      - pending
+      title: PlatformHandbookAcknowledgementStats
+    PlatformHandbook:
+      properties:
+        summary:
+          $ref: '#/components/schemas/PlatformHandbookSummary'
+        details:
+          $ref: '#/components/schemas/PlatformHandbookDetails'
+      type: object
+      required:
+      - summary
+      - details
+      title: PlatformHandbook
+    PlatformHandbookAutomationSessionResponse:
+      properties:
+        automation_url:
+          type: string
+          title: Automation Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - automation_url
+      - created_at
+      - expires_at
+      title: PlatformHandbookAutomationSessionResponse
+    PlatformHandbookDetails:
+      properties:
+        handbook_automation_url:
+          type: string
+          title: Handbook Automation Url
+      type: object
+      required:
+      - handbook_automation_url
+      title: PlatformHandbookDetails
     PlatformHandbookSummary:
       properties:
         number_of_adopotable_policies:
@@ -220,6 +220,41 @@ components:
       - publishable
       - has_published
       title: PlatformHandbookSummary
+    ValidationError_2:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
     PlatformHandbookAcknowledgementStats_2:
       properties:
         signed:
@@ -258,41 +293,6 @@ components:
       - created_at
       - expires_at
       title: HostedSessionResponse
-    HostedSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: HostedSessionRequest
-    ValidationError_2:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     PlatformHandbookSummary_2:
       properties:
         number_of_adoptable_policies:

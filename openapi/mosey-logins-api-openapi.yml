@@ -266,44 +266,6 @@ paths:
       - Logins
 components:
   schemas:
-    LoginsSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: LoginsSessionRequest
-    PlatformLegalEntityAccountLoginSessionResponse:
-      properties:
-        created_at:
-          type: string
-          title: Created At
-          description: This is the time the `url` became accessible
-        expires_at:
-          type: string
-          title: Expires At
-          description: This is the time after which the `url` will no longer accessible
-        url:
-          type: string
-          title: Url
-          description: A temporary link the user must follow if they want to access the Login information (including passwords and user names)
-      type: object
-      required:
-      - created_at
-      - expires_at
-      - url
-      title: PlatformLegalEntityAccountLoginSessionResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -325,6 +287,44 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformLegalEntityAccountLoginSessionResponse:
+      properties:
+        created_at:
+          type: string
+          title: Created At
+          description: This is the time the `url` became accessible
+        expires_at:
+          type: string
+          title: Expires At
+          description: This is the time after which the `url` will no longer accessible
+        url:
+          type: string
+          title: Url
+          description: A temporary link the user must follow if they want to access the Login information (including passwords and user names)
+      type: object
+      required:
+      - created_at
+      - expires_at
+      - url
+      title: PlatformLegalEntityAccountLoginSessionResponse
+    LoginsSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: LoginsSessionRequest
     PlatformLegalEntityAccountLogin:
       properties:
         id:
@@ -355,32 +355,6 @@ components:
       - login_url
       - url
       title: PlatformLegalEntityAccountLogin
-    HostedSessionResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
-      type: object
-      required:
-      - url
-      - created_at
-      - expires_at
-      title: HostedSessionResponse
-    HostedSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: HostedSessionRequest
     ValidationError_2:
       properties:
         loc:
@@ -407,6 +381,32 @@ components:
       - msg
       - type
       title: ValidationError
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
+    HostedSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: HostedSessionResponse
     PlatformLegalEntityAccountLogin_2:
       properties:
         id:

@@ -137,46 +137,6 @@ paths:
       - Mail
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformMail:
-      properties:
-        id:
-          type: string
-          title: Id
-        location_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Location Id
-        type:
-          $ref: '#/components/schemas/MailType'
-        received:
-          type: string
-          format: date
-          title: Received
-        sender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sender
-        file_url:
-          type: string
-          title: File Url
-      type: object
-      required:
-      - id
-      - type
-      - received
-      - file_url
-      title: PlatformMail
     ValidationError:
       properties:
         loc:
@@ -204,15 +164,25 @@ components:
       - registered-agent
       - external-mail
       title: MailType
-    PlatformMail_2:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformMail:
       properties:
         id:
           type: string
           title: Id
-        region:
+        location_id:
           anyOf:
-          - $ref: '#/components/schemas/StateCode'
+          - type: string
           - type: 'null'
+          title: Location Id
         type:
           $ref: '#/components/schemas/MailType'
         received:
@@ -260,6 +230,36 @@ components:
       - msg
       - type
       title: ValidationError
+    PlatformMail_2:
+      properties:
+        id:
+          type: string
+          title: Id
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+        type:
+          $ref: '#/components/schemas/MailType'
+        received:
+          type: string
+          format: date
+          title: Received
+        sender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sender
+        file_url:
+          type: string
+          title: File Url
+      type: object
+      required:
+      - id
+      - type
+      - received
+      - file_url
+      title: PlatformMail
     StateCode:
       type: string
       enum:
