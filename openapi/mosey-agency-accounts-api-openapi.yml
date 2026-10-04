@@ -86,74 +86,6 @@ paths:
       - Agency Accounts
 components:
   schemas:
-    PlatformAgency:
-      properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        website:
-          type: string
-          title: Website
-      type: object
-      required:
-      - id
-      - name
-      - website
-      title: PlatformAgency
-    PlatformLegalEntityAccountLogin:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The identifier of this Account Login
-        name:
-          type: string
-          title: Name
-          description: The name of the Login
-        location_id:
-          type: string
-          title: Location Id
-          description: The location id the login belongs to
-        login_url:
-          type: string
-          title: Login Url
-          description: This field is deprecated, please use url.
-        url:
-          type: string
-          title: Url
-          description: The url pointing to the login page for this Login
-      type: object
-      required:
-      - id
-      - name
-      - location_id
-      - login_url
-      - url
-      title: PlatformLegalEntityAccountLogin
-    PlatformAgencyAttributeAndValue:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-      type: object
-      required:
-      - name
-      - description
-      - value
-      title: PlatformAgencyAttributeAndValue
     app__api__platform__models__PlatformAgencyAccount:
       properties:
         location_id:
@@ -186,6 +118,74 @@ components:
       - data
       - logins
       title: PlatformAgencyAccount
+    PlatformLegalEntityAccountLogin:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        location_id:
+          type: string
+          title: Location Id
+          description: The location id the login belongs to
+        login_url:
+          type: string
+          title: Login Url
+          description: This field is deprecated, please use url.
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - location_id
+      - login_url
+      - url
+      title: PlatformLegalEntityAccountLogin
+    PlatformAgency:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        website:
+          type: string
+          title: Website
+      type: object
+      required:
+      - id
+      - name
+      - website
+      title: PlatformAgency
+    PlatformAgencyAttributeAndValue:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+      type: object
+      required:
+      - name
+      - description
+      - value
+      title: PlatformAgencyAttributeAndValue
     ValidationError:
       properties:
         loc:
@@ -212,101 +212,6 @@ components:
       - msg
       - type
       title: ValidationError
-    PlatformAgencyAccount:
-      properties:
-        region:
-          $ref: '#/components/schemas/StateCode'
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        agency:
-          $ref: '#/components/schemas/PlatformAgency'
-        data:
-          items:
-            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue_2'
-          type: array
-          title: Data
-        logins:
-          items:
-            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin_2'
-          type: array
-          title: Logins
-      type: object
-      required:
-      - region
-      - id
-      - name
-      - agency
-      - data
-      - logins
-      title: PlatformAgencyAccount
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformAgencyAttributeAndValue_2:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-        status:
-          $ref: '#/components/schemas/PlatformAgencyAttributeStatus'
-      type: object
-      required:
-      - name
-      - description
-      - value
-      - status
-      title: PlatformAgencyAttributeAndValue
-    PlatformAgencyAttributeStatus:
-      type: string
-      enum:
-      - todo
-      - in-progress
-      - done
-      title: PlatformAgencyAttributeStatus
-    PlatformLegalEntityAccountLogin_2:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The identifier of this Account Login
-        name:
-          type: string
-          title: Name
-          description: The name of the Login
-        region:
-          $ref: '#/components/schemas/StateCode'
-          description: The state which the login belongs to
-        url:
-          type: string
-          title: Url
-          description: The url pointing to the login page for this Login
-      type: object
-      required:
-      - id
-      - name
-      - region
-      - url
-      title: PlatformLegalEntityAccountLogin
     StateCode:
       type: string
       enum:
@@ -362,6 +267,101 @@ components:
       - WI
       - WY
       title: StateCode
+    PlatformAgencyAccount:
+      properties:
+        region:
+          $ref: '#/components/schemas/StateCode'
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        agency:
+          $ref: '#/components/schemas/PlatformAgency'
+        data:
+          items:
+            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue_2'
+          type: array
+          title: Data
+        logins:
+          items:
+            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin_2'
+          type: array
+          title: Logins
+      type: object
+      required:
+      - region
+      - id
+      - name
+      - agency
+      - data
+      - logins
+      title: PlatformAgencyAccount
+    PlatformAgencyAttributeStatus:
+      type: string
+      enum:
+      - todo
+      - in-progress
+      - done
+      title: PlatformAgencyAttributeStatus
+    PlatformLegalEntityAccountLogin_2:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        region:
+          $ref: '#/components/schemas/StateCode'
+          description: The state which the login belongs to
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - region
+      - url
+      title: PlatformLegalEntityAccountLogin
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformAgencyAttributeAndValue_2:
+      properties:
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+        status:
+          $ref: '#/components/schemas/PlatformAgencyAttributeStatus'
+      type: object
+      required:
+      - name
+      - description
+      - value
+      - status
+      title: PlatformAgencyAttributeAndValue
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

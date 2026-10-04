@@ -137,42 +137,12 @@ paths:
       - Mail
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     MailType:
       type: string
       enum:
       - registered-agent
       - external-mail
       title: MailType
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     PlatformMail:
       properties:
         id:
@@ -204,6 +174,36 @@ components:
       - received
       - file_url
       title: PlatformMail
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError_2:
       properties:
         loc:
@@ -230,36 +230,6 @@ components:
       - msg
       - type
       title: ValidationError
-    PlatformMail_2:
-      properties:
-        id:
-          type: string
-          title: Id
-        region:
-          anyOf:
-          - $ref: '#/components/schemas/StateCode'
-          - type: 'null'
-        type:
-          $ref: '#/components/schemas/MailType'
-        received:
-          type: string
-          format: date
-          title: Received
-        sender:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Sender
-        file_url:
-          type: string
-          title: File Url
-      type: object
-      required:
-      - id
-      - type
-      - received
-      - file_url
-      title: PlatformMail
     StateCode:
       type: string
       enum:
@@ -315,6 +285,36 @@ components:
       - WI
       - WY
       title: StateCode
+    PlatformMail_2:
+      properties:
+        id:
+          type: string
+          title: Id
+        region:
+          anyOf:
+          - $ref: '#/components/schemas/StateCode'
+          - type: 'null'
+        type:
+          $ref: '#/components/schemas/MailType'
+        received:
+          type: string
+          format: date
+          title: Received
+        sender:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Sender
+        file_url:
+          type: string
+          title: File Url
+      type: object
+      required:
+      - id
+      - type
+      - received
+      - file_url
+      title: PlatformMail
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

@@ -127,15 +127,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     PlatformAutomationSessionRequest:
       properties:
         callback_url:
@@ -145,51 +136,6 @@ components:
       required:
       - callback_url
       title: PlatformAutomationSessionRequest
-    PlatformHandbookAcknowledgementStats:
-      properties:
-        signed:
-          type: integer
-          title: Signed
-        outdated:
-          type: integer
-          title: Outdated
-        pending:
-          type: integer
-          title: Pending
-      type: object
-      required:
-      - signed
-      - outdated
-      - pending
-      title: PlatformHandbookAcknowledgementStats
-    PlatformHandbook:
-      properties:
-        summary:
-          $ref: '#/components/schemas/PlatformHandbookSummary'
-        details:
-          $ref: '#/components/schemas/PlatformHandbookDetails'
-      type: object
-      required:
-      - summary
-      - details
-      title: PlatformHandbook
-    PlatformHandbookAutomationSessionResponse:
-      properties:
-        automation_url:
-          type: string
-          title: Automation Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
-      type: object
-      required:
-      - automation_url
-      - created_at
-      - expires_at
-      title: PlatformHandbookAutomationSessionResponse
     PlatformHandbookDetails:
       properties:
         handbook_automation_url:
@@ -220,6 +166,60 @@ components:
       - publishable
       - has_published
       title: PlatformHandbookSummary
+    PlatformHandbook:
+      properties:
+        summary:
+          $ref: '#/components/schemas/PlatformHandbookSummary'
+        details:
+          $ref: '#/components/schemas/PlatformHandbookDetails'
+      type: object
+      required:
+      - summary
+      - details
+      title: PlatformHandbook
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    PlatformHandbookAutomationSessionResponse:
+      properties:
+        automation_url:
+          type: string
+          title: Automation Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - automation_url
+      - created_at
+      - expires_at
+      title: PlatformHandbookAutomationSessionResponse
+    PlatformHandbookAcknowledgementStats:
+      properties:
+        signed:
+          type: integer
+          title: Signed
+        outdated:
+          type: integer
+          title: Outdated
+        pending:
+          type: integer
+          title: Pending
+      type: object
+      required:
+      - signed
+      - outdated
+      - pending
+      title: PlatformHandbookAcknowledgementStats
     ValidationError_2:
       properties:
         loc:
@@ -255,44 +255,6 @@ components:
       required:
       - callback_url
       title: HostedSessionRequest
-    PlatformHandbookAcknowledgementStats_2:
-      properties:
-        signed:
-          type: integer
-          title: Signed
-        outdated:
-          type: integer
-          title: Outdated
-        pending:
-          type: integer
-          title: Pending
-        missing_emails:
-          type: integer
-          title: Missing Emails
-      type: object
-      required:
-      - signed
-      - outdated
-      - pending
-      - missing_emails
-      title: PlatformHandbookAcknowledgementStats
-    HostedSessionResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
-      type: object
-      required:
-      - url
-      - created_at
-      - expires_at
-      title: HostedSessionResponse
     PlatformHandbookSummary_2:
       properties:
         number_of_adoptable_policies:
@@ -314,6 +276,44 @@ components:
       - publishable
       - has_published
       title: PlatformHandbookSummary
+    HostedSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: HostedSessionResponse
+    PlatformHandbookAcknowledgementStats_2:
+      properties:
+        signed:
+          type: integer
+          title: Signed
+        outdated:
+          type: integer
+          title: Outdated
+        pending:
+          type: integer
+          title: Pending
+        missing_emails:
+          type: integer
+          title: Missing Emails
+      type: object
+      required:
+      - signed
+      - outdated
+      - pending
+      - missing_emails
+      title: PlatformHandbookAcknowledgementStats
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

@@ -78,6 +78,19 @@ paths:
       - Auth
 components:
   schemas:
+    PlatformAuthenticationSessionPayrollSetupRequest:
+      properties:
+        legal_entity_id:
+          type: string
+          title: Legal Entity Id
+        authorization_callback_url:
+          type: string
+          title: Authorization Callback Url
+      type: object
+      required:
+      - legal_entity_id
+      - authorization_callback_url
+      title: PlatformAuthenticationSessionPayrollSetupRequest
     ValidationError:
       properties:
         loc:
@@ -104,6 +117,15 @@ components:
       - msg
       - type
       title: ValidationError
+    PlatformAuthenticationSessionPayrollSetupResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: PlatformAuthenticationSessionPayrollSetupResponse
     PlatformAuthenticationSessionRequest:
       properties:
         legal_entity_id:
@@ -113,19 +135,15 @@ components:
       required:
       - legal_entity_id
       title: PlatformAuthenticationSessionRequest
-    PlatformAuthenticationSessionPayrollSetupRequest:
+    HTTPValidationError:
       properties:
-        legal_entity_id:
-          type: string
-          title: Legal Entity Id
-        authorization_callback_url:
-          type: string
-          title: Authorization Callback Url
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - legal_entity_id
-      - authorization_callback_url
-      title: PlatformAuthenticationSessionPayrollSetupRequest
+      title: HTTPValidationError
     PlatformAuthenticationSessionResponse:
       properties:
         access_token:
@@ -146,24 +164,6 @@ components:
       required:
       - access_token
       title: PlatformAuthenticationSessionResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformAuthenticationSessionPayrollSetupResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: PlatformAuthenticationSessionPayrollSetupResponse
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

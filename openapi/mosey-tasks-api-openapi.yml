@@ -569,96 +569,6 @@ paths:
       - Tasks
 components:
   schemas:
-    FeeVariable:
-      properties:
-        type:
-          type: string
-          const: variable
-          title: Type
-          default: variable
-        reason:
-          type: string
-          title: Reason
-      type: object
-      required:
-      - reason
-      title: FeeVariable
-    AccountTaskETA:
-      properties:
-        estimation:
-          $ref: '#/components/schemas/AccountTaskEstimation'
-        earliest_date:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Earliest Date
-        latest_date:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Latest Date
-      type: object
-      required:
-      - estimation
-      title: AccountTaskETA
-    AutomationSessionResponse:
-      properties:
-        automation_url:
-          type: string
-          title: Automation Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
-      type: object
-      required:
-      - automation_url
-      - created_at
-      - expires_at
-      title: AutomationSessionResponse
-    AccountTaskUpdateStatus:
-      properties:
-        status:
-          $ref: '#/components/schemas/AccountTaskStatus'
-      type: object
-      required:
-      - status
-      title: AccountTaskUpdateStatus
-    TasksSessionResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-        created_at:
-          type: string
-          title: Created At
-        expires_at:
-          type: string
-          title: Expires At
-      type: object
-      required:
-      - url
-      - created_at
-      - expires_at
-      title: TasksSessionResponse
-    AccountTaskResolutionRedirect:
-      properties:
-        type:
-          type: string
-          const: redirect
-          title: Type
-          default: redirect
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: AccountTaskResolutionRedirect
     PlatformTask:
       properties:
         id:
@@ -678,23 +588,168 @@ components:
       - status
       - source
       title: PlatformTask
-    TasksSessionRequest:
+    ActionField:
       properties:
-        callback_url:
+        name:
           type: string
-          title: Callback Url
+          title: Name
+        description:
+          type: string
+          title: Description
+        required:
+          type: boolean
+          title: Required
+        type:
+          type: string
+          title: Type
       type: object
       required:
-      - callback_url
-      title: TasksSessionRequest
-    ETAUnit:
-      type: string
-      enum:
-      - hour
-      - day
-      - week
-      - month
-      title: ETAUnit
+      - name
+      - description
+      - required
+      - type
+      title: ActionField
+    AccountTaskDefinition:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+        description:
+          type: string
+          title: Description
+        type:
+          $ref: '#/components/schemas/TaskDefinitionType'
+        resources:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Resources
+        location:
+          $ref: '#/components/schemas/LocationRef'
+      type: object
+      required:
+      - id
+      - title
+      - description
+      - type
+      - resources
+      - location
+      title: AccountTaskDefinition
+    AccountTaskEstimation:
+      properties:
+        min:
+          type: integer
+          title: Min
+        max:
+          type: integer
+          title: Max
+        unit:
+          $ref: '#/components/schemas/ETAUnit'
+      type: object
+      required:
+      - min
+      - max
+      - unit
+      title: AccountTaskEstimation
+    AccountTaskUpdateStatus:
+      properties:
+        status:
+          $ref: '#/components/schemas/AccountTaskStatus'
+      type: object
+      required:
+      - status
+      title: AccountTaskUpdateStatus
+    FeeVariable:
+      properties:
+        type:
+          type: string
+          const: variable
+          title: Type
+          default: variable
+        reason:
+          type: string
+          title: Reason
+      type: object
+      required:
+      - reason
+      title: FeeVariable
+    AccountTaskCriteria:
+      properties:
+        key:
+          type: string
+          title: Key
+        reason:
+          type: string
+          title: Reason
+        data:
+          anyOf:
+          - type: object
+          - {}
+          title: Data
+          default: {}
+      type: object
+      required:
+      - key
+      - reason
+      title: AccountTaskCriteria
+    TasksSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: TasksSessionResponse
+    TaskContextEmployee:
+      properties:
+        scope:
+          type: string
+          const: employee
+          title: Scope
+          default: employee
+        employee_id:
+          type: string
+          title: Employee Id
+      type: object
+      required:
+      - employee_id
+      title: TaskContextEmployee
+    LocationRef:
+      properties:
+        id:
+          type: string
+          title: Id
+        code:
+          type: string
+          title: Code
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - id
+      - code
+      - name
+      title: LocationRef
     AccountTask:
       properties:
         id:
@@ -804,57 +859,42 @@ components:
       - unblocks
       - criteria_met
       title: AccountTask
-    AccountTaskEstimation:
-      properties:
-        min:
-          type: integer
-          title: Min
-        max:
-          type: integer
-          title: Max
-        unit:
-          $ref: '#/components/schemas/ETAUnit'
-      type: object
-      required:
-      - min
-      - max
-      - unit
-      title: AccountTaskEstimation
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PlatformTaskStatus:
+    AccountTaskStatus:
       type: string
       enum:
       - todo
-      - deferred
+      - dismissed
       - in-progress
       - done
-      title: PlatformTaskStatus
-    AccountTaskResolutionManualStepPath:
+      title: AccountTaskStatus
+    ValidationError:
       properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
         type:
           type: string
-          title: Type
-        value:
-          type: string
-          title: Value
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
+          title: Error Type
       type: object
       required:
+      - loc
+      - msg
       - type
-      - value
-      title: AccountTaskResolutionManualStepPath
+      title: ValidationError
+    TaskPriority:
+      type: string
+      enum:
+      - high
+      - medium
+      - low
+      title: TaskPriority
     AccountManagedProvider:
       properties:
         id:
@@ -868,20 +908,34 @@ components:
       - id
       - name
       title: AccountManagedProvider
-    FeeFixed:
+    PlatformTaskStatus:
+      type: string
+      enum:
+      - todo
+      - deferred
+      - in-progress
+      - done
+      title: PlatformTaskStatus
+    AccountTaskETA:
       properties:
-        type:
-          type: string
-          const: fixed
-          title: Type
-          default: fixed
-        amount:
-          type: string
-          title: Amount
+        estimation:
+          $ref: '#/components/schemas/AccountTaskEstimation'
+        earliest_date:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Earliest Date
+        latest_date:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Latest Date
       type: object
       required:
-      - amount
-      title: FeeFixed
+      - estimation
+      title: AccountTaskETA
     PlatformTaskRequirement:
       properties:
         type:
@@ -896,104 +950,20 @@ components:
       required:
       - requirement_id
       title: PlatformTaskRequirement
-    TaskDefinitionType:
-      type: string
-      enum:
-      - requirement
-      - data-collection
-      - criteria-collection
-      title: TaskDefinitionType
-    LocationRef:
-      properties:
-        id:
-          type: string
-          title: Id
-        code:
-          type: string
-          title: Code
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - id
-      - code
-      - name
-      title: LocationRef
-    AccountTaskCriteria:
-      properties:
-        key:
-          type: string
-          title: Key
-        reason:
-          type: string
-          title: Reason
-        data:
-          anyOf:
-          - type: object
-          - {}
-          title: Data
-          default: {}
-      type: object
-      required:
-      - key
-      - reason
-      title: AccountTaskCriteria
-    AccountTaskResolutionManual:
+    AccountTaskResolutionRedirect:
       properties:
         type:
           type: string
-          const: manual
+          const: redirect
           title: Type
-          default: manual
-        steps:
-          items:
-            $ref: '#/components/schemas/AccountTaskResolutionManualStep'
-          type: array
-          title: Steps
+          default: redirect
+        url:
+          type: string
+          title: Url
       type: object
       required:
-      - steps
-      title: AccountTaskResolutionManual
-    ActionField:
-      properties:
-        name:
-          type: string
-          title: Name
-        description:
-          type: string
-          title: Description
-        required:
-          type: boolean
-          title: Required
-        type:
-          type: string
-          title: Type
-      type: object
-      required:
-      - name
-      - description
-      - required
-      - type
-      title: ActionField
-    FeeRange:
-      properties:
-        type:
-          type: string
-          const: range
-          title: Type
-          default: range
-        min:
-          type: string
-          title: Min
-        max:
-          type: string
-          title: Max
-      type: object
-      required:
-      - min
-      - max
-      title: FeeRange
+      - url
+      title: AccountTaskResolutionRedirect
     AutomationSessionRequest:
       properties:
         callback_url:
@@ -1017,13 +987,121 @@ components:
       required:
       - legal_entity_id
       title: TaskContextLegalEntity
-    TaskPriority:
+    FeeFixed:
+      properties:
+        type:
+          type: string
+          const: fixed
+          title: Type
+          default: fixed
+        amount:
+          type: string
+          title: Amount
+      type: object
+      required:
+      - amount
+      title: FeeFixed
+    AccountTaskResolutionManual:
+      properties:
+        type:
+          type: string
+          const: manual
+          title: Type
+          default: manual
+        steps:
+          items:
+            $ref: '#/components/schemas/AccountTaskResolutionManualStep'
+          type: array
+          title: Steps
+      type: object
+      required:
+      - steps
+      title: AccountTaskResolutionManual
+    ETAUnit:
       type: string
       enum:
-      - high
-      - medium
-      - low
-      title: TaskPriority
+      - hour
+      - day
+      - week
+      - month
+      title: ETAUnit
+    AccountTaskResolutionManualStep:
+      properties:
+        id:
+          type: string
+          title: Id
+        title:
+          type: string
+          title: Title
+        description:
+          type: string
+          title: Description
+        paths:
+          items:
+            $ref: '#/components/schemas/AccountTaskResolutionManualStepPath'
+          type: array
+          title: Paths
+        order:
+          type: integer
+          title: Order
+      type: object
+      required:
+      - id
+      - title
+      - description
+      - paths
+      - order
+      title: AccountTaskResolutionManualStep
+    TaskDefinitionType:
+      type: string
+      enum:
+      - requirement
+      - data-collection
+      - criteria-collection
+      title: TaskDefinitionType
+    AccountTaskAutomationFormSpec:
+      properties: {}
+      type: object
+      title: AccountTaskAutomationFormSpec
+    AccountTaskTag:
+      type: string
+      enum:
+      - certificate-of-good-standing
+      - charity-registration
+      - charity-registration-renewal
+      - employee-final-wage-payment
+      - employee-new-hire-reporting
+      - employee-onboarding
+      - employee-termination
+      - exemption
+      - foreign-qualification
+      - initial-statement
+      - local-business-setup
+      - local-payroll-setup
+      - newspaper-publication
+      - notices
+      - payroll-setup
+      - registered-agent
+      - sos-report
+      - setup
+      title: AccountTaskTag
+    AutomationSessionResponse:
+      properties:
+        automation_url:
+          type: string
+          title: Automation Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - automation_url
+      - created_at
+      - expires_at
+      title: AutomationSessionResponse
     AccountTaskResolutionAction:
       properties:
         type:
@@ -1056,111 +1134,24 @@ components:
       - content_type
       - fields
       title: AccountTaskResolutionAction
-    ValidationError:
+    HTTPValidationError:
       properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    AccountTaskAutomationFormSpec:
-      properties: {}
-      type: object
-      title: AccountTaskAutomationFormSpec
-    AccountTaskTag:
-      type: string
-      enum:
-      - certificate-of-good-standing
-      - charity-registration
-      - charity-registration-renewal
-      - employee-final-wage-payment
-      - employee-new-hire-reporting
-      - employee-onboarding
-      - employee-termination
-      - exemption
-      - foreign-qualification
-      - initial-statement
-      - local-business-setup
-      - local-payroll-setup
-      - newspaper-publication
-      - notices
-      - payroll-setup
-      - registered-agent
-      - sos-report
-      - setup
-      title: AccountTaskTag
-    TaskContextEmployee:
+      title: HTTPValidationError
+    TasksSessionRequest:
       properties:
-        scope:
+        callback_url:
           type: string
-          const: employee
-          title: Scope
-          default: employee
-        employee_id:
-          type: string
-          title: Employee Id
+          title: Callback Url
       type: object
       required:
-      - employee_id
-      title: TaskContextEmployee
-    AccountTaskStatus:
-      type: string
-      enum:
-      - todo
-      - dismissed
-      - in-progress
-      - done
-      title: AccountTaskStatus
-    AccountTaskDefinition:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        summary:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary
-        description:
-          type: string
-          title: Description
-        type:
-          $ref: '#/components/schemas/TaskDefinitionType'
-        resources:
-          items:
-            additionalProperties:
-              type: string
-            type: object
-          type: array
-          title: Resources
-        location:
-          $ref: '#/components/schemas/LocationRef'
-      type: object
-      required:
-      - id
-      - title
-      - description
-      - type
-      - resources
-      - location
-      title: AccountTaskDefinition
+      - callback_url
+      title: TasksSessionRequest
     AccountTaskResolutionAutomate:
       properties:
         type:
@@ -1182,257 +1173,42 @@ components:
       - submit_url
       - hosted_url
       title: AccountTaskResolutionAutomate
-    AccountTaskResolutionManualStep:
+    AccountTaskResolutionManualStepPath:
       properties:
-        id:
+        type:
           type: string
-          title: Id
-        title:
+          title: Type
+        value:
           type: string
-          title: Title
-        description:
-          type: string
-          title: Description
-        paths:
-          items:
-            $ref: '#/components/schemas/AccountTaskResolutionManualStepPath'
-          type: array
-          title: Paths
-        order:
-          type: integer
-          title: Order
+          title: Value
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
       type: object
       required:
-      - id
-      - title
-      - description
-      - paths
-      - order
-      title: AccountTaskResolutionManualStep
-    PlatformAgency:
+      - type
+      - value
+      title: AccountTaskResolutionManualStepPath
+    FeeRange:
       properties:
-        id:
+        type:
           type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        website:
-          type: string
-          title: Website
-      type: object
-      required:
-      - id
-      - name
-      - website
-      title: PlatformAgency
-    PlatformTaskEstimation:
-      properties:
+          const: range
+          title: Type
+          default: range
         min:
-          type: integer
+          type: string
           title: Min
         max:
-          type: integer
+          type: string
           title: Max
-        unit:
-          $ref: '#/components/schemas/ETAUnit'
       type: object
       required:
       - min
       - max
-      - unit
-      title: PlatformTaskEstimation
-    PlatformAgencyAccount:
-      properties:
-        region:
-          $ref: '#/components/schemas/StateCode'
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        agency:
-          $ref: '#/components/schemas/PlatformAgency'
-        data:
-          items:
-            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue'
-          type: array
-          title: Data
-        logins:
-          items:
-            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
-          type: array
-          title: Logins
-      type: object
-      required:
-      - region
-      - id
-      - name
-      - agency
-      - data
-      - logins
-      title: PlatformAgencyAccount
-    PlatformTaskETA:
-      properties:
-        estimation:
-          $ref: '#/components/schemas/PlatformTaskEstimation'
-        earliest_date:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Earliest Date
-        latest_date:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Latest Date
-      type: object
-      required:
-      - estimation
-      title: PlatformTaskETA
-    PlatformTaskRequirementCriteria:
-      properties:
-        type:
-          anyOf:
-          - $ref: '#/components/schemas/PlatformTaskRequirementCriteriaType'
-          - $ref: '#/components/schemas/CriteriaType'
-          title: Type
-        reason:
-          type: string
-          title: Reason
-        task_id:
-          type: string
-          title: Task Id
-      type: object
-      required:
-      - type
-      - reason
-      - task_id
-      title: PlatformTaskRequirementCriteria
-    PlatformHttpException:
-      properties:
-        message:
-          type: string
-          title: Message
-        detail:
-          type: string
-          title: Detail
-      type: object
-      required:
-      - message
-      - detail
-      title: PlatformHttpException
-    PlatformTaskUnlocks:
-      properties:
-        requirement_id:
-          type: string
-          title: Requirement Id
-        title:
-          type: string
-          title: Title
-        definition:
-          type: string
-          title: Definition
-        summary:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Summary
-        resources:
-          items:
-            additionalProperties:
-              type: string
-            type: object
-          type: array
-          title: Resources
-        region:
-          $ref: '#/components/schemas/RegionRef'
-        tags:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/TagInstance'
-            type: array
-          - type: 'null'
-          title: Tags
-        source:
-          type: string
-          const: requirement
-          title: Source
-          default: requirement
-      type: object
-      required:
-      - requirement_id
-      - title
-      - definition
-      - resources
-      - region
-      title: PlatformTaskUnlocks
-    PlatformQuestionTaskUpdate:
-      properties:
-        answer:
-          anyOf:
-          - type: integer
-          - type: boolean
-          - type: string
-            format: date
-          - type: number
-          title: Answer
-      type: object
-      required:
-      - answer
-      title: PlatformQuestionTaskUpdate
-    PlatformUpdateTaskStatusResponse:
-      properties:
-        task:
-          $ref: '#/components/schemas/PlatformTask_2'
-        unlocked_tasks:
-          items:
-            $ref: '#/components/schemas/PlatformTask_2'
-          type: array
-          title: Unlocked Tasks
-      type: object
-      required:
-      - task
-      - unlocked_tasks
-      title: PlatformUpdateTaskStatusResponse
-    LocationScope:
-      type: string
-      enum:
-      - entity
-      - region
-      - zip
-      - city
-      title: LocationScope
-    PlatformTaskResolutionManualStep:
-      properties:
-        id:
-          type: string
-          title: Id
-        title:
-          type: string
-          title: Title
-        description:
-          type: string
-          title: Description
-        paths:
-          items:
-            $ref: '#/components/schemas/PlatformTaskResolutionManualStepPath'
-          type: array
-          title: Paths
-        order:
-          type: integer
-          title: Order
-      type: object
-      required:
-      - id
-      - title
-      - description
-      - paths
-      - order
-      title: PlatformTaskResolutionManualStep
+      title: FeeRange
     PlatformTask_2:
       properties:
         id:
@@ -1464,13 +1240,124 @@ components:
       - status
       - source
       title: PlatformTask
-    PlatformTaskResolutionHosted:
+    PlatformTaskQuestionResolutions:
+      properties:
+        hosted:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformTaskResolutionHosted'
+          - type: 'null'
+        endpoint:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformTaskResolutionEndpoint'
+          - type: 'null'
+      type: object
+      title: PlatformTaskQuestionResolutions
+    PlatformAgencyAccount:
+      properties:
+        region:
+          $ref: '#/components/schemas/StateCode'
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        agency:
+          $ref: '#/components/schemas/PlatformAgency'
+        data:
+          items:
+            $ref: '#/components/schemas/PlatformAgencyAttributeAndValue'
+          type: array
+          title: Data
+        logins:
+          items:
+            $ref: '#/components/schemas/PlatformLegalEntityAccountLogin'
+          type: array
+          title: Logins
+      type: object
+      required:
+      - region
+      - id
+      - name
+      - agency
+      - data
+      - logins
+      title: PlatformAgencyAccount
+    PlatformTaskResolutionManualStepPath:
       properties:
         type:
           type: string
-          const: hosted
           title: Type
-          default: hosted
+        value:
+          type: string
+          title: Value
+        text:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Text
+      type: object
+      required:
+      - type
+      - value
+      title: PlatformTaskResolutionManualStepPath
+    PlatformTaskUpdate:
+      properties:
+        status:
+          $ref: '#/components/schemas/PlatformTaskStatusUpdate'
+      type: object
+      required:
+      - status
+      title: PlatformTaskUpdate
+    PlatformTaskQuestion:
+      properties:
+        type:
+          type: string
+          const: question
+          title: Type
+          default: question
+        regions:
+          items:
+            $ref: '#/components/schemas/RegionRef'
+          type: array
+          title: Regions
+        region_scope:
+          $ref: '#/components/schemas/LocationScope'
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        answer:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Answer
+        is_editable:
+          type: boolean
+          title: Is Editable
+        resolutions:
+          $ref: '#/components/schemas/PlatformTaskQuestionResolutions'
+        categories:
+          items:
+            $ref: '#/components/schemas/TaskCategory'
+          type: array
+          title: Categories
+      type: object
+      required:
+      - regions
+      - region_scope
+      - is_editable
+      - resolutions
+      - categories
+      title: PlatformTaskQuestion
+    PlatformTaskResolutionEndpoint:
+      properties:
+        type:
+          type: string
+          const: endpoint
+          title: Type
+          default: endpoint
         description:
           type: string
           title: Description
@@ -1495,8 +1382,8 @@ components:
       - url
       - content_type
       - fields
-      title: PlatformTaskResolutionHosted
-      description: Directs a user to take action in order to start a hosted session to complete an action.
+      title: PlatformTaskResolutionEndpoint
+      description: Directs a user to take action in order to resolve the task using an API endpoint.
     PlatformRequirementTaskAutomationStatusChange:
       properties:
         status:
@@ -1510,28 +1397,6 @@ components:
       - status
       - updated_at
       title: PlatformRequirementTaskAutomationStatusChange
-    PlatformTaskStatusUpdate:
-      type: string
-      enum:
-      - todo
-      - done
-      title: PlatformTaskStatusUpdate
-    PlatformTaskRequirementCriteriaType:
-      type: string
-      enum:
-      - requirement-done
-      title: PlatformTaskRequirementCriteriaType
-    TaskCategory:
-      type: string
-      enum:
-      - hr
-      - insurance
-      - payroll
-      - registration
-      - registration-maintenance
-      - tax
-      - sales-tax
-      title: TaskCategory
     HostedManageTasksSessionRequest:
       properties:
         callback_url:
@@ -1563,6 +1428,121 @@ components:
       - complete
       - canceled
       title: PlatformRequirementTaskAutomationStatus
+    PlatformUpdateQuestionTaskStatusResponse:
+      properties:
+        unlocked_tasks:
+          items:
+            $ref: '#/components/schemas/PlatformTask_2'
+          type: array
+          title: Unlocked Tasks
+      type: object
+      required:
+      - unlocked_tasks
+      title: PlatformUpdateQuestionTaskStatusResponse
+    ValidationError_2:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TaskCategory:
+      type: string
+      enum:
+      - hr
+      - insurance
+      - payroll
+      - registration
+      - registration-maintenance
+      - tax
+      - sales-tax
+      title: TaskCategory
+    PlatformUpdateTaskStatusResponse:
+      properties:
+        task:
+          $ref: '#/components/schemas/PlatformTask_2'
+        unlocked_tasks:
+          items:
+            $ref: '#/components/schemas/PlatformTask_2'
+          type: array
+          title: Unlocked Tasks
+      type: object
+      required:
+      - task
+      - unlocked_tasks
+      title: PlatformUpdateTaskStatusResponse
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
+    PlatformAgencyAttributeStatus:
+      type: string
+      enum:
+      - todo
+      - in-progress
+      - done
+      title: PlatformAgencyAttributeStatus
+    TaskStatus:
+      type: string
+      enum:
+      - todo
+      - deferred
+      - in-progress
+      - done
+      title: TaskStatus
+    HostedSessionResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+        created_at:
+          type: string
+          title: Created At
+        expires_at:
+          type: string
+          title: Expires At
+      type: object
+      required:
+      - url
+      - created_at
+      - expires_at
+      title: HostedSessionResponse
+    PlatformTaskRequirementResolutions:
+      properties:
+        hosted:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformTaskResolutionHosted'
+          - type: 'null'
+        manual:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformTaskResolutionManual'
+          - type: 'null'
+      type: object
+      title: PlatformTaskRequirementResolutions
     PlatformTaskRequirement_2:
       properties:
         type:
@@ -1694,7 +1674,23 @@ components:
       - resolutions
       - category
       title: PlatformTaskRequirement
-    RegionRef:
+    PlatformTaskEstimation:
+      properties:
+        min:
+          type: integer
+          title: Min
+        max:
+          type: integer
+          title: Max
+        unit:
+          $ref: '#/components/schemas/ETAUnit'
+      type: object
+      required:
+      - min
+      - max
+      - unit
+      title: PlatformTaskEstimation
+    PlatformAgency:
       properties:
         id:
           type: string
@@ -1702,233 +1698,60 @@ components:
         name:
           type: string
           title: Name
-        parent_region:
-          anyOf:
-          - $ref: '#/components/schemas/RegionRef'
-          - type: 'null'
+        website:
+          type: string
+          title: Website
       type: object
       required:
       - id
       - name
-      title: RegionRef
-    CriteriaType:
-      type: string
-      enum:
-      - has-employees
-      - employee-count
-      - employee-count-previous-year
-      - total-employee-count-in-period
-      - has-non-exempt-employees
-      - employee-terminated
-      - payroll-amount
-      - has-physical-location
-      - foreign-qualification-date
-      - date-attribute
-      - doing-business
-      - business-income-tax-nexus
-      - sales-tax-nexus
-      - estimated-tax-liability
-      - single-requirement
-      - charitable-registration-nexus
-      - partner-nexus
-      title: CriteriaType
-    PlatformTaskTag:
-      type: string
-      enum:
-      - certificate-of-good-standing
-      - charity-registration
-      - charity-registration-renewal
-      - employee-final-wage-payment
-      - employee-new-hire-reporting
-      - employee-onboarding
-      - employee-requirement
-      - employee-termination
-      - exemption
-      - foreign-qualification
-      - handbook
-      - initial-statement
-      - local-business-exemption-setup
-      - local-business-setup
-      - local-business-registration-renewal
-      - local-payroll-setup
-      - local-business-tax-setup
-      - newspaper-publication
-      - notices
-      - payroll-setup
-      - registered-agent
-      - sales-tax
-      - setup
-      - sos-report
-      - warn-notice
-      title: PlatformTaskTag
-    PlatformTaskResolutionEndpoint:
-      properties:
-        type:
-          type: string
-          const: endpoint
-          title: Type
-          default: endpoint
-        description:
-          type: string
-          title: Description
-        method:
-          type: string
-          title: Method
-        url:
-          type: string
-          title: Url
-        content_type:
-          type: string
-          title: Content Type
-        fields:
-          items:
-            $ref: '#/components/schemas/ActionField'
-          type: array
-          title: Fields
-      type: object
-      required:
-      - description
-      - method
-      - url
-      - content_type
-      - fields
-      title: PlatformTaskResolutionEndpoint
-      description: Directs a user to take action in order to resolve the task using an API endpoint.
-    PlatformTaskRequirementResolutions:
-      properties:
-        hosted:
-          anyOf:
-          - $ref: '#/components/schemas/PlatformTaskResolutionHosted'
-          - type: 'null'
-        manual:
-          anyOf:
-          - $ref: '#/components/schemas/PlatformTaskResolutionManual'
-          - type: 'null'
-      type: object
-      title: PlatformTaskRequirementResolutions
-    HostedSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: HostedSessionRequest
-    PlatformTaskResolutionManualStepPath:
-      properties:
-        type:
-          type: string
-          title: Type
-        value:
-          type: string
-          title: Value
-        text:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Text
-      type: object
-      required:
-      - type
-      - value
-      title: PlatformTaskResolutionManualStepPath
-    PlatformAgencyAttributeStatus:
+      - website
+      title: PlatformAgency
+    TasksFilterStatus:
       type: string
       enum:
       - todo
-      - in-progress
+      - overdue
       - done
-      title: PlatformAgencyAttributeStatus
-    PlatformTaskQuestion:
+      - automated
+      - managed
+      title: TasksFilterStatus
+    PlatformTaskETA:
+      properties:
+        estimation:
+          $ref: '#/components/schemas/PlatformTaskEstimation'
+        earliest_date:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Earliest Date
+        latest_date:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Latest Date
+      type: object
+      required:
+      - estimation
+      title: PlatformTaskETA
+    PlatformTaskResolutionManual:
       properties:
         type:
           type: string
-          const: question
+          const: manual
           title: Type
-          default: question
-        regions:
+          default: manual
+        steps:
           items:
-            $ref: '#/components/schemas/RegionRef'
+            $ref: '#/components/schemas/PlatformTaskResolutionManualStep'
           type: array
-          title: Regions
-        region_scope:
-          $ref: '#/components/schemas/LocationScope'
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        answer:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Answer
-        is_editable:
-          type: boolean
-          title: Is Editable
-        resolutions:
-          $ref: '#/components/schemas/PlatformTaskQuestionResolutions'
-        categories:
-          items:
-            $ref: '#/components/schemas/TaskCategory'
-          type: array
-          title: Categories
+          title: Steps
       type: object
       required:
-      - regions
-      - region_scope
-      - is_editable
-      - resolutions
-      - categories
-      title: PlatformTaskQuestion
-    PlatformUpdateQuestionTaskStatusResponse:
-      properties:
-        unlocked_tasks:
-          items:
-            $ref: '#/components/schemas/PlatformTask_2'
-          type: array
-          title: Unlocked Tasks
-      type: object
-      required:
-      - unlocked_tasks
-      title: PlatformUpdateQuestionTaskStatusResponse
-    PlatformLegalEntityAccountLogin:
-      properties:
-        id:
-          type: string
-          title: Id
-          description: The identifier of this Account Login
-        name:
-          type: string
-          title: Name
-          description: The name of the Login
-        region:
-          $ref: '#/components/schemas/StateCode'
-          description: The state which the login belongs to
-        url:
-          type: string
-          title: Url
-          description: The url pointing to the login page for this Login
-      type: object
-      required:
-      - id
-      - name
-      - region
-      - url
-      title: PlatformLegalEntityAccountLogin
-    PlatformTaskQuestionResolutions:
-      properties:
-        hosted:
-          anyOf:
-          - $ref: '#/components/schemas/PlatformTaskResolutionHosted'
-          - type: 'null'
-        endpoint:
-          anyOf:
-          - $ref: '#/components/schemas/PlatformTaskResolutionEndpoint'
-          - type: 'null'
-      type: object
-      title: PlatformTaskQuestionResolutions
+      - steps
+      title: PlatformTaskResolutionManual
     StateCode:
       type: string
       enum:
@@ -1984,23 +1807,82 @@ components:
       - WI
       - WY
       title: StateCode
-    TaskStatus:
+    PlatformTaskType:
       type: string
       enum:
-      - todo
-      - deferred
-      - in-progress
-      - done
-      title: TaskStatus
-    TasksFilterStatus:
+      - requirement
+      - question
+      title: PlatformTaskType
+    PlatformTaskTag:
       type: string
       enum:
-      - todo
-      - overdue
-      - done
-      - automated
-      - managed
-      title: TasksFilterStatus
+      - certificate-of-good-standing
+      - charity-registration
+      - charity-registration-renewal
+      - employee-final-wage-payment
+      - employee-new-hire-reporting
+      - employee-onboarding
+      - employee-requirement
+      - employee-termination
+      - exemption
+      - foreign-qualification
+      - handbook
+      - initial-statement
+      - local-business-exemption-setup
+      - local-business-setup
+      - local-business-registration-renewal
+      - local-payroll-setup
+      - local-business-tax-setup
+      - newspaper-publication
+      - notices
+      - payroll-setup
+      - registered-agent
+      - sales-tax
+      - setup
+      - sos-report
+      - warn-notice
+      title: PlatformTaskTag
+    RegionRef:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        parent_region:
+          anyOf:
+          - $ref: '#/components/schemas/RegionRef'
+          - type: 'null'
+      type: object
+      required:
+      - id
+      - name
+      title: RegionRef
+    PlatformLegalEntityAccountLogin:
+      properties:
+        id:
+          type: string
+          title: Id
+          description: The identifier of this Account Login
+        name:
+          type: string
+          title: Name
+          description: The name of the Login
+        region:
+          $ref: '#/components/schemas/StateCode'
+          description: The state which the login belongs to
+        url:
+          type: string
+          title: Url
+          description: The url pointing to the login page for this Login
+      type: object
+      required:
+      - id
+      - name
+      - region
+      - url
+      title: PlatformLegalEntityAccountLogin
     TagInstance:
       type: string
       enum:
@@ -2037,32 +1919,47 @@ components:
       - password-update
       - mail-delivery
       title: TagInstance
-    ValidationError_2:
+    PlatformTaskStatusUpdate:
+      type: string
+      enum:
+      - todo
+      - done
+      title: PlatformTaskStatusUpdate
+    CriteriaType:
+      type: string
+      enum:
+      - has-employees
+      - employee-count
+      - employee-count-previous-year
+      - total-employee-count-in-period
+      - has-non-exempt-employees
+      - employee-terminated
+      - payroll-amount
+      - has-physical-location
+      - foreign-qualification-date
+      - date-attribute
+      - doing-business
+      - business-income-tax-nexus
+      - sales-tax-nexus
+      - estimated-tax-liability
+      - single-requirement
+      - charitable-registration-nexus
+      - partner-nexus
+      title: CriteriaType
+    PlatformQuestionTaskUpdate:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+        answer:
+          anyOf:
+          - type: integer
+          - type: boolean
+          - type: string
+            format: date
+          - type: number
+          title: Answer
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - answer
+      title: PlatformQuestionTaskUpdate
     PlatformAgencyAttributeAndValue:
       properties:
         name:
@@ -2087,23 +1984,41 @@ components:
       - value
       - status
       title: PlatformAgencyAttributeAndValue
-    HostedSessionResponse:
+    LocationScope:
+      type: string
+      enum:
+      - entity
+      - region
+      - zip
+      - city
+      title: LocationScope
+    PlatformTaskResolutionManualStep:
       properties:
-        url:
+        id:
           type: string
-          title: Url
-        created_at:
+          title: Id
+        title:
           type: string
-          title: Created At
-        expires_at:
+          title: Title
+        description:
           type: string
-          title: Expires At
+          title: Description
+        paths:
+          items:
+            $ref: '#/components/schemas/PlatformTaskResolutionManualStepPath'
+          type: array
+          title: Paths
+        order:
+          type: integer
+          title: Order
       type: object
       required:
-      - url
-      - created_at
-      - expires_at
-      title: HostedSessionResponse
+      - id
+      - title
+      - description
+      - paths
+      - order
+      title: PlatformTaskResolutionManualStep
     PlatformTaskResolutionType:
       type: string
       enum:
@@ -2111,36 +2026,121 @@ components:
       - hosted
       - endpoint
       title: PlatformTaskResolutionType
-    PlatformTaskUpdate:
+    PlatformHttpException:
       properties:
-        status:
-          $ref: '#/components/schemas/PlatformTaskStatusUpdate'
+        message:
+          type: string
+          title: Message
+        detail:
+          type: string
+          title: Detail
       type: object
       required:
-      - status
-      title: PlatformTaskUpdate
-    PlatformTaskType:
-      type: string
-      enum:
-      - requirement
-      - question
-      title: PlatformTaskType
-    PlatformTaskResolutionManual:
+      - message
+      - detail
+      title: PlatformHttpException
+    PlatformTaskResolutionHosted:
       properties:
         type:
           type: string
-          const: manual
+          const: hosted
           title: Type
-          default: manual
-        steps:
+          default: hosted
+        description:
+          type: string
+          title: Description
+        method:
+          type: string
+          title: Method
+        url:
+          type: string
+          title: Url
+        content_type:
+          type: string
+          title: Content Type
+        fields:
           items:
-            $ref: '#/components/schemas/PlatformTaskResolutionManualStep'
+            $ref: '#/components/schemas/ActionField'
           type: array
-          title: Steps
+          title: Fields
       type: object
       required:
-      - steps
-      title: PlatformTaskResolutionManual
+      - description
+      - method
+      - url
+      - content_type
+      - fields
+      title: PlatformTaskResolutionHosted
+      description: Directs a user to take action in order to start a hosted session to complete an action.
+    PlatformTaskRequirementCriteria:
+      properties:
+        type:
+          anyOf:
+          - $ref: '#/components/schemas/PlatformTaskRequirementCriteriaType'
+          - $ref: '#/components/schemas/CriteriaType'
+          title: Type
+        reason:
+          type: string
+          title: Reason
+        task_id:
+          type: string
+          title: Task Id
+      type: object
+      required:
+      - type
+      - reason
+      - task_id
+      title: PlatformTaskRequirementCriteria
+    PlatformTaskUnlocks:
+      properties:
+        requirement_id:
+          type: string
+          title: Requirement Id
+        title:
+          type: string
+          title: Title
+        definition:
+          type: string
+          title: Definition
+        summary:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Summary
+        resources:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          type: array
+          title: Resources
+        region:
+          $ref: '#/components/schemas/RegionRef'
+        tags:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/TagInstance'
+            type: array
+          - type: 'null'
+          title: Tags
+        source:
+          type: string
+          const: requirement
+          title: Source
+          default: requirement
+      type: object
+      required:
+      - requirement_id
+      - title
+      - definition
+      - resources
+      - region
+      title: PlatformTaskUnlocks
+    PlatformTaskRequirementCriteriaType:
+      type: string
+      enum:
+      - requirement-done
+      title: PlatformTaskRequirementCriteriaType
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

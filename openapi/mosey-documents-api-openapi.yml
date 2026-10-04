@@ -65,6 +65,15 @@ paths:
       - Documents
 components:
   schemas:
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
     ValidationError:
       properties:
         loc:
@@ -91,15 +100,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HostedSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: HostedSessionRequest
     HTTPValidationError:
       properties:
         detail:
