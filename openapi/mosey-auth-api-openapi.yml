@@ -78,19 +78,35 @@ paths:
       - Auth
 components:
   schemas:
-    PlatformAuthenticationSessionPayrollSetupRequest:
+    PlatformAuthenticationSessionResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        token_type:
+          type: string
+          const: bearer
+          title: Token Type
+          default: bearer
+        state:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: State
+      type: object
+      required:
+      - access_token
+      title: PlatformAuthenticationSessionResponse
+    PlatformAuthenticationSessionRequest:
       properties:
         legal_entity_id:
           type: string
           title: Legal Entity Id
-        authorization_callback_url:
-          type: string
-          title: Authorization Callback Url
       type: object
       required:
       - legal_entity_id
-      - authorization_callback_url
-      title: PlatformAuthenticationSessionPayrollSetupRequest
+      title: PlatformAuthenticationSessionRequest
     ValidationError:
       properties:
         loc:
@@ -117,24 +133,6 @@ components:
       - msg
       - type
       title: ValidationError
-    PlatformAuthenticationSessionPayrollSetupResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: PlatformAuthenticationSessionPayrollSetupResponse
-    PlatformAuthenticationSessionRequest:
-      properties:
-        legal_entity_id:
-          type: string
-          title: Legal Entity Id
-      type: object
-      required:
-      - legal_entity_id
-      title: PlatformAuthenticationSessionRequest
     HTTPValidationError:
       properties:
         detail:
@@ -144,26 +142,28 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    PlatformAuthenticationSessionResponse:
+    PlatformAuthenticationSessionPayrollSetupRequest:
       properties:
-        access_token:
+        legal_entity_id:
           type: string
-          title: Access Token
-        token_type:
+          title: Legal Entity Id
+        authorization_callback_url:
           type: string
-          const: bearer
-          title: Token Type
-          default: bearer
-        state:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: State
+          title: Authorization Callback Url
       type: object
       required:
-      - access_token
-      title: PlatformAuthenticationSessionResponse
+      - legal_entity_id
+      - authorization_callback_url
+      title: PlatformAuthenticationSessionPayrollSetupRequest
+    PlatformAuthenticationSessionPayrollSetupResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: PlatformAuthenticationSessionPayrollSetupResponse
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2

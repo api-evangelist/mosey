@@ -266,36 +266,6 @@ paths:
       - Logins
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    LoginsSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: LoginsSessionRequest
     PlatformLegalEntityAccountLogin:
       properties:
         id:
@@ -326,15 +296,6 @@ components:
       - login_url
       - url
       title: PlatformLegalEntityAccountLogin
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     PlatformLegalEntityAccountLoginSessionResponse:
       properties:
         created_at:
@@ -355,7 +316,7 @@ components:
       - expires_at
       - url
       title: PlatformLegalEntityAccountLoginSessionResponse
-    ValidationError_2:
+    ValidationError:
       properties:
         loc:
           items:
@@ -370,17 +331,39 @@ components:
         type:
           type: string
           title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
       type: object
       required:
       - loc
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    LoginsSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: LoginsSessionRequest
+    HostedSessionRequest:
+      properties:
+        callback_url:
+          type: string
+          title: Callback Url
+      type: object
+      required:
+      - callback_url
+      title: HostedSessionRequest
     StateCode:
       type: string
       enum:
@@ -436,15 +419,6 @@ components:
       - WI
       - WY
       title: StateCode
-    HostedSessionRequest:
-      properties:
-        callback_url:
-          type: string
-          title: Callback Url
-      type: object
-      required:
-      - callback_url
-      title: HostedSessionRequest
     PlatformLegalEntityAccountLogin_2:
       properties:
         id:
@@ -486,6 +460,32 @@ components:
       - created_at
       - expires_at
       title: HostedSessionResponse
+    ValidationError_2:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     OAuth2PasswordBearer:
       type: oauth2
