@@ -64,6 +64,137 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Mosey is a company surfaced as a portfolio company of canaan-partners and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Mosey is a business compliance platform that helps multi-state companies open and manage state and local tax, HR, payroll, insurance, and registration accounts. The Mosey API is a composable set of OpenAPI 3.1 endpoints that let software platforms embed state compliance into their own products: sign up or authenticate a legal entity, register the states it operates in, generate and resolve compliance tasks, receive physical mail, and securely manage state-agency logins via short-lived hosted sessions. Authentication is OAuth2 (password grant). Mosey partnered with Gusto, Stripe, and Sequoia Consulting Group and was subsequently acquired by Gusto. This profile was surfaced as a Canaan Partners portfolio company and enriched by the API Evangelist pipeline from Mosey's public OpenAPI and developer documentation.
 
-Backed by: canaan-partners
+**Areas:** Company · Compliance · RegTech · State Compliance · Tax · Payroll · Human Resources · Business Operations
+
+## Mosey on APIs.io
+
+Everything profiled for Mosey is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/mosey/](https://apis.io/providers/mosey/)** — or go straight to one of the APIs or properties below.
+
+### APIs (12)
+
+- [Mosey Accounts API](https://apis.io/apis/mosey/mosey-accounts-api/) — The Accounts API from Mosey — 7 operation(s) for accounts.
+- [Mosey Agency Accounts API](https://apis.io/apis/mosey/mosey-agency-accounts-api/) — The Agency Accounts API from Mosey — 2 operation(s) for agency accounts.
+- [Mosey Auth API](https://apis.io/apis/mosey/mosey-auth-api/) — The Auth API from Mosey — 2 operation(s) for auth.
+- [Mosey Documents API](https://apis.io/apis/mosey/mosey-documents-api/) — The Documents API from Mosey — 1 operation(s) for documents.
+- [Mosey Handbook API](https://apis.io/apis/mosey/mosey-handbook-api/) — The Handbook API from Mosey — 3 operation(s) for handbook.
+- [Mosey Legal Entity API](https://apis.io/apis/mosey/mosey-legal-entity-api/) — The Legal Entity API from Mosey — 2 operation(s) for legal entity.
+- [Mosey Locations API](https://apis.io/apis/mosey/mosey-locations-api/) — The Locations API from Mosey — 7 operation(s) for locations.
+- [Mosey Logins API](https://apis.io/apis/mosey/mosey-logins-api/) — The Logins API from Mosey — 4 operation(s) for logins.
+- [Mosey Mail API](https://apis.io/apis/mosey/mosey-mail-api/) — The Mail API from Mosey — 2 operation(s) for mail.
+- [Mosey Regions API](https://apis.io/apis/mosey/mosey-regions-api/) — The Regions API from Mosey — 2 operation(s) for regions.
+- [Mosey Signup API](https://apis.io/apis/mosey/mosey-signup-api/) — The Signup API from Mosey — 3 operation(s) for signup.
+- [Mosey Tasks API](https://apis.io/apis/mosey/mosey-tasks-api/) — The Tasks API from Mosey — 9 operation(s) for tasks.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [mosey](https://apis.io/servers/mosey/mosey/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Mosey Agentic Access](https://apis.io/agentic-access/mosey/mosey-agentic-access/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [Mosey Accounts API](https://apis.io/collections/mosey/open-mosey-accounts-api/)
+- [Mosey Accounts Agency Accounts API](https://apis.io/collections/mosey/open-mosey-agency-accounts-api/)
+- [Mosey Accounts Auth API](https://apis.io/collections/mosey/open-mosey-auth-api/)
+- [Mosey Accounts Documents API](https://apis.io/collections/mosey/open-mosey-documents-api/)
+- [Mosey Accounts Handbook API](https://apis.io/collections/mosey/open-mosey-handbook-api/)
+- [Mosey Accounts Legal Entity API](https://apis.io/collections/mosey/open-mosey-legal-entity-api/)
+- [Mosey Accounts Locations API](https://apis.io/collections/mosey/open-mosey-locations-api/)
+- [Mosey Accounts Logins API](https://apis.io/collections/mosey/open-mosey-logins-api/)
+- [Mosey Accounts Mail API](https://apis.io/collections/mosey/open-mosey-mail-api/)
+- [Mosey Accounts Regions API](https://apis.io/collections/mosey/open-mosey-regions-api/)
+- [Mosey Accounts Signup API](https://apis.io/collections/mosey/open-mosey-signup-api/)
+- [Mosey Accounts Tasks API](https://apis.io/collections/mosey/open-mosey-tasks-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Mosey Openapi Overlay](https://apis.io/overlays/mosey/mosey-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Mosey Authentication](https://apis.io/security/mosey/mosey-authentication/)
+- [Mosey Domain Security](https://apis.io/security/mosey/mosey-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.mosey.com/)
+- [Documentation](https://docs.mosey.com/api-reference/introduction)
+- [API reference](https://docs.mosey.com/api-reference/introduction)
+- [Pricing](https://mosey.com/pricing/)
+- [Sign up](https://app.mosey.com/signup)
+- [Blog](https://mosey.com/blog/)
+- [Terms of service](https://mosey.com/terms-of-service/)
+- [Privacy policy](https://mosey.com/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 34.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 38.4 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 42.3 |
+| Access clarity | 38.2 |
+
+**Agent readiness 25.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Employment & Payroll
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/mosey/](https://apis.io/providers/mosey/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Mosey: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/mosey/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
